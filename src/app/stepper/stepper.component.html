@@ -1,0 +1,71 @@
+<div class="row mb-5">
+<div class="col-md-12 text-right">
+  <button type="button" class="btn btn-danger" (click)="cancel()">
+    Back
+  </button>
+</div>
+</div>
+<section>
+<div class="container">
+  <div id="stepper1" class="bs-stepper stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#workFlowDetail">
+        <button
+          class="step-trigger"
+          aria-controls="workFlowDetail-part"
+          id="workFlowDetail-part-trigger"
+        >
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Workflow Details</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#dctSelection">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">DCT Selection</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#userSelection">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">User/level Selection</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <div
+        id="workFlowDetail"
+        class="content"
+        role="tabpanel"
+        aria-labelledby="workFlowDetail-part-trigger"
+      >
+        <div class="component">
+          <app-stepper-1  (getWorkFlowInfo)="getWorkFlowInfo($event)"> </app-stepper-1>
+        </div>
+      </div>
+      <div
+        id="dctSelection"
+        class="content"
+        role="tabpanel"
+        aria-labelledby="dctSelection-part-trigger"
+      >
+        <div class="component">
+          <app-stepper-2> </app-stepper-2>
+        </div>
+      </div>
+      <div
+        id="userSelection"
+        class="content"
+        role="tabpanel"
+        aria-labelledby="userSelection-part-trigger"
+      >
+        <div class="component">
+          <app-stepper-3> </app-stepper-3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

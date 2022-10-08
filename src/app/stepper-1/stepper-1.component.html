@@ -1,0 +1,28 @@
+<form name="form" [formGroup]="workFlowForm" (ngSubmit)="onSubmit(workFlowForm)" novalidate >
+<div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label class="form-col-form-label" for="workflow">Work Flow Name</label>
+                <input type="text" class="form-control" name="name" id="workflow" placeholder="Work Flow Name"
+                     formControlName="name" 
+                    [ngClass]="{ 'is-invalid': formSubmitAttempt && f.name.errors }">
+                <div *ngIf="formSubmitAttempt && f.name.invalid" class="invalid-feedback">
+                    <div *ngIf="formSubmitAttempt && f.name.errors.required">Work Flow Name is
+                        required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-col-form-label" for="description">Description</label>
+                <textarea rows="2" class="form-control" name="description" formControlName="description"
+                    ></textarea>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btnClass">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

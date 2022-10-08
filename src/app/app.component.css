@@ -1,0 +1,32 @@
+p {
+  font-family: Lato;
+}
+.nav-tabs {
+  border-bottom: 0 !important;
+  margin-bottom: 15px !important;
+}
+
+.nav-tabs .nav-link {
+  color: #73818f;
+  background: #fff;
+}
+
+.btnClass {
+  background: #d02525;
+  min-width: 10rem;
+  border-radius: 25px;
+  color: #fff;
+}
+button:focus {
+  outline: none;
+  outline: none;
+}
+
+.active .bs-stepper-circle {
+  background-color: #d02525;
+}
+
+.bs-stepper .step-trigger {
+  display: flex;
+  flex-direction: column;
+}
