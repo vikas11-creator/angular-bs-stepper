@@ -21,14 +21,15 @@ export class Stepper2Component implements OnInit {
   ngOnInit() {}
 
   push() {
-    for (let i = 0; i < this.myArray.length; i++) {
-      for (let j = 0; j < this.newArray.length; j++) {
-        if (this.myArray[i].id != this.newArray[j].id) {
-          
-        }else{
-          this.myArray.push(this.newArray[j]);
-        }
-      }
+    let res = [];
+    res = this.newArray.filter((el) => {
+      return !this.myArray.find((element) => {
+        return element.id === el.id;
+      });
+    });
+    if (res.length > 0) {
+      this.myArray = this.myArray.concat(res);
     }
+    console.log(this.myArray);
   }
 }
