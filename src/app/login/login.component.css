@@ -8,3 +8,14 @@ button:focus {
   outline: none;
   outline: none;
 }
+.is-invalid {
+  border-color: red;
+}
+.form-group {
+  position: relative;
+}
+.eyes {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+}

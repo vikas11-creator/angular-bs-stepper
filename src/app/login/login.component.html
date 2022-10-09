@@ -1,7 +1,7 @@
 <form
   name="form"
-  [formGroup]="workFlowForm"
-  (ngSubmit)="onSubmit(workFlowForm)"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit(loginForm)"
   novalidate
 >
   <div>
@@ -29,15 +29,31 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-col-form-label" for="description"
-            >Description</label
+          <label class="form-col-form-label" for="password">password</label>
+          <input
+            [type]="password"
+            class="form-control password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': formSubmitAttempt && f.password.errors }"
+          />
+          <i
+            class="fa eyes"
+            *ngIf="iconShow"
+            [ngClass]="eyeButton ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePassword()"
+            aria-hidden="true"
+          ></i>
+          <div
+            *ngIf="formSubmitAttempt && f.password.invalid"
+            class="invalid-feedback"
           >
-          <textarea
-            rows="2"
-            class="form-control"
-            name="description"
-            formControlName="description"
-          ></textarea>
+            <div *ngIf="formSubmitAttempt && f.password.errors.required">
+              password is required
+            </div>
+          </div>
         </div>
 
         <div class="d-flex justify-content-center">
