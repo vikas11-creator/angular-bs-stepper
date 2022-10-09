@@ -1,0 +1,10 @@
+.btnClass {
+  background: #d02525;
+  min-width: 10rem;
+  border-radius: 25px;
+  color: #fff;
+}
+button:focus {
+  outline: none;
+  outline: none;
+}

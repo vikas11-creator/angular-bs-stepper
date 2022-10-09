@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { StepperComponent } from './stepper/stepper.component';
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   declarations: [
@@ -19,6 +21,7 @@ import { StepperComponent } from './stepper/stepper.component';
     Stepper3Component,
     RegistrationComponent,
     StepperComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent],
 })

@@ -14,7 +14,7 @@ export class Stepper2Component implements OnInit {
 
   newArray = [
     { id: 3, name: 'barb' },
-    { id: 4, name: 'xyz' },
+     { id: 4, name: 'xyz' },
   ];
   constructor() {}
 
@@ -24,12 +24,19 @@ export class Stepper2Component implements OnInit {
     let res = [];
     res = this.newArray.filter((el) => {
       return !this.myArray.find((element) => {
-        return element.id === el.id;
+        return element.name === el.name;
       });
     });
     if (res.length > 0) {
       this.myArray = this.myArray.concat(res);
     }
+    // for(let i = 0; i<this.newArray.length; i++){
+    //   for(let j = 0; j<this.myArray.length; j++){
+    //      if(this.newArray[i] !== this.myArray[j]){
+    //       res.push(this.newArray[i])
+    //      }
+    //   }
+    // }
     console.log(this.myArray);
   }
 }
