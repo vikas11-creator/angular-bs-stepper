@@ -14,13 +14,23 @@ export class Stepper2Component implements OnInit {
 
   newArray = [
     { id: 3, name: 'barb' },
-     { id: 4, name: 'xyz' },
+    { id: 4, name: 'xyz' },
   ];
   constructor() {}
 
   ngOnInit() {}
 
   push() {
+    // 0 means false >0 means true
+    //value means true and undefinded ,null means false
+    // in res el is going to be returned
+    //but el belong to newArray's object not myArray's
+    //once it enters in filter method there is 2 return method
+    //focus on second return if both value matches then it will be true otherwise false
+    //if it returns true then first return will return element
+    //element is ssame value then ! means it will become false
+    //false mean el will not be stored in res
+    //in second pass
     let res = [];
     res = this.newArray.filter((el) => {
       return !this.myArray.find((element) => {
@@ -30,13 +40,5 @@ export class Stepper2Component implements OnInit {
     if (res.length > 0) {
       this.myArray = this.myArray.concat(res);
     }
-    // for(let i = 0; i<this.newArray.length; i++){
-    //   for(let j = 0; j<this.myArray.length; j++){
-    //      if(this.newArray[i] !== this.myArray[j]){
-    //       res.push(this.newArray[i])
-    //      }
-    //   }
-    // }
-    console.log(this.myArray);
   }
 }
