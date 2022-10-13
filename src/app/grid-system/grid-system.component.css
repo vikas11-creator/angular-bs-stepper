@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper-chart {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-rows: 3fr 1fr;
+}
+.wrapper-body-1 {
+  background-color: rgb(160, 161, 161);
+}
+.wrapper-body-2 {
+  background-color: antiquewhite;
+}
+.wrapper-body-3 {
+  background-color: aquamarine;
+}
+.wrapper-body-4 {
+  background-color: bisque;
+}
+.wrapper-body-5 {
+  background-color: aqua;
+}
+.wrapper-body-6 {
+  background-color: blueviolet;
+}
+.wrapper-body-7 {
+  background-color: wheat;
+}
+.wrapper-body-8 {
+  background-color: aqua;
+}
+.wrapper-body-9 {
+  background-color: aqua;
+}

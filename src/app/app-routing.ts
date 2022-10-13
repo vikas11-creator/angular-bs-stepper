@@ -4,9 +4,14 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { LoginComponent } from './login/login.component';
+import { GridSystemComponent } from './grid-system/grid-system.component';
 const routes: Routes = [
   {
     path: '',
+    component: GridSystemComponent,
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {
