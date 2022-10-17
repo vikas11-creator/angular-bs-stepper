@@ -169,42 +169,65 @@
   column-gap: 10px;
 }
 .exposure {
-  .exposure-graph {
-  }
-
-  .exposure-text {
-    font-weight: 700;
-    line-height: 35px;
-    font-size: 16px;
-    color: gray;
-  }
-  .deposits {
-  }
-  .deposits-graph {
-  }
-
-  .deposits-text {
-    font-weight: 700;
-    line-height: 35px;
-    font-size: 16px;
-    color: gray;
-  }
-  .securities {
-  }
-  .securities-graph {
-  }
-
-  .securities-text {
-    font-weight: 700;
-    line-height: 35px;
-    font-size: 16px;
-    color: gray;
-  }
-  .liabilities {
-  }
+}
+.exposure-graph {
+  background-color: #ff9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5px;
 }
 
+.exposure-text {
+  font-weight: 700;
+  line-height: 35px;
+  font-size: 16px;
+  color: gray;
+}
+.deposits {
+}
+.deposits-graph {
+  background-color: #ff9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+.deposits-text {
+  font-weight: 700;
+  line-height: 35px;
+  font-size: 16px;
+  color: gray;
+}
+.securities {
+}
+.securities-graph {
+  background-color: #ff9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+.securities-text {
+  font-weight: 700;
+  line-height: 35px;
+  font-size: 16px;
+  color: gray;
+}
+.liabilities {
+}
 .liabilities-graph {
+  background-color: #ff9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5px;
 }
 
 .liabilities-text {
