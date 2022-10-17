@@ -9,53 +9,63 @@
 .wrapper-body {
   height: 75%;
 
-  .wrapper-body-1 {
-    height: 100%;
-    flex-shrink: 0;
-    flex-grow: 1;
-    flex-basis: 15%;
 
-    .left-wrapper {
-      display: flex;
-      flex-direction: column;
-      row-gap: 10px;
-      height: 100%;
-    }
+ 
+}
+.wrapper-body-4 {
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-basis: 15%;
 
-    .left-sub-wrapper {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      padding: 10px;
-      background-color: #fff;
-      height: 100%;
-      border-radius: 3px;
-    }
-  }
 
-  .wrapper-body-4 {
-    height: 100%;
-    flex-shrink: 0;
-    flex-grow: 1;
-    flex-basis: 15%;
+}
 
-    .right-wrapper {
-      display: flex;
-      flex-direction: column;
-      row-gap: 10px;
-      height: 100%;
+.right-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  height: 100%;
 
-      .right-sub-wrapper {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 10px;
-        background-color: #fff;
-        height: 100%;
-        border-radius: 3px;
-      }
-    }
-  }
+
+}
+
+.right-sub-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  background-color: bisque;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.wrapper-body-1 {
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-basis: 15%;
+
+
+
+
+}
+
+.left-sub-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  background-color: bisque;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  height: 100%;
 }
 
 .body {
@@ -76,7 +86,7 @@
   flex-grow: 1;
   flex-basis: 32%;
   padding: 10px;
-  background-color: #fff;
+  background-color: bisque;
   border-radius: 3px;
 }
 
@@ -90,7 +100,7 @@
   flex-grow: 1;
   flex-basis: 32%;
   padding: 10px;
-  background-color: #fff;
+  background-color: bisque;
   border-radius: 3px;
 }
 
@@ -118,108 +128,112 @@
   flex-shrink: 0;
   flex-grow: 1;
   padding: 10px;
-  background-color: #fff;
+  background-color: bisque;
   height: 100%;
   border-radius: 3px;
 
-  .content-section {
-    flex-grow: 1;
-    width: 100%;
-  }
-
-  .content-sub-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-
-    .footer-sub-block {
-      display: flex;
-      column-gap: 10px;
-      align-items: flex-end;
-    }
-  }
 }
 
+
+.content-sub-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+
+}
+
+
+.footer-sub-block {
+  display: flex;
+  column-gap: 10px;
+  align-items: flex-end;
+}
+.content-section {
+  flex-grow: 1;
+  width: 100%;
+}
 .graph {
   height: 100%;
 
-  .graph-variance {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 10%;
+}
 
-    .variance {
+.graph-variance {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 10%;
+
+}
+
+.variance {
+  font-weight: 700;
+  line-height: 35px;
+  font-size: 16px;
+  color: gray;
+}
+
+.view-all {
+  align-self: flex-start;
+  font-weight: 600;
+  font-size: 14px;
+}
+.graph-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 90%;
+  column-gap: 10px;
+
+ 
+  }
+  .exposure {
+    .exposure-graph {
+    }
+
+    .exposure-text {
       font-weight: 700;
       line-height: 35px;
       font-size: 16px;
       color: gray;
     }
+  .deposits {
 
-    .view-all {
-      align-self: flex-start;
-      font-weight: 600;
-      font-size: 14px;
-    }
+  }
+  .deposits-graph {
   }
 
-  .graph-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 90%;
-    column-gap: 10px;
+  .deposits-text {
+    font-weight: 700;
+    line-height: 35px;
+    font-size: 16px;
+    color: gray;
+  }
+  .securities {
+   
+  }
+  .securities-graph {
+  }
 
-    .exposure {
-      .exposure-graph {
-      }
-
-      .exposure-text {
-        font-weight: 700;
-        line-height: 35px;
-        font-size: 16px;
-        color: gray;
-      }
-    }
-
-    .deposits {
-      .deposits-graph {
-      }
-
-      .deposits-text {
-        font-weight: 700;
-        line-height: 35px;
-        font-size: 16px;
-        color: gray;
-      }
-    }
-
-    .securities {
-      .securities-graph {
-      }
-
-      .securities-text {
-        font-weight: 700;
-        line-height: 35px;
-        font-size: 16px;
-        color: gray;
-      }
-    }
-
-    .liabilities {
-      .liabilities-graph {
-      }
-
-      .liabilities-text {
-        font-weight: 700;
-        line-height: 35px;
-        font-size: 16px;
-        color: gray;
-      }
-    }
+  .securities-text {
+    font-weight: 700;
+    line-height: 35px;
+    font-size: 16px;
+    color: gray;
+  }
+  .liabilities {
+  
   }
 }
 
+.liabilities-graph {
+}
+
+.liabilities-text {
+  font-weight: 700;
+  line-height: 35px;
+  font-size: 16px;
+  color: gray;
+}
 .img {
   height: 100px;
   width: 100%;
@@ -228,40 +242,27 @@
 .graph {
   height: 100%;
 
-  .graph-text {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 10%;
-
-    .view-all {
-      align-self: flex-end;
-      font-weight: 600;
-      font-size: 14px;
-    }
-  }
-
-  .graph-page {
-    height: 90%;
-
-    .graph-body {
-      height: 100%;
-
-      .bar-graph {
-        height: 100%;
-
-        .bar-chart {
-          height: 100%;
-
-          .mychart {
-            height: 100% !important;
-            width: 100% !important;
-          }
-        }
-      }
-    }
-  }
 }
 
+.graph-text {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 10%;
+
+
+}
+.view-all {
+  align-self: flex-end;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+
+
+.graph-page {
+  height: 90%;
+}
 @media (min-width: 320px) and (max-width: 600px) {
   .wrapper {
     height: auto;
