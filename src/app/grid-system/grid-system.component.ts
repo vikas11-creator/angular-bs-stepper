@@ -12,8 +12,14 @@ export class GridSystemComponent implements OnInit {
   ngOnInit() {
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
-    var lineChartDom = document.getElementById('exposure-graph');
-    var lineChar = echarts.init(lineChartDom);
+    var lineChartDomExposure = document.getElementById('exposure-graph');
+    var lineChartDomDeposits = document.getElementById('deposits-graph');
+    var lineChartDomSecurities = document.getElementById('securities-graph');
+    var lineChartDomLiabilities = document.getElementById('liabilities-graph');
+    var lineChartExposure = echarts.init(lineChartDomExposure);
+    var lineChartDeposits = echarts.init(lineChartDomDeposits);
+    var lineChartSecurities = echarts.init(lineChartDomSecurities);
+    var lineChartLiabilities = echarts.init(lineChartDomLiabilities);
     var option;
     var optionLineChart;
 
@@ -57,28 +63,33 @@ export class GridSystemComponent implements OnInit {
     optionLineChart = {
       xAxis: {
         type: 'category',
-        show:false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        show: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       },
       yAxis: {
-        type: 'value',show:false
-      },grid: {
+        type: 'value',
+        show: false,
+      },
+      grid: {
         containLabel: false,
-        left: '0%',
+        left: '2%',
         bottom: '0%',
-        right: '0%',
+        right: '2%',
         top: '15%',
       },
       series: [
         {
           data: [820, 932, 901, 934, 1290, 1330, 1320],
           type: 'line',
-          smooth: true
-        }
-      ]
+          smooth: true,
+        },
+      ],
     };
 
     option && myChart.setOption(option);
-    optionLineChart && lineChar.setOption(optionLineChart);
+    optionLineChart && lineChartExposure.setOption(optionLineChart);
+    optionLineChart && lineChartDeposits.setOption(optionLineChart);
+    optionLineChart && lineChartSecurities.setOption(optionLineChart);
+    optionLineChart && lineChartLiabilities.setOption(optionLineChart);
   }
 }
