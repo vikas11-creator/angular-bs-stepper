@@ -7,21 +7,17 @@ import * as echarts from 'echarts';
   styleUrls: ['./grid-system.component.css'],
 })
 export class GridSystemComponent implements OnInit {
+  dataSet= [820, 932, 901, 934, 1290, 1330, 1320];
   constructor() {}
-
   ngOnInit() {
+    this.loadLineChart('exposure-graph',this.dataSet);
+    this.loadLineChart('deposits-graph',this.dataSet);
+    this.loadLineChart('securities-graph',this.dataSet);
+    this.loadLineChart('liabilities-graph',this.dataSet);
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
-    var lineChartDomExposure = document.getElementById('exposure-graph');
-    var lineChartDomDeposits = document.getElementById('deposits-graph');
-    var lineChartDomSecurities = document.getElementById('securities-graph');
-    var lineChartDomLiabilities = document.getElementById('liabilities-graph');
-    var lineChartExposure = echarts.init(lineChartDomExposure);
-    var lineChartDeposits = echarts.init(lineChartDomDeposits);
-    var lineChartSecurities = echarts.init(lineChartDomSecurities);
-    var lineChartLiabilities = echarts.init(lineChartDomLiabilities);
+    
     var option;
-    var optionLineChart;
 
     option = {
       dataset: {
@@ -38,7 +34,7 @@ export class GridSystemComponent implements OnInit {
         containLabel: true,
         left: '10%',
         bottom: '0%',
-        right: '5%',
+        right: '10%',
         top: '5%',
       },
       xAxis: { name: 'amount', show: false, width: 500 },
@@ -60,7 +56,13 @@ export class GridSystemComponent implements OnInit {
         fontWeight: 'bold',
       },
     };
-    optionLineChart = {
+    option && myChart.setOption(option);
+  }
+  
+  loadLineChart(id,data){
+    const lineChartDomExposure = document.getElementById(id);
+    const lineChartExposure = echarts.init(lineChartDomExposure);
+    const optionLineChart = {
       xAxis: {
         type: 'category',
         show: false,
@@ -79,17 +81,12 @@ export class GridSystemComponent implements OnInit {
       },
       series: [
         {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          data:data,
           type: 'line',
           smooth: true,
         },
       ],
     };
-
-    option && myChart.setOption(option);
     optionLineChart && lineChartExposure.setOption(optionLineChart);
-    optionLineChart && lineChartDeposits.setOption(optionLineChart);
-    optionLineChart && lineChartSecurities.setOption(optionLineChart);
-    optionLineChart && lineChartLiabilities.setOption(optionLineChart);
   }
 }
