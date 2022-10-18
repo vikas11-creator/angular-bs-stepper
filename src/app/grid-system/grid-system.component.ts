@@ -8,34 +8,39 @@ import * as echarts from 'echarts';
 })
 export class GridSystemComponent implements OnInit {
   dataSet= [820, 932, 901, 934, 1290, 1330, 1320];
+  graphTypeLine: string = 'line';
+  graphTypeBar: string = 'bar';
+  BarChartdata = [
+    ['amount', 'Department'],
+    [2, 'HR'],
+    [2, 'Accounts'],
+    [3, 'IT'],
+    [5, 'RMD'],
+    [24, 'Treasury']
+  ];
   constructor() {}
   ngOnInit() {
-    this.loadLineChart('exposure-graph',this.dataSet);
-    this.loadLineChart('deposits-graph',this.dataSet);
-    this.loadLineChart('securities-graph',this.dataSet);
-    this.loadLineChart('liabilities-graph',this.dataSet);
-    var chartDom = document.getElementById('main');
-    var myChart = echarts.init(chartDom);
-    
-    var option;
-
-    option = {
+    this.loadLineChart('exposure-graph', this.dataSet,this.graphTypeLine);
+    this.loadLineChart('deposits-graph', this.dataSet,this.graphTypeLine);
+    this.loadLineChart('securities-graph', this.dataSet,this.graphTypeLine);
+    this.loadLineChart('liabilities-graph', this.dataSet,this.graphTypeBar);
+    this.loadBarChart('pendency', this.BarChartdata);
+  }
+  
+  loadBarChart(id, data) {
+    const barChartDomExposure = document.getElementById(id);
+    const barChartExposure = echarts.init(barChartDomExposure);
+    const option = {
       dataset: {
-        source: [
-          ['amount', 'Department'],
-          [2, 'HR'],
-          [2, 'Accounts'],
-          [3, 'IT'],
-          [5, 'RMD'],
-          [24, 'Treasury'],
-        ],
+        source: data,
       },
       grid: {
         containLabel: true,
-        left: '10%',
+        left: '5%',
         bottom: '0%',
         right: '10%',
         top: '5%',
+        padding: 10,
       },
       xAxis: { name: 'amount', show: false, width: 500 },
       yAxis: { type: 'category', fontSize: 25, fontWeight: 'bold' },
@@ -56,10 +61,10 @@ export class GridSystemComponent implements OnInit {
         fontWeight: 'bold',
       },
     };
-    option && myChart.setOption(option);
+    option && barChartExposure.setOption(option);
   }
   
-  loadLineChart(id,data){
+  loadLineChart(id,data,chartType){
     const lineChartDomExposure = document.getElementById(id);
     const lineChartExposure = echarts.init(lineChartDomExposure);
     const optionLineChart = {
@@ -82,7 +87,7 @@ export class GridSystemComponent implements OnInit {
       series: [
         {
           data:data,
-          type: 'line',
+          type: chartType,
           smooth: true,
         },
       ],
