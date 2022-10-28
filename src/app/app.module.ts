@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { LoginComponent } from './login/login.component';
 import { GridSystemComponent } from './grid-system/grid-system.component';
+import { FormArrayComponent } from './form-array/form-array.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
@@ -23,7 +24,8 @@ import { GridSystemComponent } from './grid-system/grid-system.component';
     RegistrationComponent,
     StepperComponent,
     LoginComponent,
-    GridSystemComponent
+    GridSystemComponent,
+    FormArrayComponent
   ],
   bootstrap: [AppComponent],
 })
