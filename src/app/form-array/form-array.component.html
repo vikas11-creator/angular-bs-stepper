@@ -1,0 +1,94 @@
+<form
+  name="form"
+  [formGroup]="workFlowForm"
+  (ngSubmit)="onSubmit(workFlowForm)"
+  novalidate
+>
+  <div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="form-group">
+          <label class="form-col-form-label" for="reminder">reminder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="reminder"
+            placeholder="Enter reminder"
+            formControlName="reminder"
+            [ngClass]="{ 'is-invalid': formSubmitAttempt && f.reminder.errors }"
+          />
+          <div
+            *ngIf="formSubmitAttempt && f.reminder.invalid"
+            class="invalid-feedback"
+          >
+            <div *ngIf="formSubmitAttempt && f.reminder.errors.required">
+            reminder is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-col-form-label" for="contractDocument"
+            >contractDocument</label
+          >
+          <textarea
+            rows="2"
+            class="form-control"
+            name="contractDocument"
+            formControlName="contractDocument"
+          ></textarea>
+        </div>
+        <div class="task" formArrayName="keyContacts" *ngFor="let item of basicSettingsForm.get('keyContacts')['controls']; let i = index;let isLast=last">
+        <div [formGroupName]="i" class="row mt-3">
+            <div class="key-contract-heading" >
+                <h1 class="key-number">Key Contact {{i+1}}</h1>
+            </div>
+            <div class="text-right" [ngClass]="isLast?'islast':''">
+                <em  class="icon-delete icon positions" aria-hidden="true" pTooltip="Delete" tooltipPosition="bottom"  id="deleteContractBtn" *ngIf=" practiceControls.length > 1" (click)="removeBtn(i)" ></em>  
+            </div>
+            <div class="col-md-6 mb-2 admin-invite-customer">
+                <div class="input-wrapper">
+                    
+                    <label for="contractName" id="contractNameLabel">Name<em  class="red-star">*</em>  </label>
+                    <input type="text" formControlName="name" pInputText  [ngClass]="{'is-invalid':formSubmitAttempt && item.get('name').errors}">
+                </div>
+                <div app-errors class="error-msg" [control]="item.get('name')" [submit]="formSubmitAttempt"
+                    label="Name">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 admin-invite-customer">
+                <div class="input-wrapper">
+                    
+                    <label for="Email" id="Email">Email<em  class="red-star">*</em>  </label>
+                    <input type="text" class="add-contract-input" formControlName="emailId" pInputText  [ngClass]="{'is-invalid':formSubmitAttempt && item.get('emailId').errors}">
+                </div>
+                <div app-errors class="error-msg" [control]="item.get('emailId')" [submit]="formSubmitAttempt"
+                    label="Email Id">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 admin-invite-customer">
+                <div class="input-wrapper">
+                    <label for="phoneNumber" id="phoneNumber">Phone Number<em  class="red-star">*</em>  </label>
+                    <input id="phoneNumber" #phone class="form-control admin-phone-number" (keypress)="numberOnly($event)"
+                        ng2TelInput name="phoneNumber" formControlName="phoneNumber"
+                    [ng2TelInputOptions]="{initialCountry:countryCode,separateDialCode:true}"
+                    (countryChange)="onCountryChange($event)" (hasError)="onError($event)"
+                    [ngClass]="{'is-invalid':formSubmitAttempt && item.get('phoneNumber').errors}">
+                </div>
+                <div app-errors class="error-msg" [control]="item.get('phoneNumber')" [submit]="formSubmitAttempt"
+                    label="Phone Number">
+                </div>
+            </div>
+        </div> 
+        <div class="text-left buttons mb-3 mt-3" *ngIf="isLast">
+            <button class="btn cancel qns-btn"  (click)="addItem()" [disabled]="item.get('phoneNumber').value && item.get('emailId').value && item.get('name').value?false:true" id="add-question" ><em  class="icon-add icons-position" aria-hidden="true"></em>   Add Key Contact</button>
+        </div>
+    </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btnClass">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

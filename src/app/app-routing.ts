@@ -5,7 +5,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { LoginComponent } from './login/login.component';
 import { GridSystemComponent } from './grid-system/grid-system.component';
+import { FormArrayComponent } from './form-array/form-array.component';
 const routes: Routes = [
+  {
+    path: 'form-array',
+    component: FormArrayComponent,
+  },
   {
     path: '',
     component: GridSystemComponent,
