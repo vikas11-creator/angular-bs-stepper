@@ -8,7 +8,7 @@ import { GridSystemComponent } from './grid-system/grid-system.component';
 import { FormArrayComponent } from './form-array/form-array.component';
 const routes: Routes = [
   {
-    path: 'form-array',
+    path: 'nested-form-array',
     component: FormArrayComponent,
   },
   {
