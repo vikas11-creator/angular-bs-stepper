@@ -69,19 +69,110 @@ export class FormArrayComponent implements OnInit {
     console.log('ghgjj');
     // console.log(formControlName)
     if (type == 'male') {
+      //this.createForm2();
+      this.addX();
       this.isformStart = true;
-      this.createForm();
+    }
+    console.log('myForm2', this.myForm);
+  }
+
+  callFormCheck(event: any, type: any) {
+    console.log(event.target.checked);
+    if (type == 'female' && event.target.checked) {
+      this.addY();
     }
   }
 
-  createForm() {
-    this.myForm = this.fb.group({
-      filterField: ['', [Validators.required]],
-      // genderControl: ['', [Validators.required]],
-      people: this.fb.array([this.createPeopleArray()]),
+  callCheckbox(event: any, type: any, iy: any, ix: any, iz: any) {
+    console.log(event.target.checked);
+    if (type == 'female' && event.target.checked) {
+      this.addYD(iz);
+    }
+    //dekho ki datatype ek hi add hota hai na ki multiple
+  }
+
+  addYD(i: any) {
+    const control: any = <FormArray>(
+      this.myForm.controls['people']['controls'][0]['controls']['Ys'][
+        'controls'
+      ][0]['controls']['newFilterField']['controls'][i]['controls']['Ys']
+    );
+    console.log('addYD', control);
+    control.push(this.createYsArrayLookUp());
+  }
+
+  createYsArrayLookUp() {
+    return this.fb.group({
+      a: this.fb.array([this.call()]),
     });
   }
 
+  call() {
+    return this.fb.group({
+      p: [''],
+      q: [''],
+    });
+  }
+  createForm() {
+    this.myForm = this.fb.group({
+      filterFieldStart: ['', [Validators.required]],
+      // genderControl: ['', [Validators.required]],
+      people: this.fb.array([]),
+    });
+    console.log('myForm', this.myForm);
+  }
+  //this.createPeopleArray()
+
+  addX() {
+    const control: any = <FormArray>this.myForm.controls['people']['controls'];
+    control.push(this.createAddressArray());
+  }
+
+  addY() {
+    const control: any = <FormArray>(
+      this.myForm.controls['people']['controls'][0]['controls']['Ys']
+    );
+    control.push(this.createYsArray());
+  }
+
+  createForm2() {
+    this.myForm = this.fb.group({
+      people: this.fb.array([this.createPeopleArray()]),
+    });
+    console.log('myForm2', this.myForm);
+  }
+
+  createYsArray() {
+    return this.fb.group({
+      dataType: [''],
+      newFilterField: this.fb.array([]),
+    });
+  }
+
+  createPeopleArray() {
+    return this.fb.group({
+      addresses: new FormArray([this.createAddressArray()]),
+    });
+  }
+
+  createAddressArray() {
+    return this.fb.group({
+      genderControl: [''],
+      filterField: ['', [Validators.required]],
+      Ys: this.fb.array([]),
+    });
+  }
+  addDatanewAddArray(d: any, i: any) {
+    const control: any = <FormArray>(
+      this.myForm.controls['people']['controls'][i]['controls']['Ys'][
+        'controls'
+      ][0]['controls']['newFilterField']
+    );
+    console.log('controls', control);
+    control.push(this.createAddressArray());
+  }
+
+  amd(d: any, i: any, ip: any) {}
   createNew() {
     return this.fb.group({
       name: null,
@@ -89,28 +180,13 @@ export class FormArrayComponent implements OnInit {
     });
   }
 
-  createPeopleArray() {
-    // if(this.isChange){
-    return this.fb.group({
-      name: null,
-      addresses: new FormArray([this.createAddressArray()]),
-    });
-    //}
-  }
-
   getPeople(form) {
+    console.log('getPeople', form.controls.people.controls);
     return form.controls.people.controls;
   }
 
   getAddress(form) {
     return form.controls.addresses.controls;
-  }
-
-  createAddressArray() {
-    return this.fb.group({
-      genderControl: [''],
-      Ys: this.fb.array([]),
-    });
   }
 
   initY() {
