@@ -6,9 +6,14 @@ import { StepperComponent } from './stepper/stepper.component';
 import { LoginComponent } from './login/login.component';
 import { GridSystemComponent } from './grid-system/grid-system.component';
 import { FormArrayComponent } from './form-array/form-array.component';
+import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
 const routes: Routes = [
   {
     path: '',
+    component: AccordionLoopComponent,
+  },
+  {
+    path: 'form-array',
     component: FormArrayComponent,
   },
   {
