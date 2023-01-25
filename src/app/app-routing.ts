@@ -7,9 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { GridSystemComponent } from './grid-system/grid-system.component';
 import { FormArrayComponent } from './form-array/form-array.component';
 import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
+import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 const routes: Routes = [
   {
     path: '',
+    component: VerticalCssStepperComponent,
+  },
+  {
+    path: 'accordion',
     component: AccordionLoopComponent,
   },
   {

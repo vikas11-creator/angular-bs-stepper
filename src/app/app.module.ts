@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { GridSystemComponent } from './grid-system/grid-system.component';
 import { FormArrayComponent } from './form-array/form-array.component';
 import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
+import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
@@ -28,6 +29,7 @@ import { AccordionLoopComponent } from './accordion-loop/accordion-loop.componen
     GridSystemComponent,
     FormArrayComponent,
     AccordionLoopComponent,
+    VerticalCssStepperComponent
   ],
   bootstrap: [AppComponent],
 })
