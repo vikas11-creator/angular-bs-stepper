@@ -1,0 +1,35 @@
+<h1>
+  notify to me jo for loop hai usme side by side krna hai uske liye yeh tarika
+  hai
+</h1>
+<div class="edit-field">
+  <div>
+    <div *ngFor="let d of editWorkflowValue; let i = index">
+      <div class="mb-2 sub-field-label">
+        Approval Level {{ i == 0 ? '' : i + 1 }}
+      </div>
+      <div class="field-dataset p-3 mb-3">
+        <div class="field-data">
+          <div class="label">Send Notification</div>
+          <div class="data-value">{{ d.entityType }}</div>
+        </div>
+        <div class="field-data">
+          <div class="label">Notify To</div>
+          <div class="notify">
+            <ng-container *ngFor="let n of d.name">
+              <div class="data data-value mr-3">{{ n.name }}</div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="field-data">
+          <div class="label">Turn Around Time</div>
+          <div class="data-value">{{ d.turnTime }}</div>
+        </div>
+        <div class="field-data">
+          <div class="label">Action</div>
+          <div class="data-value">{{ d.action }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

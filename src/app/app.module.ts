@@ -14,6 +14,7 @@ import { GridSystemComponent } from './grid-system/grid-system.component';
 import { FormArrayComponent } from './form-array/form-array.component';
 import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
 import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
+import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
@@ -29,7 +30,8 @@ import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css
     GridSystemComponent,
     FormArrayComponent,
     AccordionLoopComponent,
-    VerticalCssStepperComponent
+    VerticalCssStepperComponent,
+    NgforWithFlexComponent
   ],
   bootstrap: [AppComponent],
 })

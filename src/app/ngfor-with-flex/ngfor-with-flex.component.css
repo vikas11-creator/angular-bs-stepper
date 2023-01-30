@@ -1,0 +1,36 @@
+.edit-field {
+  display: flex;
+  flex-direction: column;
+}
+.sub-field-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+}
+.data {
+  background-color: #f3f4f5;
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+.data-value {
+  font-size: 12px;
+  font-weight: 500;
+}
+.notify {
+  display: flex;
+  gap: 16px;   
+}
+.field-data {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+.field-dataset {
+  background-color: #dfdfdf;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
