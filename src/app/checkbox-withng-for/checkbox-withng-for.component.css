@@ -1,0 +1,142 @@
+.dynamic-model-menu {
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  min-width: 241px;
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute;
+  top: 40px;
+  z-index: 111;
+  right: 0px;
+}
+.dynamic-table-heading {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  height: 33px;
+}
+
+.heading {
+  padding: 2px 12px;
+  color: blue;
+}
+.search-column {
+  padding: 5px 15px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 12px;
+  right: 30px;
+  font-size: 14px;
+}
+
+.search-column input {
+  width: 100%;
+  height: 34px;
+  padding: 8px;
+}
+
+.search-all {
+  font-size:12px;
+  font-weight: 700;
+  border-bottom: 2px solid #ced4da;
+}
+
+.search-all-label {
+  justify-self: start;
+  align-self: flex-start;
+  color: blue;
+}
+
+
+.search-all-input {
+  justify-self: flex-end;
+}
+
+.search-container {
+  padding: 5px 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.fields-switch {
+  height: 150px;
+  overflow-y: overlay;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 10px;
+  align-items: center;
+  padding: 0px 15px;
+  margin-bottom: 10px;
+}
+
+
+.align-self-left {
+  justify-self: start;
+  align-self: flex-start;
+}
+
+.align-self-right {
+  justify-self: flex-end;
+}
+
+.btn-clear {
+  padding: 10px;
+  justify-self: start;
+}
+.btn-apply {
+  padding: 10px;
+  justify-self: flex-end;
+}
+
+
+.btn-cancel {
+  background: #E9EFF7;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin: 0;
+  width: 90px;
+  border-radius: 2px;
+  display: flex;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit {
+  background-color: blue;
+  padding: 10px 20px;
+  color: white;
+  width: 90px;
+  border-radius: 2px;
+  display: flex;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: white;
+  height: 64px;
+  place-content: center;
+}
+
+.flex-column {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 10px;
+  align-items: center;
+  background-color: #E6EBF2;
+}

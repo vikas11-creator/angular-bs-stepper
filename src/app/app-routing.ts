@@ -9,9 +9,14 @@ import { FormArrayComponent } from './form-array/form-array.component';
 import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
 import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
+import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
 const routes: Routes = [
   {
     path: '',
+    component: CheckboxWithngForComponent,
+  },
+  {
+    path: 'flex',
     component: NgforWithFlexComponent,
   },
   {

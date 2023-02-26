@@ -1,0 +1,87 @@
+<table style="width:100%">
+  <tr>
+    <ng-container *ngFor="let col of dataSet; let i index">
+      <th *ngIf="col.display">
+          <div class="table-heading">
+              <div class="display-flex">
+                  <div>{{col.header}}</div>
+              </div>
+          </div>
+      </th>
+  </ng-container>
+  </tr>
+  <tr *ngFor="let col of dataSet; let in = index">
+    <ng-container *ngIf="col.display">
+      <td>{{col.field}}</td>
+      <td>{{col.header}}</td>
+      <td>{{col.order}}</td>
+      <td>{{col.isCheckBox}}</td>
+      <td>{{col.width}}</td>
+      <td>{{col.id}}</td>
+    </ng-container>
+  </tr>
+</table>
+
+
+<div class="dynamic-model-menu">
+  <div class="dynamic-table-heading">
+      <div class="heading my-2">Table Columns Filter</div>
+  </div>
+  <form [formGroup]="dynamicDataTable">
+      <div class="flex-column">
+          <div class="input-wrapper search-all">
+              <div class="search-container">
+                  <div class="search-all-label">
+                      <label for="searchAll" class="search-all-label">Default</label>
+                  </div>
+              </div>
+          </div>
+          <div formArrayName="activeFields" class="fields-switch">
+              <div class="form-group"
+                  *ngFor="let category of filteredArray; let i = index">
+                  <div formGroupName="{{i}}" class="field">
+                      <div class="p-field-checkbox colFilterlist">
+                               <input type="checkbox" name="{{category.header}}"
+                               value="{{category.display}}"
+                                [formControlName]="category.header">
+                          <label for="{{category.header}}">{{category.header}}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <ng-container *ngIf="uncheckedArray.length > 0">
+              <div class="input-wrapper search-all">
+                  <div class="search-container">
+                      <div class="search-all-label">
+                          <label for="searchAll" class="search-all-label">Other</label>
+                      </div>
+                  </div>
+              </div>
+              <div formArrayName="inactiveFields" class="fields-switch">
+                  <div class="form-group"
+                      *ngFor="let category of uncheckedArray; let i = index">
+                      <div formGroupName="{{i}}" class="field">
+                          <div class="p-field-checkbox colFilterlist">
+                              <!-- <p-checkbox name="{{category.header}}" [binary]="true"
+                                  value="{{category.display}}" [formControlName]="category.header" inputId="{{category.header}}"
+                                  ></p-checkbox> -->
+                                  <input type="checkbox" name="{{category.header}}"
+                                  value="{{category.display}}"
+                                   [formControlName]="category.header">
+                              <label for="{{category.header}}">{{category.header}}</label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+          <div class="form-button">
+              <div class="btn-clear">
+                  <button type="button" class="btn btn-reset" (click)="clearForm()">Clear</button>
+              </div>
+              <div class="btn-apply">
+                  <button type="button" class="btn btn-submit" (click)="onSubmit(dynamicDataTable)">Apply</button>
+              </div>
+          </div>
+      </div>
+  </form>
+</div>

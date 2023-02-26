@@ -15,6 +15,7 @@ import { FormArrayComponent } from './form-array/form-array.component';
 import { AccordionLoopComponent } from './accordion-loop/accordion-loop.component';
 import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
+import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
@@ -31,7 +32,8 @@ import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.compon
     FormArrayComponent,
     AccordionLoopComponent,
     VerticalCssStepperComponent,
-    NgforWithFlexComponent
+    NgforWithFlexComponent,
+    CheckboxWithngForComponent
   ],
   bootstrap: [AppComponent],
 })
