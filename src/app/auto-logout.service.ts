@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from "./auth.service";
+import { DialogService } from "primeng/dynamicdialog";
+import { IdledialogComponent } from './idledialog/idledialog.component';
+
 let AUTO_LOGOUT_TIME // in mins
 let SESSION_TIME // in mins
-const CHECK_INTERVAL = 15000 // in ms
+const CHECK_INTERVAL = 15 // in ms
 const STORE_KEY = 'lastAction';
 @Injectable()
 export class AutoLogoutService {
@@ -16,7 +19,7 @@ export class AutoLogoutService {
         localStorage.setItem(STORE_KEY, lastAction.toString());
     }
 
-    constructor(private router: Router, private authService: AuthService,) {
+    constructor(private router: Router,private dialogService: DialogService, private authService: AuthService,) {
         this.check();
         this.initListener();
         this.initInterval();
@@ -27,8 +30,8 @@ export class AutoLogoutService {
         // this.http.doget('get_login_timeout').subscribe((res:any)=>{
         //   MINUTES_UNITL_AUTO_LOGOUT = res.data;
         // })
-        SESSION_TIME = 15;
-        AUTO_LOGOUT_TIME = 17;
+        SESSION_TIME = 1;
+        AUTO_LOGOUT_TIME = 1;
         this.token = localStorage.getItem('careToken');
     }
 
@@ -63,7 +66,7 @@ export class AutoLogoutService {
 
         if ((isTimeout && this.isFirst) && this.token) {
             this.isFirst = false;
-            const ref = this.dialogService.open(IdleDialogComponent,
+            const ref = this.dialogService.open(IdledialogComponent,
                 {
                     header: 'Session Timeout',
                     width: '40%'

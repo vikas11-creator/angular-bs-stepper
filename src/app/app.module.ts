@@ -16,6 +16,7 @@ import { AccordionLoopComponent } from './accordion-loop/accordion-loop.componen
 import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
 import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
+import { IdledialogComponent } from './idledialog/idledialog.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
@@ -33,7 +34,8 @@ import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withn
     AccordionLoopComponent,
     VerticalCssStepperComponent,
     NgforWithFlexComponent,
-    CheckboxWithngForComponent
+    CheckboxWithngForComponent,
+    IdledialogComponent
   ],
   bootstrap: [AppComponent],
 })
