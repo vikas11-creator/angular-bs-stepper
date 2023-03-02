@@ -1,0 +1,162 @@
+.edit-profile-form {
+}
+.form-group {
+}
+.data-field {
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.field-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: #fff;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px !important;
+  color: blue;
+}
+
+.radio-container {
+  height: 100%;
+  display: flex;
+}
+
+.radio-flex {
+  display: flex;
+  gap: 64px;
+  align-items: center;
+}
+
+.radio-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-array-profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.form-array-field {
+}
+
+.field-array-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: #fff;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px !important;
+  color: blue;
+}
+
+.radio-container {
+  height: 100%;
+  display: flex;
+}
+
+.radio-flex {
+  display: flex;
+  gap: 64px;
+  align-items: center;
+}
+
+.radio-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: blue;
+}
+
+p-radiobutton {
+  vertical-align: inherit;
+}
+
+.field-set {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.switch-profile {
+  display: flex;
+  align-items: center;
+}
+
+.menu-access {
+  background-color: #fff;
+  border-top: 1px solid #e9eff7;
+}
+
+.menu-container {
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.menu-access-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: blue;
+}
+.border-bottom {
+  border-bottom: 1px solid #e9eff7;
+}
+
+.add-profile {
+  background-color: #fff;
+}
+
+.add-profile-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.add-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-footer {
+  background-color: #fff;
+}
+
+.form-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}

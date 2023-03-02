@@ -10,9 +10,14 @@ import { AccordionLoopComponent } from './accordion-loop/accordion-loop.componen
 import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css-stepper.component';
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
 import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
+import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-array.component';
 const routes: Routes = [
   {
     path: '',
+    component: DynamicFormArrayComponent,
+  },
+  {
+    path: 'tablecolumnfilter',
     component: CheckboxWithngForComponent,
   },
   {

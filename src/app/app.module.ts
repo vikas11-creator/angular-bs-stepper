@@ -17,9 +17,19 @@ import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
 import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
 import { IdledialogComponent } from './idledialog/idledialog.component';
+import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-array.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+  ],
   declarations: [
     AppComponent,
     HelloComponent,
@@ -35,7 +45,8 @@ import { IdledialogComponent } from './idledialog/idledialog.component';
     VerticalCssStepperComponent,
     NgforWithFlexComponent,
     CheckboxWithngForComponent,
-    IdledialogComponent
+    IdledialogComponent,
+    DynamicFormArrayComponent,
   ],
   bootstrap: [AppComponent],
 })
