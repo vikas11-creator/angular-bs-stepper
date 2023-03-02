@@ -149,6 +149,4 @@ export class DynamicFormArrayComponent implements OnInit {
   getValueTypeList(key) {
     return this.obj[key];
   }
-
-  submitForm() {}
 }
