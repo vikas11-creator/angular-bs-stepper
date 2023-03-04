@@ -45,7 +45,7 @@
                         (change)="getDropDownVal($event, i)"
                         [formControl]="arr.get('value1')"
                       >
-                        <option disabled>
+                        <option [ngValue]="null" disabled>
                           Choose value to get dynamic column
                         </option>
                         <option *ngFor="let prf of productTypeList">
