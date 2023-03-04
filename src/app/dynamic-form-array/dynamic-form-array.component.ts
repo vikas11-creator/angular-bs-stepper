@@ -135,6 +135,8 @@ export class DynamicFormArrayComponent implements OnInit {
   getDropDownVal(event, i) {
     console.log(event.value, i); //event dynamic aayegi  this.obj[event.value] = [];
     this.obj['entity_type_id'] = [];
+
+    //us value ke base par api call hogi jisse res har bar alag alag aayegi
     //this.httpService.getData(`${PATH.INPUTOUTPUTDROPDOWNVALUE}/${event.value}`).subscribe((res: any) => {
     let res: any = [
       'id',
