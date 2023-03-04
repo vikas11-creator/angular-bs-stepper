@@ -17,10 +17,10 @@ export class DynamicFormArrayComponent implements OnInit {
 
   async ngOnInit() {
     this.sourceList = [
-      {key:'1',value:'ERM'},
-      {key:'2',value:'  Interface'},
-      {key:'3',value:'Other Model'}
-    ]
+      { key: '1', value: 'ERM' },
+      { key: '2', value: '  Interface' },
+      { key: '3', value: 'Other Model' },
+    ];
     this.dynamicArray = [
       {
         id: 48,
@@ -133,7 +133,7 @@ export class DynamicFormArrayComponent implements OnInit {
   }
 
   getDropDownVal(event, i) {
-    console.log(event.value, i)
+    console.log(event.value, i);
     this.obj[event.value] = [];
     //this.httpService.getData(`${PATH.INPUTOUTPUTDROPDOWNVALUE}/${event.value}`).subscribe((res: any) => {
     let res: any = [
@@ -154,6 +154,7 @@ export class DynamicFormArrayComponent implements OnInit {
   }
 
   getValueTypeList(key) {
+    console.log(key);
     return this.obj[key];
   }
 }
