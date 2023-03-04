@@ -11,9 +11,14 @@ import { VerticalCssStepperComponent } from './vertical-css-stepper/vertical-css
 import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.component';
 import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
 import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-array.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
   {
     path: '',
+    component: LandingPageComponent,
+  },
+  {
+    path: 'DynamicFormArrayComponent',
     component: DynamicFormArrayComponent,
   },
   {
@@ -33,7 +38,7 @@ const routes: Routes = [
     component: AccordionLoopComponent,
   },
   {
-    path: 'form-array',
+    path: 'formarray',
     component: FormArrayComponent,
   },
   {
