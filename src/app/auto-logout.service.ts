@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from "./auth.service";
 import { DialogService } from "primeng/dynamicdialog";
-import { IdledialogComponent } from './idledialog/idledialog.component';
+//import { IdledialogComponent } from './idledialog/idledialog.component';
 
 let AUTO_LOGOUT_TIME // in mins
 let SESSION_TIME // in mins
@@ -64,17 +64,17 @@ export class AutoLogoutService {
         const isTimeout = diff < 0;
         const isLogoutTime = logoutDiff < 0;
 
-        if ((isTimeout && this.isFirst) && this.token) {
-            this.isFirst = false;
-            const ref = this.dialogService.open(IdledialogComponent,
-                {
-                    header: 'Session Timeout',
-                    width: '40%'
-                })
-            ref.onClose.subscribe(res => {
-                this.isFirst = true;
-            });
-        }
+        // if ((isTimeout && this.isFirst) && this.token) {
+        //     this.isFirst = false;
+        //     const ref = this.dialogService.open(IdledialogComponent,
+        //         {
+        //             header: 'Session Timeout',
+        //             width: '40%'
+        //         })
+        //     ref.onClose.subscribe(res => {
+        //         this.isFirst = true;
+        //     });
+        // }
 
         if (isLogoutTime && this.token) {
             this.authService.logout();
