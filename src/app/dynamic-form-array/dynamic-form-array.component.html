@@ -62,11 +62,14 @@
                       <select [formControl]="arr.get('value2')">
                         <option>Choose column</option>
                         <option
-                          *ngFor="let prf of getValueTypeList(arr.value.value1)"
+                          *ngFor="let prf of getValueTypeList('entity_type_id')"
                         >
                           {{ prf.value }}
                         </option>
                       </select>
+                      <!-- <option
+                          *ngFor="let prf of getValueTypeList(arr.value.value1)"
+                        >  value dynamic rhegi ho value upar wale dropdown me select krenge wo bejenge-->
                     </div>
                   </div>
                 </div>

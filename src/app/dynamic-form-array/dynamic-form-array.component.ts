@@ -133,8 +133,8 @@ export class DynamicFormArrayComponent implements OnInit {
   }
 
   getDropDownVal(event, i) {
-    console.log(event.value, i);
-    this.obj[event.value] = [];
+    console.log(event.value, i); //event dynamic aayegi  this.obj[event.value] = [];
+    this.obj['entity_type_id'] = [];
     //this.httpService.getData(`${PATH.INPUTOUTPUTDROPDOWNVALUE}/${event.value}`).subscribe((res: any) => {
     let res: any = [
       'id',
@@ -148,12 +148,14 @@ export class DynamicFormArrayComponent implements OnInit {
       'entity_parent',
     ];
     res.forEach((element: any) => {
-      this.obj[event.value].push({ key: 'label', value: element });
+      this.obj['entity_type_id'].push({ key: 'label', value: element });
+      //this.obj[event.value].push({ key: 'label', value: element });//jab dynamic aayegi tab usi key me push krenge
     });
     // })
   }
 
   getValueTypeList(key) {
+    //abhi html se static key le rhe h but dynamic hoga jo upar wale div me select krenge
     console.log(key);
     return this.obj[key];
   }
