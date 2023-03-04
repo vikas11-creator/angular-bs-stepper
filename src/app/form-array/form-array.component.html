@@ -47,14 +47,14 @@
   </div>
 </form> -->
 <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
-<input
-  type="text"
-  (keypress)="changeEvent($event)"
-  formControlName="filterFieldStart"
-/>
-<div *ngIf="isChange">
-  <div>
-    <!-- <label for="type"> Male</label>
+  <input
+    type="text"
+    (keypress)="changeEvent($event)"
+    formControlName="filterFieldStart"
+  />
+  <div *ngIf="isChange">
+    <div>
+      <!-- <label for="type"> Male</label>
   <input
     id="type"
     type="radio"
@@ -70,90 +70,90 @@
     name="genderControl"
     (onClick)="callForm($event)"
   /> -->
-    <label for="male" (click)="callForm('male')">Male</label>
-    <!-- <input type="radio" name="genderControl" id="male" value="male"
+      <label for="male" (click)="callForm('male')">Male</label>
+      <!-- <input type="radio" name="genderControl" id="male" value="male"
   formControlName="genderControl" (change)="callForm($event,'male')"> -->
-    <label for="female" (click)="callForm('female')">Female</label>
-    <!-- <input type="radio" name="genderControl" id="female" value="female"
+      <label for="female" (click)="callForm('female')">Female</label>
+      <!-- <input type="radio" name="genderControl" id="female" value="female"
   formControlName="genderControl" (change)="callForm($event,'female')"> -->
+    </div>
   </div>
-</div>
-<div formArrayName="people">
-  <div *ngFor="let person of getPeople(myForm); let ig = index">
-    <div style="margin: 5px;" [formGroupName]="ig">
-      <!-- <div formArrayName="addresses">
+  <div formArrayName="people">
+    <div *ngFor="let person of getPeople(myForm); let ig = index">
+      <div style="margin: 5px;" [formGroupName]="ig">
+        <!-- <div formArrayName="addresses">
         <div *ngFor="let address of getAddress(person); let j = index"> -->
-      <div>
-        <span>Address {{ ig + 1 }}</span>
-        <input
-          type="text"
-          placeholder="filterField"
-          formControlName="filterField"
-        />
-        <input
-          type="radio"
-          name="genderControl"
-          id="male"
-          value="male"
-          formControlName="genderControl"
-          (change)="callFormCheck($event, 'male')"
-        />
-        <label for="male"> Add Data Type</label>
-        <input
-          type="radio"
-          name="genderControl"
-          id="female"
-          value="female"
-          formControlName="genderControl"
-          (change)="callFormCheck($event, 'female')"
-        />
-        <label for="female"> Look Up Data</label>
-        <div formArrayName="Ys">
-          <div
-            *ngFor="
-              let Y of person['controls'].Ys['controls'];
-              let iy = index
-            "
-          >
-            <div formGroupName="{{ iy }}" class="Ys">
-              <input type="text" formControlName="dataType" />
-              <input
-                type="button"
-                (click)="addDatanewAddArray(Y, ig)"
-                value="+"
-              />
-              <div formArrayName="newFilterField">
-                <div
-                  *ngFor="
-                    let Z of Y['controls']['newFilterField']['controls'];
-                    let iz = index
-                  "
-                >
-                  <div formGroupName="{{ iz }}">
-                    <input
-                      type="text"
-                      placeholder="filterField"
-                      formControlName="filterField"
-                    />
-                    <input
-                      type="radio"
-                      name="genderControl"
-                      id="male"
-                      value="male"
-                      formControlName="genderControl"
-                      (change)="callCheckbox($event, 'male', iy, ig, iz)"
-                    />
-                    <label for="male"> Add Data Type</label>
-                    <input
-                      type="radio"
-                      name="genderControl"
-                      id="female"
-                      value="female"
-                      formControlName="genderControl"
-                      (change)="callCheckbox($event, 'female', iy, ix, iz)"
-                    />
-                    <label for="female"> Look Up Data</label>
-                    <!-- <div formArrayName="a">
+        <div>
+          <span>Address {{ ig + 1 }}</span>
+          <input
+            type="text"
+            placeholder="filterField"
+            formControlName="filterField"
+          />
+          <input
+            type="radio"
+            name="genderControl"
+            id="male"
+            value="male"
+            formControlName="genderControl"
+            (change)="callFormCheck($event, 'male')"
+          />
+          <label for="male"> Add Data Type</label>
+          <input
+            type="radio"
+            name="genderControl"
+            id="female"
+            value="female"
+            formControlName="genderControl"
+            (change)="callFormCheck($event, 'female')"
+          />
+          <label for="female"> Look Up Data</label>
+          <div formArrayName="Ys">
+            <div
+              *ngFor="
+                let Y of person['controls'].Ys['controls'];
+                let iy = index
+              "
+            >
+              <div formGroupName="{{ iy }}" class="Ys">
+                <input type="text" formControlName="dataType" />
+                <input
+                  type="button"
+                  (click)="addDatanewAddArray(Y, ig)"
+                  value="+"
+                />
+                <div formArrayName="newFilterField">
+                  <div
+                    *ngFor="
+                      let Z of Y['controls']['newFilterField']['controls'];
+                      let iz = index
+                    "
+                  >
+                    <div formGroupName="{{ iz }}">
+                      <input
+                        type="text"
+                        placeholder="filterField"
+                        formControlName="filterField"
+                      />
+                      <input
+                        type="radio"
+                        name="genderControl"
+                        id="male"
+                        value="male"
+                        formControlName="genderControl"
+                        (change)="callCheckbox($event, 'male', iy, ig, iz)"
+                      />
+                      <label for="male"> Add Data Type</label>
+                      <input
+                        type="radio"
+                        name="genderControl"
+                        id="female"
+                        value="female"
+                        formControlName="genderControl"
+                        (change)="callCheckbox($event, 'female', iy, ix, iz)"
+                      />
+                      <label for="female"> Look Up Data</label>
+                      <!-- <div formArrayName="a">
                       <div
                         *ngFor="
                           let pqr of Z['controls']['newFilterField'][
@@ -178,18 +178,18 @@
                         </div>
                       </div>
                     </div> -->
+                    </div>
                   </div>
+                  <input type="button" (click)="amd(Z, ig, iy)" value="Add z" />
                 </div>
-                <input type="button" (click)="amd(Z, ig, iy)" value="Add z" />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- </div>
+        <!-- </div>
       </div> -->
+      </div>
     </div>
   </div>
-</div>
-<input type="submit" value="submit" />
+  <input type="submit" value="submit" />
 </form>
