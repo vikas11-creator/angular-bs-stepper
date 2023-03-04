@@ -1,56 +1,80 @@
 <div class="edit-profile-form">
   <div class="form-group" *ngIf="inputOutputData">
-      <form class="inputOutputForm" [formGroup]="inputOutputForm">
-          <div class="data-field">
-              <div class="form">
-                  <div class="">       
-                      <div class="inputOutputlistBox">
-                          <div class="inputOutput-row">
-                              <div class="field" >
-                                  Parameter Label
-                              </div>
-                              <div class="field">
-                                  Source
-                              </div>
-                              <div class="field">
-                                  Value
-                              </div>
-                              <div class="field">
-                                  &nbsp;
-                              </div>
-                          </div>
-                          <div formArrayName="inputOutputArray">
-                              <div class="inputOutput-row" *ngFor="let arr of inputOutputForm.get('inputOutputArray')['controls']; let i=index;">
-                                  <div class="field">
-                                      {{arr.get('paramName').value}}
-                                  </div>
-                                  <div class="field">
-                                      <div class="form-group input-type p-field">
-                                          <p-dropdown [options]=""  [formControl]="arr.get('source')"
-                                              placeholder="ERM" optionLabel="value" optionValue="value">
-                                          </p-dropdown>
-                                      </div>
-                                  </div>
-                                  <div class="field">
-                                      <div class="form-group input-type p-field">
-                                          <p-dropdown [options]="productTypeList"  (onChange)="getDropDownVal($event, i)"  [formControl]="arr.get('value1')"
-                                              placeholder="Select Table Name" optionLabel="value" optionValue="value">
-                                          </p-dropdown>
-                                      </div>
-                                  </div>
-                                  <div class="field">
-                                      <div class="form-group input-type p-field" *ngIf="arr.value.value1">
-                                          <p-dropdown [options]="getValueTypeList(arr.value.value1)" [formControl]="arr.get('value2')"
-                                              placeholder="Select Column Name" optionLabel="value" optionValue="value">
-                                          </p-dropdown>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+    <form class="inputOutputForm" [formGroup]="inputOutputForm">
+      <div class="data-field">
+        <div class="form">
+          <div class="">
+            <div class="inputOutputlistBox">
+              <div class="inputOutput-row">
+                <div class="field">Parameter Label</div>
+                <div class="field">Source</div>
+                <div class="field">Value</div>
+                <div class="field">&nbsp;</div>
               </div>
+              <div formArrayName="inputOutputArray">
+                <div
+                  class="inputOutput-row"
+                  *ngFor="
+                    let arr of inputOutputForm.get('inputOutputArray')[
+                      'controls'
+                    ];
+                    let i = index
+                  "
+                >
+                  <div class="field">
+                    {{ arr.get('paramName').value }}
+                  </div>
+                  <div class="field">
+                    <div class="form-group input-type p-field">
+                      <select [formControl]="arr.get('source')">
+                        <option [ngValue]="null" disabled>
+                          Choose source list
+                        </option>
+                        <option
+                          *ngFor="let prf of sourceList"
+                          [ngValue]="value"
+                        >
+                          {{ prf.value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="form-group input-type p-field">
+                      <select
+                        (change)="getDropDownVal($event, i)"
+                        [formControl]="arr.get('value1')"
+                      >
+                        <option disabled>
+                          Choose value to get dynamic column
+                        </option>
+                        <option *ngFor="let prf of productTypeList">
+                          {{ prf.value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div
+                      class="form-group input-type p-field"
+                      *ngIf="arr.value.value1"
+                    >
+                      <select [formControl]="arr.get('value2')">
+                        <option>Choose column</option>
+                        <option
+                          *ngFor="let prf of getValueTypeList(arr.value.value1)"
+                        >
+                          {{ prf.value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-      </form>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
