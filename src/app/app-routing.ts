@@ -12,7 +12,6 @@ import { NgforWithFlexComponent } from './ngfor-with-flex/ngfor-with-flex.compon
 import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withng-for.component';
 import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-array.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CheckboxwithngforanotherwayComponent } from './checkboxwithngforanotherway/checkboxwithngforanotherway.component';
 const routes: Routes = [
   {
     path: '',
@@ -25,10 +24,6 @@ const routes: Routes = [
   {
     path: 'tablecolumnfilter',
     component: CheckboxWithngForComponent,
-  },
-  {
-    path: 'CheckboxwithngforanotherwayComponent',
-    component: CheckboxwithngforanotherwayComponent,
   },
   {
     path: 'flex',

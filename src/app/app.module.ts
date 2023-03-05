@@ -20,7 +20,7 @@ import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-arr
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CheckboxwithngforanotherwayComponent } from './checkboxwithngforanotherway/checkboxwithngforanotherway.component';
+
 
 @NgModule({
   imports: [
@@ -47,9 +47,8 @@ import { CheckboxwithngforanotherwayComponent } from './checkboxwithngforanother
     NgforWithFlexComponent,
     CheckboxWithngForComponent,
     DynamicFormArrayComponent,
-    LandingPageComponent,
-    CheckboxwithngforanotherwayComponent
-  ],
+    LandingPageComponent
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
