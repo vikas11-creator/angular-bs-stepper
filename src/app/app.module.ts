@@ -20,6 +20,7 @@ import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-arr
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     NgforWithFlexComponent,
     CheckboxWithngForComponent,
     DynamicFormArrayComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    DiffcssinforloopComponent
     ],
   bootstrap: [AppComponent],
 })
