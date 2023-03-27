@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   eyeButton: boolean = false;
   password: string = 'password';
   iconShow: boolean = true;
+  name = '<h3>Name</h3>';
+  passwordP = '<h3>Password</h3>';
   constructor(private _formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit() {
