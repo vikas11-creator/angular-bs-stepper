@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class InputPushComponent implements OnInit {
   inputForm: FormGroup;
+  arr: any[] = [];
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -21,6 +22,10 @@ export class InputPushComponent implements OnInit {
       inp3: [''],
       total: [''],
     });
+  }
+
+  pushData(obj) {
+    console.log(obj);
   }
 
   onSubmit(formVal) {}

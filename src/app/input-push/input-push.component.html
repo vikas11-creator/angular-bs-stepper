@@ -5,28 +5,31 @@
   novalidate
 >
   <input
-    type="text"
+    type="number"
     class="form-control"
     name="inp1"
     id="workflow"
     placeholder="Enter Name"
     formControlName="inp1"
+    (change)="pushData({ x: 'l', v: $event.target.value })"
   />
   <input
-    type="text"
+    type="number"
     class="form-control"
     name="inp2"
     id="workflow"
     placeholder="Enter Name"
     formControlName="inp2"
+    (change)="pushData({ x: 'm', v: $event.target.value })"
   />
   <input
-    type="text"
+    type="number"
     class="form-control"
     name="inp3"
     id="workflow"
     placeholder="Enter Name"
     formControlName="inp3"
+    (change)="pushData({ x: 'h', v: $event.target.value })"
   />
   <input
     type="text"
