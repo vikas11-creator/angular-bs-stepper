@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class InputPushComponent implements OnInit {
   inputForm: FormGroup;
   arr: any[] = [];
+  total: any;
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -43,11 +44,11 @@ export class InputPushComponent implements OnInit {
       }
     }
 
-    let total = this.arr.reduce((acc, current) => {
+     this.total = this.arr.reduce((acc, current) => {
       return acc + parseInt(current.v);
     }, 0);
 
-    console.log(total);
+    console.log(this.total);
   }
 
   onSubmit(formVal) {}
