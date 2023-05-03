@@ -44,7 +44,7 @@ export class InputPushComponent implements OnInit {
     }
 
     let total = this.arr.reduce((acc, current) => {
-      return acc + current.v;
+      return acc + parseInt(current.v);
     }, 0);
 
     console.log(total);
