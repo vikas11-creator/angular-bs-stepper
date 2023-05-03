@@ -1,0 +1,46 @@
+<form
+  name="form"
+  [formGroup]="inputForm"
+  (ngSubmit)="onSubmit(loginForm)"
+  novalidate
+>
+  <div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="workflow"
+            placeholder="Enter Name"
+            formControlName="inp1"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="workflow"
+            placeholder="Enter Name"
+            formControlName="inp2"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="workflow"
+            placeholder="Enter Name"
+            formControlName="inp3"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="workflow"
+            placeholder="Enter Name"
+            formControlName="total"
+          />
+      </div>
+    </div>
+  </div>
+</form>

@@ -13,10 +13,15 @@ import { CheckboxWithngForComponent } from './checkbox-withng-for/checkbox-withn
 import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-array.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.component';
+import { InputPushComponent } from './input-push/input-push.component';
 const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent,
+  },
+  {
+    path: 'inputPush',
+    component: InputPushComponent,
   },
   {
     path: 'DynamicFormArrayComponent',

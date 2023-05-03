@@ -21,7 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.component';
-
+import { InputPushComponent } from './input-push/input-push.component';
 
 @NgModule({
   imports: [
@@ -49,8 +49,9 @@ import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.c
     CheckboxWithngForComponent,
     DynamicFormArrayComponent,
     LandingPageComponent,
-    DiffcssinforloopComponent
-    ],
+    DiffcssinforloopComponent,
+    InputPushComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
