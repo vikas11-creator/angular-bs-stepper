@@ -49,6 +49,7 @@ export class InputPushComponent implements OnInit {
     }, 0);
 
     console.log(this.total);
+    this.inputForm.get('total').patchValue(this.total);
   }
 
   onSubmit(formVal) {}
