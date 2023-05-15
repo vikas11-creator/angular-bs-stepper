@@ -14,10 +14,15 @@ import { DynamicFormArrayComponent } from './dynamic-form-array/dynamic-form-arr
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.component';
 import { InputPushComponent } from './input-push/input-push.component';
+import { NewCssComponent } from './css/new-css/new-css.component';
 const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent,
+  },
+  {
+    path: 'css',
+    component: NewCssComponent,
   },
   {
     path: 'inputPush',

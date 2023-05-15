@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DiffcssinforloopComponent } from './diffcssinforloop/diffcssinforloop.component';
 import { InputPushComponent } from './input-push/input-push.component';
+import { NewCssComponent } from './css/new-css/new-css.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { InputPushComponent } from './input-push/input-push.component';
     LandingPageComponent,
     DiffcssinforloopComponent,
     InputPushComponent,
+    NewCssComponent
   ],
   bootstrap: [AppComponent],
 })
