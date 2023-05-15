@@ -1,1 +1,8 @@
-jbj
+<div class="container">
+  <div class="bucket" *ngFor="let d of data;let i = index" [ngClass]="i==0 ? 'left-semi-circle between' : i==data.length-1 ? 'last-data': i< data.length-1 ? 'between': i==1 ? 'cut':''">
+
+  </div>
+</div>
+
+
+<div (click)="addBoxes()">Add More</div>

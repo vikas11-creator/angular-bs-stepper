@@ -1,0 +1,48 @@
+.container {
+  height: 100px;
+  width: 100vw;
+  padding: 10px 20px;
+  background-color: blanchedalmond;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bucket {
+  width: 20%;
+  height: 25px;
+  margin-right: 30px;
+  background-color: black;
+  position: relative;
+}
+
+.left-semi-circle {
+  border-radius: 60px 0px 0px 60px;
+}
+
+.between::after {
+  content: ' ';
+  position: absolute;
+  right: -28px;
+  top: 0;
+  border-top: 13px solid transparent;
+  border-right: none;
+  border-left: 29px solid #1c304b;
+  border-bottom: 13px solid transparent;
+  border-radius: 2px;
+}
+
+.cut {
+  content: ' ';
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  border-top: 13px solid transparent;
+  border-right: none;
+  border-left: 30px solid #e9eff7;
+  border-bottom: 13px solid transparent;
+  border-radius: 0;
+}
+.last-data {
+  border-radius: 0px 60px 60px 0px;
+}

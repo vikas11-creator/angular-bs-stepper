@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-css.component.css']
 })
 export class NewCssComponent implements OnInit {
-
+  data:any = [
+    {
+      id:1,
+    }
+  ]
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addBoxes(){
+    let l = this.data.length;
+    this.data.push({id:l+1});
   }
 
 }
