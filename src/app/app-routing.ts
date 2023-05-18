@@ -21,7 +21,7 @@ import { BaseComponent } from './inheritance/base/base/base.component';
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
 const routes: Routes = [
   {
-    path: 'landing',
+    path: '',
     component: LandingPageComponent,
   },
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
     path: 'workflow/edit/:step/:id',
     component: StepperComponent,
   },
-  { path: '', component: Component1Component },
+  { path: 'pageone', component: Component1Component },
   { path: 'pagetwo', component: Component2Component },
   { path: 'pagethree', component: Component3Component },
 ];
