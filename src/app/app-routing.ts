@@ -17,7 +17,6 @@ import { InputPushComponent } from './input-push/input-push.component';
 import { NewCssComponent } from './css/new-css/new-css.component';
 import { Component1Component } from './inheritance/comp1/component1/component1.component';
 import { Component2Component } from './inheritance/comp2/component2/component2.component';
-import { BaseComponent } from './inheritance/base/base/base.component';
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
 const routes: Routes = [
   {

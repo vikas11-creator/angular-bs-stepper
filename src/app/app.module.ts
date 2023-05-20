@@ -60,7 +60,7 @@ import { Component3Component } from './inheritance/comp3/component3/component3.c
     BaseComponent,
     Component1Component,
     Component2Component,
-    Component3Component
+    Component3Component,
   ],
   bootstrap: [AppComponent],
 })
