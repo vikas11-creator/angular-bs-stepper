@@ -1,9 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
+  OnInit
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,8 +12,6 @@ import * as _ from 'lodash';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-  @ViewChild('container', { read: ViewContainerRef, static: true })
-  container: ViewContainerRef;
   checked = true;
   merge: boolean;
   mergeList = [];
