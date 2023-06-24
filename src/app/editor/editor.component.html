@@ -48,7 +48,7 @@
                         'controls'
                       ];
                       let j = index
-                    "
+                    " 
                     [ngClass]="
                       columnControl.value.checked ? 'selectedCell' : ''
                     "
@@ -60,7 +60,7 @@
                     [attr.colspan]="columnControl.value.colspan"
                     formGroupName="{{ j }}"
                     (dblclick)="op.toggle($event)"
-                    (click)="cellClicked(columnControl, j)"
+                    (click)="getCellDetail(columnControl)"
                   >
                     {{ labelType[columnControl.value.colType] }}
                     <ng-container
@@ -183,9 +183,9 @@
     <div class="col-12">
       <button
         style="float: right;"
-        *ngIf="selectedCells.length > 1"
+        *ngIf="localTableArray.length > 1"
         class="linkBtn-submit ml-3"
-        (click)="mergeColumns()"
+        (click)="mergeData()"
       >
         Merge Columns
       </button>
