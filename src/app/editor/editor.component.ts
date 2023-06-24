@@ -88,7 +88,6 @@ export class EditorComponent implements OnInit {
               ))
                 .at(i)
                 .get('columns') as FormArray;
-              console.log(control.controls);
               control.controls.forEach((el: any) => {
                 el.value.checked = false;
               });
