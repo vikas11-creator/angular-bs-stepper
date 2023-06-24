@@ -22,7 +22,7 @@ export class EditorComponent implements OnInit {
   isLoad: boolean = false;
   selectedCells: any = [];
   indexList: any = [];
-
+  localTableArray: any = [];
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
@@ -49,6 +49,87 @@ export class EditorComponent implements OnInit {
 
   ngAfterContentChecked() {
     this.cdr.detectChanges();
+  }
+
+  
+
+  getCellDetail(compType) {
+    console.log(compType.value);
+    compType.value.checked=!compType.value.checked;
+    this.localTableArray.push(compType.value);
+  }
+
+  mergeData() {
+    let ind: number;
+    let found: any = {};
+    const sumWithInitial = this.localTableArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.colspan,0);      
+    this.localTableArray.map((element: any) => {
+      if (Object.keys(found).length == 0) {
+        this.componentForm.value.rows.map((elem: any, i: number) => {
+          if (Object.keys(found).length == 0) {
+            found = elem.columns.find((el: any, j: number) => {
+              ind = j;
+              return el.id == element.id;
+            })
+            if (found == undefined) {
+              found = {};
+            }
+            if (this.isValidInput(found) && Object.keys(found).length !== 0) {
+              found.colspan = sumWithInitial;
+              elem.columns.splice(ind + 1, ((this.localTableArray.length) - 1));
+              const control: any = (<FormArray>this.componentForm.controls['rows'])
+                .at(i)
+                .get('columns') as FormArray;
+              control.controls.splice(ind + 1, ((this.localTableArray.length) - 1));
+              this.localTableArray = [];
+            }
+          }
+        })
+      }
+    })
+    console.log(this.componentForm.value.rows);
+    // console.log(ind);
+    // console.log(((this.localTableArray.length) - (ind + 1)));
+    // console.log('this.componentForm.value.rows', this.componentForm.value.rows);
+  }
+
+  isValidInput(input) {
+    if (this.isNull(input) || this.isUndefined(input) || this.isEmpty(input)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isUndefined(input) {
+    if (typeof input === 'undefined') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isNull(input) {
+    if (input != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isEmpty(input) {
+    if (typeof input === 'undefined') {
+      return true;
+    } else {
+      let lstrTempstring = String(input);
+      lstrTempstring = lstrTempstring.trim();
+      if (lstrTempstring === '' || lstrTempstring === 'undefined') {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   getRowProperty(e, i, type) {
