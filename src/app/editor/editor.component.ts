@@ -237,6 +237,7 @@ export class EditorComponent implements OnInit {
   postData() {}
 
   getColumnCount() {
+    this.componentForm.get('rows')['controls'] = []
     this.createTable();
   }
 
