@@ -88,10 +88,6 @@ export class EditorComponent implements OnInit {
         })
       }
     })
-    console.log(this.componentForm.value.rows);
-    // console.log(ind);
-    // console.log(((this.localTableArray.length) - (ind + 1)));
-    // console.log('this.componentForm.value.rows', this.componentForm.value.rows);
   }
 
   isValidInput(input) {
