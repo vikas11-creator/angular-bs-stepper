@@ -51,12 +51,22 @@ export class EditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  
-
   getCellDetail(compType) {
     console.log(compType.value);
     compType.value.checked=!compType.value.checked;
-    this.localTableArray.push(compType.value);
+    if(compType.value.checked){
+      this.localTableArray.push(compType.value);
+    }else{
+      let ind;
+      let findCell = this.localTableArray.find((el:any,i:number)=>{
+        ind = i;
+        return el.id == compType.value.id
+      })
+      if(findCell){
+        this.localTableArray.splice(ind,1)
+      }
+    }
+    console.log(this.localTableArray)
   }
 
   mergeData() {
