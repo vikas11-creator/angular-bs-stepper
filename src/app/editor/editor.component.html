@@ -100,13 +100,25 @@
                       <div class="grid p-2">
                         <div class="col-12">
                           <label class="label">Component Type</label>
-                          <p-dropdown
+                          <!-- <p-dropdown
                             formControlName="colType"
                             placeholder="Select column type"
                             [options]="products"
                             optionLabel="name"
                             optionValue="value"
-                          ></p-dropdown>
+                          ></p-dropdown> -->
+                          <select 
+                          formControlName="colType">
+                            <option [ngValue]="null" disabled>
+                              Choose source list
+                            </option>
+                            <option
+                              *ngFor="let prf of products"
+                              [ngValue]="value"
+                            >
+                              {{ prf.value }}
+                            </option>
+                          </select>
                           <label for="txtColor" class="label">Text Color</label>
                           <p-colorPicker
                             id="txtColor"
