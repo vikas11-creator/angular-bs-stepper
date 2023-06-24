@@ -1,8 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
@@ -26,8 +22,7 @@ export class EditorComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   public componentForm = this.formbuilder.group({
     id: uuidv4(),
@@ -53,22 +48,27 @@ export class EditorComponent implements OnInit {
 
   getCellDetail(compType) {
     console.log(compType.value);
-    compType.value.checked=!compType.value.checked;
-    if(compType.value.checked){
+    compType.value.checked = !compType.value.checked;
+    if (compType.value.checked) {
       this.localTableArray.push(compType.value);
-    }else{
-      this.localTableArray.splice(this.localTableArray.findIndex((el:any)=>{
-        return el.id == compType.value.id
-      }),1)
+    } else {
+      this.localTableArray.splice(
+        this.localTableArray.findIndex((el: any) => {
+          return el.id == compType.value.id;
+        }),
+        1
+      );
     }
-    console.log(this.localTableArray)
+    console.log(this.localTableArray);
   }
 
   mergeData() {
     let ind: number;
     let found: any = {};
     const sumWithInitial = this.localTableArray.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.colspan,0);      
+      (accumulator, currentValue) => accumulator + currentValue.colspan,
+      0
+    );
     this.localTableArray.map((element: any) => {
       if (Object.keys(found).length == 0) {
         this.componentForm.value.rows.map((elem: any, i: number) => {
@@ -76,23 +76,25 @@ export class EditorComponent implements OnInit {
             found = elem.columns.find((el: any, j: number) => {
               ind = j;
               return el.id == element.id;
-            })
+            });
             if (found == undefined) {
               found = {};
             }
             if (this.isValidInput(found) && Object.keys(found).length !== 0) {
               found.colspan = sumWithInitial;
-              elem.columns.splice(ind + 1, ((this.localTableArray.length) - 1));
-              const control: any = (<FormArray>this.componentForm.controls['rows'])
+              elem.columns.splice(ind + 1, this.localTableArray.length - 1);
+              const control: any = (<FormArray>(
+                this.componentForm.controls['rows']
+              ))
                 .at(i)
                 .get('columns') as FormArray;
-              control.controls.splice(ind + 1, ((this.localTableArray.length) - 1));
+              control.controls.splice(ind + 1, this.localTableArray.length - 1);
               this.localTableArray = [];
             }
           }
-        })
+        });
       }
-    })
+    });
   }
 
   isValidInput(input) {
