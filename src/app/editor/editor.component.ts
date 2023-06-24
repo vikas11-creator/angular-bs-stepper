@@ -28,7 +28,6 @@ export class EditorComponent implements OnInit {
   infoData: any;
   isEdit: boolean = false;
   checked = true;
-  selectedCategory: any = null;
   categories: any[];
   userData: any;
   merge: boolean;
@@ -45,14 +44,10 @@ export class EditorComponent implements OnInit {
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
   ) {
-    this.selectedCategory = this.categories[0];
   }
 
   public componentForm = this.formbuilder.group({
-    title: [''],
     id: uuidv4(),
-    refId: [''],
-    fieldType: [],
     row: [],
     column: [],
     rows: this.formbuilder.array([]),
@@ -270,15 +265,6 @@ export class EditorComponent implements OnInit {
   }
 
   postData() {}
-
-  toggleClick(ev) {
-    if (this.selectedCategory.name == 'Component') {
-      this.checked = true;
-    } else {
-      this.checked = false;
-    }
-    this.componentType = this.selectedCategory.key;
-  }
 
   tableCol(i: number) {
     return (<FormArray>this.componentForm.controls['tableRow'])

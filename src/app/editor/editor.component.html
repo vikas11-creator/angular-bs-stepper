@@ -1,284 +1,202 @@
 <form [formGroup]="componentForm">
   <div class="new-rating">
     <div class="row">
-      <div class="input-wrapper">
-        <div class="comContainerBox grid p-2" *ngIf="dialogRefData.flag">
-          <div *ngFor="let category of categories" class="p-field-checkbox">
-            <p-radioButton
-              class="careedgePrime-radio"
-              [inputId]="category.key"
-              name="category"
-              [value]="category"
-              [(ngModel)]="selectedCategory"
-              [ngModelOptions]="{ standalone: true }"
-              (onClick)="toggleClick($event.value)"
-            ></p-radioButton>
-            <label [for]="category.key">{{ category.name }}</label>
-          </div>
+      <div class="col-6">
+        <label class="label"> No of Rows </label>
+        <div class="form-group input-type p-field">
+          <input
+            formControlName="row"
+            placeholder="No of columns"
+            class="input-field"
+            (change)="getRowCount()"
+            pInputText
+            maxlength="51"
+          />
         </div>
-        <div class="AddContainer grid">
-          <div
-            class="col-6"
-            *ngIf="componentType == 'tab' && editorType.type == 'header'"
-          >
-            <div class="">
-              <label class="label"> Select Group Type </label>
-              <div class="form-group input-type p-field">
-                <p-dropdown
-                  [options]="headerGroupList"
-                  optionLabel="Header Group Name"
-                  optionValue="Header Group Name"
-                  placeholder=" Select"
-                  formControlName="fieldType"
-                  scrollHeight="150px"
-                ></p-dropdown>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="">
-              <label class="label"> Title </label>
-              <div class="form-group input-type p-field">
-                <input
-                  formControlName="title"
-                  placeholder="Title"
-                  class="input-field"
-                  pInputText
-                  maxlength="200"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-6"
-            *ngIf="
-              (componentType == 'component' && checked) ||
-              (componentType == 'rowComponent' && checked)
-            "
-          >
-            <div class="">
-              <label class="label"> Select Component </label>
-              <div class="form-group input-type p-field">
-                <p-dropdown
-                  [options]="fieldTypeList"
-                  optionLabel="name"
-                  optionValue="code"
-                  placeholder="Select"
-                  formControlName="fieldType"
-                  scrollHeight="150px"
-                ></p-dropdown>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="col-6">
+        <label class="label"> No of Columns </label>
+        <div class="form-group input-type p-field">
+          <input
+            formControlName="column"
+            placeholder="No of columns"
+            class="input-field"
+            (change)="getColumnCount()"
+            pInputText
+            maxlength="51"
+          />
         </div>
       </div>
     </div>
 
-    <div class="grid" *ngIf="componentType == 'table'">
-      <div class="col-6">
-        <div class="">
-          <label class="label"> No of Rows </label>
-          <div class="form-group input-type p-field">
-            <input
-              formControlName="row"
-              placeholder="No of rows"
-              class="input-field"
-              (change)="getRowCount()"
-              pInputText
-              maxlength="51"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <div class="">
-          <label class="label"> No of Columns </label>
-          <div class="form-group input-type p-field">
-            <input
-              formControlName="column"
-              placeholder="No of columns"
-              class="input-field"
-              (change)="getColumnCount()"
-              pInputText
-              maxlength="51"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12">
-        <div class="form-group">
-          <p *ngIf="merge" class="col-12">Select Columns to be merged</p>
-          <div class="rating-editor tableEditer-box">
-            <table>
-              <ng-container formArrayName="rows">
-                <tr
-                  *ngFor="
-                    let rowControl of tableRowControls['controls'];
-                    let i = index
-                  "
-                  formGroupName="{{ i }}"
-                >
-                  <ng-container formArrayName="columns">
-                    <td
-                      *ngFor="
-                        let columnControl of rowControl.get('columns')[
-                          'controls'
-                        ];
-                        let j = index
-                      "
-                      [ngClass]="
-                        columnControl.value.checked ? 'selectedCell' : ''
-                      "
-                      [ngStyle]="{
-                        color: columnControl.value.textColor,
-                        'background-color': columnControl.value.bgColor,
-                        'font-size': columnControl.value.fontSize
-                      }"
-                      [attr.colspan]="columnControl.value.colspan"
-                      formGroupName="{{ j }}"
-                      (dblclick)="op.toggle($event)"
-                      (click)="cellClicked(columnControl, j)"
+    <div class="col-12">
+      <div class="form-group">
+        <p *ngIf="merge" class="col-12">Select Columns to be merged</p>
+        <div class="rating-editor tableEditer-box">
+          <table>
+            <ng-container formArrayName="rows">
+              <tr
+                *ngFor="
+                  let rowControl of tableRowControls['controls'];
+                  let i = index
+                "
+                formGroupName="{{ i }}"
+              >
+                <ng-container formArrayName="columns">
+                  <td
+                    *ngFor="
+                      let columnControl of rowControl.get('columns')[
+                        'controls'
+                      ];
+                      let j = index
+                    "
+                    [ngClass]="
+                      columnControl.value.checked ? 'selectedCell' : ''
+                    "
+                    [ngStyle]="{
+                      color: columnControl.value.textColor,
+                      'background-color': columnControl.value.bgColor,
+                      'font-size': columnControl.value.fontSize
+                    }"
+                    [attr.colspan]="columnControl.value.colspan"
+                    formGroupName="{{ j }}"
+                    (dblclick)="op.toggle($event)"
+                    (click)="cellClicked(columnControl, j)"
+                  >
+                    {{ labelType[columnControl.value.colType] }}
+                    <ng-container
+                      *ngIf="columnControl.value.colType == 'label'"
                     >
-                      {{ labelType[columnControl.value.colType] }}
-                      <ng-container
-                        *ngIf="columnControl.value.colType == 'label'"
-                      >
-                        <input
-                          formControlName="value"
-                          placeholder="Enter label title"
-                          class="input-field"
-                          pInputText
-                          maxlength="51"
-                        />
-                      </ng-container>
-                      <ng-container
-                        *ngIf="columnControl.value.colType == 'dropDown'"
-                      >
-                        <p-dropdown
-                          formControlName="value"
-                          [options]="products"
-                          placeholder="Select dropdown type"
-                          optionLabel="name"
-                          optionValue="value"
-                        ></p-dropdown>
-                      </ng-container>
-                      <ng-container
-                        *ngIf="columnControl.value.colType == 'input'"
-                      >
-                        <input
-                          formControlName="value"
-                          placeholder="Enter Input"
-                          class="input-field"
-                          pInputText
-                          maxlength="51"
-                        />
-                      </ng-container>
-                      <p-overlayPanel #op>
-                        <div class="grid p-2">
-                          <div class="col-12">
-                            <label class="label">Component Type</label>
-                            <p-dropdown
-                              formControlName="colType"
-                              placeholder="Select column type"
-                              [options]="products"
-                              optionLabel="name"
-                              optionValue="value"
-                            ></p-dropdown>
-                            <label for="txtColor" class="label"
-                              >Text Color</label
-                            >
-                            <p-colorPicker
-                              id="txtColor"
-                              formControlName="textColor"
-                            ></p-colorPicker>
-                            <label for="bgColor" class="label"
-                              >Background Color</label
-                            >
-                            <p-colorPicker
-                              id="bgColor"
-                              formControlName="bgColor"
-                            ></p-colorPicker>
-                            <label for="bgColor" class="label">Font Size</label>
-                            <p-dropdown
-                              formControlName="fontSize"
-                              [options]="fontSize"
-                              placeholder="Select font size"
-                              optionLabel="name"
-                              optionValue="value"
-                            ></p-dropdown>
-                          </div>
+                      <input
+                        formControlName="value"
+                        placeholder="Enter label title"
+                        class="input-field"
+                        pInputText
+                        maxlength="51"
+                      />
+                    </ng-container>
+                    <ng-container
+                      *ngIf="columnControl.value.colType == 'dropDown'"
+                    >
+                      <p-dropdown
+                        formControlName="value"
+                        [options]="products"
+                        placeholder="Select dropdown type"
+                        optionLabel="name"
+                        optionValue="value"
+                      ></p-dropdown>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="columnControl.value.colType == 'input'"
+                    >
+                      <input
+                        formControlName="value"
+                        placeholder="Enter Input"
+                        class="input-field"
+                        pInputText
+                        maxlength="51"
+                      />
+                    </ng-container>
+                    <p-overlayPanel #op>
+                      <div class="grid p-2">
+                        <div class="col-12">
+                          <label class="label">Component Type</label>
+                          <p-dropdown
+                            formControlName="colType"
+                            placeholder="Select column type"
+                            [options]="products"
+                            optionLabel="name"
+                            optionValue="value"
+                          ></p-dropdown>
+                          <label for="txtColor" class="label">Text Color</label>
+                          <p-colorPicker
+                            id="txtColor"
+                            formControlName="textColor"
+                          ></p-colorPicker>
+                          <label for="bgColor" class="label"
+                            >Background Color</label
+                          >
+                          <p-colorPicker
+                            id="bgColor"
+                            formControlName="bgColor"
+                          ></p-colorPicker>
+                          <label for="bgColor" class="label">Font Size</label>
+                          <p-dropdown
+                            formControlName="fontSize"
+                            [options]="fontSize"
+                            placeholder="Select font size"
+                            optionLabel="name"
+                            optionValue="value"
+                          ></p-dropdown>
                         </div>
-                      </p-overlayPanel>
-                    </td>
-                  </ng-container>
-                  <td>
-                    <button
-                      class="linkBtn-submit"
-                      (dblclick)="opRow.toggle($event)"
-                    >
-                      row
-                    </button>
-                  </td>
-                  <p-overlayPanel #opRow>
-                    <div class="grid p-2">
-                      <div class="col-12">
-                        <label class="label">Component Type</label>
-                        <p-dropdown
-                          placeholder="Select column type"
-                          [options]="products"
-                          optionLabel="name"
-                          optionValue="value"
-                          (onChange)="getRowProperty($event, i, 'colType')"
-                        ></p-dropdown>
-                        <label for="txtColor" class="label">Text Color</label>
-                        <p-colorPicker
-                          id="txtColor"
-                          (onChange)="getRowProperty($event, i, 'textColor')"
-                        ></p-colorPicker>
-                        <label for="bgColor" class="label"
-                          >Background Color</label
-                        >
-                        <p-colorPicker
-                          id="bgColor"
-                          (onChange)="getRowProperty($event, i, 'bgColor')"
-                        ></p-colorPicker>
-                        <label for="bgColor" class="label">Font Size</label>
-                        <p-dropdown
-                          [options]="fontSize"
-                          placeholder="Select font size"
-                          (onChange)="getRowProperty($event, i, 'fontSize')"
-                          optionLabel="name"
-                          optionValue="value"
-                        ></p-dropdown>
                       </div>
+                    </p-overlayPanel>
+                  </td>
+                </ng-container>
+                <td>
+                  <button
+                    class="linkBtn-submit"
+                    (dblclick)="opRow.toggle($event)"
+                  >
+                    row
+                  </button>
+                </td>
+                <p-overlayPanel #opRow>
+                  <div class="grid p-2">
+                    <div class="col-12">
+                      <label class="label">Component Type</label>
+                      <p-dropdown
+                        placeholder="Select column type"
+                        [options]="products"
+                        optionLabel="name"
+                        optionValue="value"
+                        (onChange)="getRowProperty($event, i, 'colType')"
+                      ></p-dropdown>
+                      <label for="txtColor" class="label">Text Color</label>
+                      <p-colorPicker
+                        id="txtColor"
+                        (onChange)="getRowProperty($event, i, 'textColor')"
+                      ></p-colorPicker>
+                      <label for="bgColor" class="label"
+                        >Background Color</label
+                      >
+                      <p-colorPicker
+                        id="bgColor"
+                        (onChange)="getRowProperty($event, i, 'bgColor')"
+                      ></p-colorPicker>
+                      <label for="bgColor" class="label">Font Size</label>
+                      <p-dropdown
+                        [options]="fontSize"
+                        placeholder="Select font size"
+                        (onChange)="getRowProperty($event, i, 'fontSize')"
+                        optionLabel="name"
+                        optionValue="value"
+                      ></p-dropdown>
                     </div>
-                  </p-overlayPanel>
-                </tr>
-              </ng-container>
-            </table>
-          </div>
+                  </div>
+                </p-overlayPanel>
+              </tr>
+            </ng-container>
+          </table>
         </div>
       </div>
-      <div class="col-12">
-        <button
-          style="float: right;"
-          *ngIf="selectedCells.length > 1"
-          class="linkBtn-submit ml-3"
-          (click)="mergeColumns()"
-        >
-          Merge Columns
-        </button>
-        <button
-          style="float: right;"
-          class="linkBtn-submit"
-          (click)="addMoreRows()"
-        >
-          Add Row
-        </button>
-      </div>
+    </div>
+    <div class="col-12">
+      <button
+        style="float: right;"
+        *ngIf="selectedCells.length > 1"
+        class="linkBtn-submit ml-3"
+        (click)="mergeColumns()"
+      >
+        Merge Columns
+      </button>
+      <button
+        style="float: right;"
+        class="linkBtn-submit"
+        (click)="addMoreRows()"
+      >
+        Add Row
+      </button>
     </div>
   </div>
   <div class="col-12 btn-curev">
