@@ -88,7 +88,12 @@ export class EditorComponent implements OnInit {
               ))
                 .at(i)
                 .get('columns') as FormArray;
+              console.log(control.controls);
+              control.controls.forEach((el: any) => {
+                el.value.checked = false;
+              });
               control.controls.splice(ind + 1, this.localTableArray.length - 1);
+              console.log(control.controls);
               this.localTableArray = [];
             }
           }
@@ -229,7 +234,6 @@ export class EditorComponent implements OnInit {
       fontSize: [],
     });
   }
-
 
   //subham code
   // mergeColumns() {
