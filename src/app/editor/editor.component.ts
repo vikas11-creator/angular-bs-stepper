@@ -234,6 +234,26 @@ export class EditorComponent implements OnInit {
     });
   }
 
+  postData() {}
+
+  getColumnCount() {
+    this.createTable();
+  }
+
+  products: any = [
+    { name: 'Label', value: 'label' },
+    { name: 'Dropdown', value: 'dropDown' },
+    { name: 'Input', value: 'input' },
+  ];
+
+  fontSize: any = [
+    { name: '14px', value: '14px' },
+    { name: '16px', value: '16px' },
+    { name: '18px', value: '18px' },
+  ];
+
+  getRowCount() {}
+
   //subham code
   // mergeColumns() {
   //   if (this.validateMerge()) {
@@ -312,94 +332,9 @@ export class EditorComponent implements OnInit {
   //   return flag;
   // }
 
-  sequntialIndices(arr: any, n: any) {
-    arr.sort();
-    for (let i = 1; i < n; i++) if (arr[i] != arr[i - 1] + 1) return false;
-    return true;
-  }
-
-  postData() {}
-
-  tableCol(i: number) {
-    return (<FormArray>this.componentForm.controls['tableRow'])
-      .at(i)
-      .get('rows') as FormArray;
-  }
-
-  onAddRow(data) {
-    let gr = this.formbuilder.array([]);
-    this.cols.forEach((itm, index) => {
-      gr.push(
-        this.formbuilder.control(data ? data[index] : [], [Validators.required])
-      );
-    });
-  }
-
-  getColumnCount() {
-    this.setColumn();
-    this.createTable();
-    for (let index = 0; index <= 1; index++) {
-      this.onAddRow(null);
-    }
-  }
-
-  products: any = [
-    { name: 'Label', value: 'label' },
-    { name: 'Dropdown', value: 'dropDown' },
-    { name: 'Input', value: 'input' },
-  ];
-
-  fontSize: any = [
-    { name: '14px', value: '14px' },
-    { name: '16px', value: '16px' },
-    { name: '18px', value: '18px' },
-  ];
-
-  getRowCount() {}
-
-  addTableRow() {
-    return this.formbuilder.group({
-      rows: this.formbuilder.array([]),
-    });
-  }
-
-  addTableColumn() {
-    return this.formbuilder.group({
-      title: [''],
-      value: [''],
-    });
-  }
-
-  setColumn() {
-    this.cols = [];
-    let formVal = this.componentForm.value;
-    this.colLength = formVal.column;
-    for (let i = 0; i < this.colLength; i++) {
-      this.cols.push({
-        title: '',
-        value: [],
-        colType: '',
-        colspan: '',
-        property: [{ color: '#000', background: '' }],
-      });
-    }
-  }
-
-  toggleCols() {
-    this.merge = true;
-  }
-
-  mergeCols() {
-    let checked: any;
-    let data = [];
-    checked.forEach((index) => {
-      if (typeof index == 'number') {
-        if (!data.includes(index)) {
-          data.push(index);
-        }
-      }
-    });
-    this.mergeList.push(data);
-    console.log(this.mergeList);
-  }
+  // sequntialIndices(arr: any, n: any) {
+  //   arr.sort();
+  //   for (let i = 1; i < n; i++) if (arr[i] != arr[i - 1] + 1) return false;
+  //   return true;
+  // }
 }
