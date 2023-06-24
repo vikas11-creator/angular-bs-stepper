@@ -82,6 +82,7 @@ export class EditorComponent implements OnInit {
             }
             if (this.isValidInput(found) && Object.keys(found).length !== 0) {
               found.colspan = sumWithInitial;
+              // found.controls.colspan.value = sumWithInitial;
               elem.columns.splice(ind + 1, this.localTableArray.length - 1);
               const control: any = (<FormArray>(
                 this.componentForm.controls['rows']
@@ -228,20 +229,6 @@ export class EditorComponent implements OnInit {
       checked: [],
       fontSize: [],
     });
-  }
-
-  cellClicked(data: any, index: number) {
-    data.value.checked
-      ? (data.value.checked = !data.value.checked)
-      : (data.value.checked = true);
-    this.selectedCells.includes(data.value)
-      ? _.remove(this.selectedCells, (element: any) =>
-          _.isEqual(element, data.value)
-        )
-      : this.selectedCells.push(data.value);
-    this.indexList.includes(index)
-      ? _.remove(this.indexList, (element: any) => _.isEqual(element, index))
-      : this.indexList.push(index);
   }
 
   mergeColumns() {
