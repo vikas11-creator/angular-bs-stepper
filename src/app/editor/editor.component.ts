@@ -16,20 +16,7 @@ import * as _ from 'lodash';
 export class EditorComponent implements OnInit {
   @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
-  headerGroupList: any = [];
-  componentList: any = [];
-  fieldTypeList: any = [];
-  containerList: any = [];
-  tabList: any = [];
-  formList: any = [];
-  infoId: string = '';
-  componentType: string;
-  editorType: any;
-  infoData: any;
-  isEdit: boolean = false;
   checked = true;
-  categories: any[];
-  userData: any;
   merge: boolean;
   mergeList = [];
   merged: any = [];
@@ -258,10 +245,6 @@ export class EditorComponent implements OnInit {
     arr.sort();
     for (let i = 1; i < n; i++) if (arr[i] != arr[i - 1] + 1) return false;
     return true;
-  }
-
-  changes(ev: any) {
-    this.componentType = ev.value;
   }
 
   postData() {}

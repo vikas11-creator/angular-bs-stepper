@@ -1,0 +1,16 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+tr {
+  background: #fff;
+  color: #000;
+  transition: box-shadow 0.2s;
+}
+td,
+th {
+  border: 1px solid #dee2e6;
+  height: 56px;
+  padding: 8px 16px;
+  color: #dee2e6;
+}
