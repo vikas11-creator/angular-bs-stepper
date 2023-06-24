@@ -48,7 +48,7 @@
                         'controls'
                       ];
                       let j = index
-                    " 
+                    "
                     [ngClass]="
                       columnControl.value.checked ? 'selectedCell' : ''
                     "
@@ -191,6 +191,7 @@
       </button>
       <button
         style="float: right;"
+        *ngIf="isAdd"
         class="linkBtn-submit"
         (click)="addMoreRows()"
       >

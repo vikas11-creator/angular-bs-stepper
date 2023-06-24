@@ -18,6 +18,7 @@ export class EditorComponent implements OnInit {
   isLoad: boolean = false;
   indexList: any = [];
   localTableArray: any = [];
+  isAdd: boolean = false;
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
@@ -210,6 +211,7 @@ export class EditorComponent implements OnInit {
         control.push(this.createColumn());
       }
     }
+    this.isAdd = true;
   }
 
   createRow(): FormGroup {
@@ -237,7 +239,7 @@ export class EditorComponent implements OnInit {
   postData() {}
 
   getColumnCount() {
-    this.componentForm.get('rows')['controls'] = []
+    this.componentForm.get('rows')['controls'] = [];
     this.createTable();
   }
 
