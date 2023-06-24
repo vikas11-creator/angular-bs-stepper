@@ -9,7 +9,7 @@ export class NewCssComponent implements OnInit {
   data:any = [
     {
       id:1,
-    }
+    } 
   ]
   constructor() { }
 
