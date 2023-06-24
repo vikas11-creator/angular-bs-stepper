@@ -18,6 +18,7 @@ import { NewCssComponent } from './css/new-css/new-css.component';
 import { Component1Component } from './inheritance/comp1/component1/component1.component';
 import { Component2Component } from './inheritance/comp2/component2/component2.component';
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
+import { EditorComponent } from './editor/editor.component';
 const routes: Routes = [
   {
     path: '',
@@ -78,6 +79,10 @@ const routes: Routes = [
   {
     path: 'workflow/edit/:step/:id',
     component: StepperComponent,
+  },
+  {
+    path: 'editor',
+    component: EditorComponent,
   },
   { path: 'pageone', component: Component1Component },
   { path: 'pagetwo', component: Component2Component },

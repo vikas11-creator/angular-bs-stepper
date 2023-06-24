@@ -27,6 +27,11 @@ import { BaseComponent } from './inheritance/base/base/base.component';
 import { Component1Component } from './inheritance/comp1/component1/component1.component';
 import { Component2Component } from './inheritance/comp2/component2/component2.component';
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
+import { EditorComponent } from './editor/editor.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputTextModule } from 'primeng/inputtext';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   imports: [
@@ -36,9 +41,13 @@ import { Component3Component } from './inheritance/comp3/component3/component3.c
     ReactiveFormsModule,
     DropdownModule,
     BrowserAnimationsModule,
+    RadioButtonModule,
+    InputTextModule,
+    ColorPickerModule,
+    OverlayPanelModule
   ],
   declarations: [
-    AppComponent,
+    AppComponent, 
     HelloComponent,
     Stepper1Component,
     Stepper2Component,
@@ -61,6 +70,7 @@ import { Component3Component } from './inheritance/comp3/component3/component3.c
     Component1Component,
     Component2Component,
     Component3Component,
+    EditorComponent
   ],
   bootstrap: [AppComponent],
 })
