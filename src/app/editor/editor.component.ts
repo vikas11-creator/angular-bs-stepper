@@ -57,14 +57,9 @@ export class EditorComponent implements OnInit {
     if(compType.value.checked){
       this.localTableArray.push(compType.value);
     }else{
-      let ind;
-      let findCell = this.localTableArray.find((el:any,i:number)=>{
-        ind = i;
+      this.localTableArray.splice(this.localTableArray.findIndex((el:any)=>{
         return el.id == compType.value.id
-      })
-      if(findCell){
-        this.localTableArray.splice(ind,1)
-      }
+      }),1)
     }
     console.log(this.localTableArray)
   }
