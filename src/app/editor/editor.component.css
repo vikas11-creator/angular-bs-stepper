@@ -14,3 +14,80 @@ th {
   padding: 8px 16px;
   color: #dee2e6;
 }
+
+.box{
+  margin-top: 10px;
+}
+.new-rating{
+  background: #e9ecef;
+}
+
+.btn-curev{
+  display: flex;
+  padding: 16px 16px;
+  margin-right: 13px;
+  justify-content: end;
+}
+.AddContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.selectList{
+  margin-left: 10px;
+}
+.comContainerBox {
+  margin-bottom: 8px;
+}
+.label{
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1C304B;
+  display: block;
+}
+.comContainerBox .p-field-checkbox{
+  display: flex;
+  align-items: baseline;
+}
+
+.selectedCell{
+  background-color: skyblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+.tableEditer-box {
+overflow: auto;
+max-height: 240px;
+}
+td{
+  min-width: 140px;
+  max-width: 140px;
+}
+.dynamic-tableEditer {
+display: flex;
+justify-content: flex-start;
+
+
+}
+.label{
+  margin-bottom: 0px;
+  margin-left: 8px;
+}
+.tableEditer-col {
+  padding-right: 16px;
+  min-width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+ 
+}
