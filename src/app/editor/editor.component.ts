@@ -61,8 +61,6 @@ export class EditorComponent implements OnInit {
         1
       );
     }
-    console.log('clickedCellIndex', this.clickedCellIndex);
-    console.log(this.localTableArray);
   }
 
   mergeData() {
@@ -74,6 +72,7 @@ export class EditorComponent implements OnInit {
         (accumulator, currentValue) => accumulator + currentValue.colspan,
         0
       );
+      console.log('this.localTableArray', this.localTableArray);
       this.localTableArray.map((element: any) => {
         if (Object.keys(found).length == 0) {
           this.componentForm.value.rows.map((elem: any, i: number) => {
@@ -86,14 +85,14 @@ export class EditorComponent implements OnInit {
                 found = {};
               }
               if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-                found.colspan = sumWithInitial;
-                // found.controls.colspan.value = sumWithInitial;
-                elem.columns.splice(ind + 1, this.localTableArray.length - 1);
                 const control: any = (<FormArray>(
                   this.componentForm.controls['rows']
                 ))
                   .at(i)
                   .get('columns') as FormArray;
+                found.colspan = sumWithInitial;
+                control.controls[ind].controls.colspan = sumWithInitial;
+                elem.columns.splice(ind + 1, this.localTableArray.length - 1);
                 control.controls.forEach((el: any) => {
                   el.value.checked = false;
                 });
