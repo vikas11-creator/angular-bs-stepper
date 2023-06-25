@@ -102,44 +102,6 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  isValidInput(input) {
-    if (this.isNull(input) || this.isUndefined(input) || this.isEmpty(input)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  isUndefined(input) {
-    if (typeof input === 'undefined') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isNull(input) {
-    if (input != null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  isEmpty(input) {
-    if (typeof input === 'undefined') {
-      return true;
-    } else {
-      let lstrTempstring = String(input);
-      lstrTempstring = lstrTempstring.trim();
-      if (lstrTempstring === '' || lstrTempstring === 'undefined') {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-
   getRowProperty(e, i, type) {
     if (type == 'bgColor' || type == 'textColor') {
       let colorArr: any = [];
@@ -257,6 +219,44 @@ export class EditorComponent implements OnInit {
 
   getRowCount() {}
 
+  isValidInput(input) {
+    if (this.isNull(input) || this.isUndefined(input) || this.isEmpty(input)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isUndefined(input) {
+    if (typeof input === 'undefined') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isNull(input) {
+    if (input != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isEmpty(input) {
+    if (typeof input === 'undefined') {
+      return true;
+    } else {
+      let lstrTempstring = String(input);
+      lstrTempstring = lstrTempstring.trim();
+      if (lstrTempstring === '' || lstrTempstring === 'undefined') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  
   //subham code
   // mergeColumns() {
   //   if (this.validateMerge()) {
