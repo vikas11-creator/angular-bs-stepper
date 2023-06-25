@@ -60,7 +60,7 @@
                     [attr.colspan]="columnControl.value.colspan"
                     formGroupName="{{ j }}"
                     (dblclick)="op.toggle($event)"
-                    (click)="getCellDetail(columnControl)"
+                    (click)="getCellDetail(columnControl,i)"
                   >
                     {{ labelType[columnControl.value.colType] }}
                     <ng-container

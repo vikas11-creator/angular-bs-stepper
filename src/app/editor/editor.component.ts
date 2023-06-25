@@ -18,6 +18,7 @@ export class EditorComponent implements OnInit {
   isLoad: boolean = false;
   indexList: any = [];
   localTableArray: any = [];
+  clickedCellIndex: any = [];
   isAdd: boolean = false;
   constructor(
     private formbuilder: FormBuilder,
@@ -46,10 +47,11 @@ export class EditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  getCellDetail(compType) {
-    console.log(compType.value);
+  getCellDetail(compType,index) {
+    console.log(index);
     compType.value.checked = !compType.value.checked;
     if (compType.value.checked) {
+      this.clickedCellIndex.push(index);
       this.localTableArray.push(compType.value);
     } else {
       this.localTableArray.splice(
@@ -58,7 +60,9 @@ export class EditorComponent implements OnInit {
         }),
         1
       );
+      this.clickedCellIndex.splice(index,1);
     }
+    console.log(this.clickedCellIndex)
     console.log(this.localTableArray);
   }
 
