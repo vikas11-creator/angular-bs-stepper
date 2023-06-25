@@ -60,13 +60,13 @@ export class EditorComponent implements OnInit {
         }),
         1
       );
-      this.clickedCellIndex.splice(index,1);
     }
     console.log(this.clickedCellIndex)
     console.log(this.localTableArray);
   }
 
   mergeData() {
+    if(this.getMergeValidation()){
     let ind: number;
     let found: any = {};
     const sumWithInitial = this.localTableArray.reduce(
@@ -104,6 +104,31 @@ export class EditorComponent implements OnInit {
         });
       }
     });
+  }
+  }
+
+  getMergeValidation(){
+    const everyVal = this.clickedCellIndex.every((el:any)=>{
+      return el == this.clickedCellIndex[0];
+    })
+    if(!everyVal){
+      this.componentForm.value.rows.map((elem: any, i: number) => {
+      const control: any = (<FormArray>(
+        this.componentForm.controls['rows']
+      ))
+        .at(i)
+        .get('columns') as FormArray;
+      control.controls.forEach((el: any) => {
+        el.value.checked = false;
+      });
+    })
+      this.localTableArray = [];
+      this.clickedCellIndex = [];
+      alert('cannot merge across cell');
+      return false;
+    }else{
+      return true;
+    }
   }
 
   getRowProperty(e, i, type) {
