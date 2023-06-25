@@ -48,7 +48,6 @@ export class EditorComponent implements OnInit {
   }
 
   getCellDetail(compType, index) {
-    console.log(index);
     compType.value.checked = !compType.value.checked;
     if (compType.value.checked) {
       this.clickedCellIndex.push(index);
@@ -61,18 +60,17 @@ export class EditorComponent implements OnInit {
         1
       );
     }
+    console.log(this.localTableArray);
   }
 
   mergeData() {
     if (this.getMergeValidation()) {
-      console.log(_.cloneDeep(this.componentForm.value.rows));
       let ind: number;
       let found: any = {};
       const sumWithInitial = this.localTableArray.reduce(
         (accumulator, currentValue) => accumulator + currentValue.colspan,
         0
       );
-      console.log('this.localTableArray', this.localTableArray);
       this.localTableArray.map((element: any) => {
         if (Object.keys(found).length == 0) {
           this.componentForm.value.rows.map((elem: any, i: number) => {
