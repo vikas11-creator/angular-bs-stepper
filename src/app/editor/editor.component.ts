@@ -47,7 +47,7 @@ export class EditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  getCellDetail(compType,index) {
+  getCellDetail(compType, index) {
     console.log(index);
     compType.value.checked = !compType.value.checked;
     if (compType.value.checked) {
@@ -61,72 +61,73 @@ export class EditorComponent implements OnInit {
         1
       );
     }
-    console.log(this.clickedCellIndex)
+    console.log(this.clickedCellIndex);
     console.log(this.localTableArray);
   }
 
   mergeData() {
-    if(this.getMergeValidation()){
-    let ind: number;
-    let found: any = {};
-    const sumWithInitial = this.localTableArray.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.colspan,
-      0
-    );
-    this.localTableArray.map((element: any) => {
-      if (Object.keys(found).length == 0) {
-        this.componentForm.value.rows.map((elem: any, i: number) => {
-          if (Object.keys(found).length == 0) {
-            found = elem.columns.find((el: any, j: number) => {
-              ind = j;
-              return el.id == element.id;
-            });
-            if (found == undefined) {
-              found = {};
-            }
-            if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-              found.colspan = sumWithInitial;
-              // found.controls.colspan.value = sumWithInitial;
-              elem.columns.splice(ind + 1, this.localTableArray.length - 1);
-              const control: any = (<FormArray>(
-                this.componentForm.controls['rows']
-              ))
-                .at(i)
-                .get('columns') as FormArray;
-              control.controls.forEach((el: any) => {
-                el.value.checked = false;
+    if (this.getMergeValidation()) {
+      let ind: number;
+      let found: any = {};
+      const sumWithInitial = this.localTableArray.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.colspan,
+        0
+      );
+      this.localTableArray.map((element: any) => {
+        if (Object.keys(found).length == 0) {
+          this.componentForm.value.rows.map((elem: any, i: number) => {
+            if (Object.keys(found).length == 0) {
+              found = elem.columns.find((el: any, j: number) => {
+                ind = j;
+                return el.id == element.id;
               });
-              control.controls.splice(ind + 1, this.localTableArray.length - 1);
-              console.log(control.controls);
-              this.localTableArray = [];
+              if (found == undefined) {
+                found = {};
+              }
+              if (this.isValidInput(found) && Object.keys(found).length !== 0) {
+                found.colspan = sumWithInitial;
+                // found.controls.colspan.value = sumWithInitial;
+                elem.columns.splice(ind + 1, this.localTableArray.length - 1);
+                const control: any = (<FormArray>(
+                  this.componentForm.controls['rows']
+                ))
+                  .at(i)
+                  .get('columns') as FormArray;
+                control.controls.forEach((el: any) => {
+                  el.value.checked = false;
+                });
+                control.controls.splice(
+                  ind + 1,
+                  this.localTableArray.length - 1
+                );
+                console.log(control.controls);
+                this.localTableArray = [];
+              }
             }
-          }
-        });
-      }
-    });
-  }
+          });
+        }
+      });
+    }
   }
 
-  getMergeValidation(){
-    const everyVal = this.clickedCellIndex.every((el:any)=>{
+  getMergeValidation() {
+    const everyVal = this.clickedCellIndex.every((el: any) => {
       return el == this.clickedCellIndex[0];
-    })
-    if(!everyVal){
+    });
+    if (!everyVal) {
       this.componentForm.value.rows.map((elem: any, i: number) => {
-      const control: any = (<FormArray>(
-        this.componentForm.controls['rows']
-      ))
-        .at(i)
-        .get('columns') as FormArray;
-      control.controls.forEach((el: any) => {
-        el.value.checked = false;
+        const control: any = (<FormArray>this.componentForm.controls['rows'])
+          .at(i)
+          .get('columns') as FormArray;
+        control.controls.forEach((el: any) => {
+          el.value.checked = false;
+        });
       });
-    })
       this.localTableArray = [];
       this.clickedCellIndex = [];
       alert('cannot merge across cell');
       return false;
-    }else{
+    } else {
       return true;
     }
   }
