@@ -64,7 +64,7 @@ export class EditorComponent implements OnInit {
   }
 
   mergeData() {
-    if (this.getMergeValidation()) {
+    // if (this.getMergeValidation()) {
       let ind: number;
       let found: any = {};
       const sumWithInitial = this.localTableArray.reduce(
@@ -89,7 +89,7 @@ export class EditorComponent implements OnInit {
                   .at(i)
                   .get('columns') as FormArray;
                 found.colspan = sumWithInitial;
-                control.controls[ind].controls.colspan = sumWithInitial;
+                // control.controls[ind].controls.colspan = sumWithInitial;
                 elem.columns.splice(ind + 1, this.localTableArray.length - 1);
                 control.controls.forEach((el: any) => {
                   el.value.checked = false;
@@ -105,7 +105,8 @@ export class EditorComponent implements OnInit {
           });
         }
       });
-    }
+    // }
+    console.log('this.componentForm.value.rows',this.componentForm.value.rows)
   }
 
   getMergeValidation() {
