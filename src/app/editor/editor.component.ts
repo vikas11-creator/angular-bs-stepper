@@ -136,13 +136,13 @@ export class EditorComponent implements OnInit {
   getConsecutiveStatus(){
     this.localTableArray.sort((a, b) => {
       return a.indexForConsecutive - b.indexForConsecutive;
-  });
-  for (let i = 1; i < this.localTableArray.length; i++)
+    });
+    for (let i = 1; i < this.localTableArray.length; i++)
         if(this.localTableArray[i]!=this.localTableArray[i-1]+1){
             return false;
         }
-    return true;
-      }
+          return true;
+    }
   }
 
   getRowProperty(e, i, type) {
