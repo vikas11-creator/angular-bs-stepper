@@ -67,6 +67,7 @@ export class EditorComponent implements OnInit {
 
   mergeData() {
     if (this.getMergeValidation()) {
+    console.log(_.cloneDeep(this.componentForm.value.rows));
       let ind: number;
       let found: any = {};
       const sumWithInitial = this.localTableArray.reduce(
@@ -128,8 +129,20 @@ export class EditorComponent implements OnInit {
       alert('cannot merge across cell');
       return false;
     } else {
-      return true;
+      this.getConsecutiveStatus();
     }
+  }
+
+  getConsecutiveStatus(){
+    this.localTableArray.sort((a, b) => {
+      return a.indexForConsecutive - b.indexForConsecutive;
+  });
+  for (let i = 1; i < this.localTableArray.length; i++)
+        if(this.localTableArray[i]!=this.localTableArray[i-1]+1){
+            return false;
+        }
+    return true;
+      }
   }
 
   getRowProperty(e, i, type) {
@@ -185,7 +198,7 @@ export class EditorComponent implements OnInit {
       const control = (<FormArray>this.componentForm.controls['rows'])
         .at(this.componentForm.value.rows.length - 1)
         .get('columns') as FormArray;
-      control.push(this.createColumn());
+      control.push(this.createColumn(j));
     }
   }
 
@@ -200,7 +213,7 @@ export class EditorComponent implements OnInit {
         const control = (<FormArray>this.componentForm.controls['rows'])
           .at(i)
           .get('columns') as FormArray;
-        control.push(this.createColumn());
+        control.push(this.createColumn(j));
       }
     }
     this.isAdd = true;
@@ -214,9 +227,10 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  createColumn(): FormGroup {
+  createColumn(indexForConsecutive): FormGroup {
     return this.formbuilder.group({
       id: uuidv4(),
+      indexForConsecutive:[indexForConsecutive],
       title: [],
       value: [],
       colType: [],
