@@ -66,6 +66,7 @@ export class EditorComponent implements OnInit {
   }
 
   mergeData() {
+    console.log(this.getMergeValidation());
     if (this.getMergeValidation()) {
       console.log(_.cloneDeep(this.componentForm.value.rows));
       let ind: number;
@@ -127,27 +128,27 @@ export class EditorComponent implements OnInit {
   getConsecutiveStatus() {
     let consecutiveIndex: any = [];
     this.localTableArray.forEach((e: any) => {
-      let consecutiveIndex = this.componentForm.value.rows[
+      let ind = this.componentForm.value.rows[
         this.clickedCellIndex[0]
-      ].columns.filter((el: any, i: number) => {
+      ].columns.findIndex((el: any, i: number) => {
         return el.id == e.id;
       });
-      if (ind) {
-        console.log('ind', ind);
-        consecutiveIndex.push(ind);
-      }
+      consecutiveIndex.push(ind);
+      console.log('sort', consecutiveIndex);
     });
-    consecutiveIndex.sort((a, b) => {
-      return a - b;
-    });
-    console.log('consecutiveIndex', consecutiveIndex);
-    for (let i = 0; i < consecutiveIndex.length; i++) {
-      if (consecutiveIndex[i] != consecutiveIndex[i + 1] + 1) {
-        this.resetTable();
-        alert('merge elements are not consecutive');
-        return false;
+    if (consecutiveIndex.length > 0) {
+      consecutiveIndex.sort();
+      console.log('consecutiveIndex', consecutiveIndex);
+      for (let i = 1; i < consecutiveIndex.length; i++) {
+        if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
+          this.resetTable();
+          alert('merge elements are not consecutive');
+          return false;
+        } else {
+          console.log('ensidnksj');
+          return true;
+        }
       }
-      return true;
     }
   }
 
