@@ -198,11 +198,32 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  postData() {}
+  postData() {
+    console.log(this.componentForm);
+    //isme jo json generate hua wo backend me uska table banega
+    // title: [],
+    //   value: [],
+    //   colType: [],
+    //   colspan: [1],
+    //   textColor: [],
+    //   bgColor: [],
+    //   checked: [],
+    //   fontSize: [],
+    //DOUBLE CLICK KRKE JO PROPERTY BNAYA WO UPAR KE VALUE,COLTYPE ME JAYEGA PHIR WAHI DATABASE ME SAVE HOGA
+  }
 
   getColumnCount() {
-    this.componentForm.get('rows')['controls'] = [];
-    this.createTable();
+    if (this.componentForm.value.row) {
+      this.componentForm.get('rows')['controls'] = [];
+      this.createTable();
+    }
+  }
+
+  getRowCount() {
+    if (this.componentForm.value.column) {
+      this.componentForm.get('rows')['controls'] = [];
+      this.createTable();
+    }
   }
 
   products: any = [
@@ -216,8 +237,6 @@ export class EditorComponent implements OnInit {
     { name: '16px', value: '16px' },
     { name: '18px', value: '18px' },
   ];
-
-  getRowCount() {}
 
   isValidInput(input) {
     if (this.isNull(input) || this.isUndefined(input) || this.isEmpty(input)) {
@@ -256,7 +275,7 @@ export class EditorComponent implements OnInit {
       }
     }
   }
-  
+
   //subham code
   // mergeColumns() {
   //   if (this.validateMerge()) {
