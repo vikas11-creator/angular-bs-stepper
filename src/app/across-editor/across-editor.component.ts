@@ -229,7 +229,6 @@ export class AcrossEditorComponent implements OnInit {
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
       this.getForStatus(value);
     });
-    console.log(this.breakLoop)
     let flag = this.breakLoop.every((el: boolean) => {
       return el == true;
     });
@@ -265,11 +264,10 @@ export class AcrossEditorComponent implements OnInit {
     this.breakLoop = [];
   }
 
-  getMergeColumnButtonStatus(){
-    // Object.values(this.localTableArray).forEach((el:any)=>{
-      console.log(Object.values(this.localTableArray)
-    // })
-    return true;
+  getMergeColumnButtonStatus() {
+    let flag: boolean = false;
+    this.clickedCellIndex.length > 1 ? (flag = true) : (flag = false);
+    return flag;
   }
 
   getRowProperty(e, i, type) {
