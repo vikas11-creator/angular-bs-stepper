@@ -64,6 +64,9 @@ export class AcrossEditorComponent implements OnInit {
         }),
         1
       );
+      if(this.localTableArray[index].length == 0){
+        delete this.localTableArray[index];
+      }
     }
     console.log(this.localTableArray);
   }
