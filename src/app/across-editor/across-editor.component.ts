@@ -117,7 +117,6 @@ export class AcrossEditorComponent implements OnInit {
                   ind + 1,
                   this.localTableArray[min].length - 1
                 );
-                // this.resetTable();//bad me dalna
               }
             }
           });
@@ -147,11 +146,6 @@ export class AcrossEditorComponent implements OnInit {
                   this.isValidInput(rowFound) &&
                   Object.keys(rowFound).length !== 0
                 ) {
-                  const control: any = (<FormArray>(
-                    this.componentForm.controls['rows']
-                  ))
-                    .at(i)
-                    .get('columns') as FormArray;
                   rowFound.rowspan = rowspanSum;
                 }
               }
@@ -161,7 +155,7 @@ export class AcrossEditorComponent implements OnInit {
         if (j !== 0) {
           value.forEach((element: any) => {
             console.log('value222', value);
-            this.componentForm.value.rows.map((elem: any, i: number) => {
+            this.componentForm.value.rows.map((elem: any, i: number,arr:any) => {
               const control: any = (<FormArray>(
                 this.componentForm.controls['rows']
               ))
@@ -173,13 +167,14 @@ export class AcrossEditorComponent implements OnInit {
               console.log('ind', ind);
               if(ind !== -1){
                 control.controls.splice(ind, 1);
+                arr[key].columns.splice(ind, 1);
               }
             });
           });
-          this.resetTable();
         }
       });
     }
+    this.resetTable();
     console.log('getMergeValidation', this.localTableArray);
     console.log('this.componentForm.value.rows', this.componentForm);
   }
