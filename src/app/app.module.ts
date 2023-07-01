@@ -32,6 +32,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { AcrossEditorComponent } from './across-editor/across-editor.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     Component1Component,
     Component2Component,
     Component3Component,
-    EditorComponent
+    EditorComponent,
+    AcrossEditorComponent
   ],
   bootstrap: [AppComponent],
 })

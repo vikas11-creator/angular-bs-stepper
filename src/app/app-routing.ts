@@ -19,6 +19,7 @@ import { Component1Component } from './inheritance/comp1/component1/component1.c
 import { Component2Component } from './inheritance/comp2/component2/component2.component';
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
 import { EditorComponent } from './editor/editor.component';
+import { AcrossEditorComponent } from './across-editor/across-editor.component';
 const routes: Routes = [
   {
     path: '',
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: 'editor',
     component: EditorComponent,
+  },
+  {
+    path: 'across-editor',
+    component: AcrossEditorComponent,
   },
   { path: 'pageone', component: Component1Component },
   { path: 'pagetwo', component: Component2Component },
