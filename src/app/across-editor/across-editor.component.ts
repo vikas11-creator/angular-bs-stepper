@@ -197,33 +197,20 @@ export class AcrossEditorComponent implements OnInit {
   }
 
   getMergeValidation(obj: any) {
-    console.log('this.clickedCellIndex', Object.values(obj));
     let condtionEqualLength = Object.values(obj).every(
       (el: any, i: number, arr: any) => {
-        console.log('arr', arr);
         let len = arr[0].length;
         return el.length == len;
       }
     );
-    console.log('arr', condtionEqualLength);
     if (condtionEqualLength) {
-      this.getConsecutiveStatus();
+      let status = this.getConsecutiveStatus();
+      return status;
     } else {
       this.resetTable();
-      alert('cannot merge across cell');
+      alert('merging cell does not have equal length');
       return false;
     }
-    // const everyVal = this.clickedCellIndex.every((el: any) => {
-    //   return el == this.clickedCellIndex[0];
-    // });
-    // if (!everyVal) {
-    //   this.resetTable();
-    //   alert('cannot merge across cell');
-    //   return false;
-    // } else {
-    //   let status = this.getConsecutiveStatus();
-    //   return status;
-    // }
   }
 
   getConsecutiveStatus() {
