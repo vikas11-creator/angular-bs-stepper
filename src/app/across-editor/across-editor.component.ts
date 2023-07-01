@@ -265,6 +265,13 @@ export class AcrossEditorComponent implements OnInit {
     this.breakLoop = [];
   }
 
+  getMergeColumnButtonStatus(){
+    // Object.values(this.localTableArray).forEach((el:any)=>{
+      console.log(Object.values(this.localTableArray)
+    // })
+    return true;
+  }
+
   getRowProperty(e, i, type) {
     if (type == 'bgColor' || type == 'textColor') {
       let colorArr: any = [];

@@ -183,6 +183,7 @@
     </div>
     <div class="col-12">
       <button
+      *ngIf="getMergeColumnButtonStatus()"
         style="float: right;"
         class="linkBtn-submit ml-3"
         (click)="mergeData()"
