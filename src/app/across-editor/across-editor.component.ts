@@ -81,7 +81,6 @@ export class AcrossEditorComponent implements OnInit {
     );
     let rowspanArray: any = [];
     Object.entries(this.localTableArray).forEach(([key, value]: any) => {
-      console.log(value);
       if (value.length > 0) {
         rowspanArray.push(value[0].rowspan);
       }
@@ -129,10 +128,12 @@ export class AcrossEditorComponent implements OnInit {
     let rowFound: any = {};
     if (rowspanSum) {
       let isFirst = true;
-      Object.entries(this.localTableArray).forEach(([key, value]: any) => {
-        if (Object.keys(rowFound).length == 0 && isFirst) {
-          console.log('value', value);
+      Object.entries(this.localTableArray).forEach(([key, value]: any,j:number) => {
+        console.log('value', value);
+        if (Object.keys(rowFound).length == 0 && j==0) {
+          isFirst = false;
           value.forEach((element: any) => {
+            console.log('value111', value);
             this.componentForm.value.rows.map((elem: any, i: number) => {
               if (Object.keys(rowFound).length == 0) {
                 rowFound = elem.columns.find((el: any, j: number) => {
@@ -152,29 +153,30 @@ export class AcrossEditorComponent implements OnInit {
                     .at(i)
                     .get('columns') as FormArray;
                   rowFound.rowspan = rowspanSum;
-                  isFirst = false;
                 }
               }
             });
           });
         }
-        if (!isFirst) {
-          value.forEach((element: any, i: number) => {
-            this.componentForm.value.rows.map((elem: any) => {
+        if (j !== 0) {
+          value.forEach((element: any) => {
+            console.log('value222', value);
+            this.componentForm.value.rows.map((elem: any, i: number) => {
               const control: any = (<FormArray>(
                 this.componentForm.controls['rows']
               ))
-                .at(i)
+                .at(key)
                 .get('columns') as FormArray;
-              control.controls.splice(
-                elem.columns.findIndex((el: any, j: number) => {
-                  return el.id == element.id;
-                }),
-                1
-              );
-              this.resetTable(); //bad me dalna
+              let ind = elem.columns.findIndex((el: any, j: number) => {
+                return el.id == element.id;
+              });
+              console.log('ind', ind);
+              if(ind !== -1){
+                control.controls.splice(ind, 1);
+              }
             });
           });
+          this.resetTable();
         }
       });
     }
