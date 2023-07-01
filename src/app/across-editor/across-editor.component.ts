@@ -105,10 +105,11 @@ export class AcrossEditorComponent implements OnInit {
       0
     );
     if (this.getMergeValidation(this.localTableArray)) {
+      console.log('gggggggggggggg');
       if (colspanSum) {
         this.localTableArray[min].map((element: any) => {
           if (Object.keys(found).length == 0) {
-            this.componentForm.value.rows.map((elem: any, i: number) => {
+            this.componentForm.value.rows?.map((elem: any, i: number) => {
               if (Object.keys(found).length == 0) {
                 found = elem.columns.find((el: any, j: number) => {
                   ind = j;
@@ -148,7 +149,7 @@ export class AcrossEditorComponent implements OnInit {
           ([key, value]: any, j: number) => {
             if (Object.keys(rowFound).length == 0 && j == 0) {
               value.forEach((element: any) => {
-                this.componentForm.value.rows.map((elem: any, i: number) => {
+                this.componentForm.value.rows?.map((elem: any, i: number) => {
                   if (Object.keys(rowFound).length == 0) {
                     rowFound = elem.columns.find((el: any, j: number) => {
                       ind = j;
@@ -169,7 +170,7 @@ export class AcrossEditorComponent implements OnInit {
             }
             if (j !== 0) {
               value.forEach((element: any) => {
-                this.componentForm.value.rows.map(
+                this.componentForm.value.rows?.map(
                   (elem: any, i: number, arr: any) => {
                     const control: any = (<FormArray>(
                       this.componentForm.controls['rows']
@@ -220,22 +221,22 @@ export class AcrossEditorComponent implements OnInit {
           let index = elem.columns.findIndex((e: any) => {
             return e.id == el.id;
           });
-          if(index>=0){
+          if (index >= 0) {
             consecutiveObj[key].push(index);
           }
         });
       });
     });
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-     this.getForStatus(value);
-    })
+      this.getForStatus(value);
+    });
     return true;
   }
 
   breakLoop: boolean = true;
   getForStatus(consecutiveIndex) {
     let flag = false;
-    if(this.breakLoop){
+    if (this.breakLoop) {
       for (let i = 1; i < consecutiveIndex.length; i++) {
         if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
           this.resetTable();
@@ -246,13 +247,13 @@ export class AcrossEditorComponent implements OnInit {
       }
       flag = true;
       return flag;
-    }else{
+    } else {
       return flag;
     }
   }
 
   resetTable() {
-    this.componentForm.value.rows.map((elem: any, i: number) => {
+    this.componentForm.value.rows?.map((elem: any, i: number) => {
       const control: any = (<FormArray>this.componentForm.controls['rows'])
         .at(i)
         .get('columns') as FormArray;
