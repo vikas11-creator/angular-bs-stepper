@@ -88,7 +88,6 @@ export class EditorComponent implements OnInit {
                   .at(i)
                   .get('columns') as FormArray;
                 found.colspan = sumWithInitial;
-                // control.controls[ind].controls.colspan = sumWithInitial;
                 elem.columns.splice(ind + 1, this.localTableArray.length - 1);
                 control.controls.splice(
                   ind + 1,
