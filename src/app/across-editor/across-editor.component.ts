@@ -215,17 +215,33 @@ export class AcrossEditorComponent implements OnInit {
 
   getConsecutiveStatus() {
     let consecutiveIndex: any = [];
+    console.log('111111', this.componentForm.value.rows);
+    let consecutiveObj: any = {};
+    Object.entries(this.localTableArray).forEach(([key, value]: any) => {
+      consecutiveObj[key] = [];
+      value.forEach((el: any) => {
+        this.componentForm.value.rows.forEach((elem: any) => {
+          let index = elem.columns.findIndex((e: any) => {
+            return e.id == el.id;
+          });
+          if(index>=0){
+            consecutiveObj[key].push(index);
+          }
+        });
+      });
+    });
+    console.log(consecutiveObj)
     // this.localTableArray.forEach((e: any) => {
     //   let ind = this.componentForm.value.rows[
     //     this.clickedCellIndex[0]
     //   ].columns.findIndex((el: any) => {
     //     return el.id == e.id;
     //   });
-    //   consecutiveIndex.push(ind);
-    //   if (consecutiveIndex.length == this.localTableArray.length) {
-    //     consecutiveIndex.sort();
-    //     this.getForStatus(consecutiveIndex);
-    //   }
+    //   // consecutiveIndex.push(ind);
+    //   // if (consecutiveIndex.length == this.localTableArray.length) {
+    //   //   consecutiveIndex.sort();
+    //   //   this.getForStatus(consecutiveIndex);
+    //   // }
     // });
     return true;
   }
