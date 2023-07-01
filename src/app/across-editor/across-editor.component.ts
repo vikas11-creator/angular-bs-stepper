@@ -21,6 +21,7 @@ export class AcrossEditorComponent implements OnInit {
   localTableArray: any = {};
   clickedCellIndex: any = [];
   isAdd: boolean = false;
+  ids:any=[];
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
@@ -48,7 +49,17 @@ export class AcrossEditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  sortIds(){
+    this.componentForm.value.rows.forEach((elem:any,i:number)=>{
+      elem.columns.forEach((el:any,j:number)=>{
+        this.ids.push(el.id);
+      })
+    })
+  }
+
   getCellDetail(compType, index) {
+    
+    console.log('this.componentForm.value.rows', this.componentForm.value.rows);
     compType.value.checked = !compType.value.checked;
     if (this.localTableArray[index]?.length > 0) {
     } else {
@@ -64,11 +75,13 @@ export class AcrossEditorComponent implements OnInit {
         }),
         1
       );
-      if(this.localTableArray[index].length == 0){
+      if (this.localTableArray[index].length == 0) {
         delete this.localTableArray[index];
       }
     }
-    console.log(this.localTableArray);
+    Object.entries(this.localTableArray).forEach(([key,value]:any)=>{
+      value.sort((a, b) => this.ids.indexOf(a.id) - this.ids.indexOf(b.id));
+    })
   }
 
   mergeData() {
@@ -347,6 +360,7 @@ export class AcrossEditorComponent implements OnInit {
     if (this.componentForm.value.row) {
       this.componentForm.get('rows')['controls'] = [];
       this.createTable();
+      this.sortIds();
     }
   }
 
@@ -354,6 +368,7 @@ export class AcrossEditorComponent implements OnInit {
     if (this.componentForm.value.column) {
       this.componentForm.get('rows')['controls'] = [];
       this.createTable();
+      this.sortIds();
     }
   }
 
