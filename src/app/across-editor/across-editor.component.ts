@@ -229,12 +229,13 @@ export class AcrossEditorComponent implements OnInit {
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
       this.getForStatus(value);
     });
-    let flag= this.breakLoop.every((el: boolean) => {
+    console.log(this.breakLoop)
+    let flag = this.breakLoop.every((el: boolean) => {
       return el == true;
     });
     if (!flag) {
-      alert('merge elements are not consecutive');
       this.resetTable();
+      alert('merge elements are not consecutive');
       return false;
     }
     return true;
@@ -261,6 +262,7 @@ export class AcrossEditorComponent implements OnInit {
     });
     this.localTableArray = [];
     this.clickedCellIndex = [];
+    this.breakLoop = [];
   }
 
   getRowProperty(e, i, type) {
