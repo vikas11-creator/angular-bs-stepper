@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
+import { ValueTransformer } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-across-editor',
   templateUrl: './across-editor.component.html',
-  styleUrls: ['./across-editor.component.css']
+  styleUrls: ['./across-editor.component.css'],
 })
 export class AcrossEditorComponent implements OnInit {
   checked = true;
@@ -17,7 +18,7 @@ export class AcrossEditorComponent implements OnInit {
   colLength: any;
   isLoad: boolean = false;
   indexList: any = [];
-  localTableArray: any = [];
+  localTableArray: any = {};
   clickedCellIndex: any = [];
   isAdd: boolean = false;
   constructor(
@@ -49,57 +50,89 @@ export class AcrossEditorComponent implements OnInit {
 
   getCellDetail(compType, index) {
     compType.value.checked = !compType.value.checked;
+    if (this.localTableArray[index]?.length > 0) {
+    } else {
+      this.localTableArray[index] = [];
+    }
     if (compType.value.checked) {
       this.clickedCellIndex.push(index);
-      this.localTableArray.push(compType.value);
+      this.localTableArray[index].push(compType.value);
     } else {
-      this.localTableArray.splice(
-        this.localTableArray.findIndex((el: any) => {
+      this.localTableArray[index].splice(
+        this.localTableArray[index].findIndex((el: any) => {
           return el.id == compType.value.id;
         }),
         1
       );
     }
+    console.log(this.localTableArray);
   }
 
   mergeData() {
-    if (this.getMergeValidation()) {
-      let ind: number;
-      let found: any = {};
-      const sumWithInitial = this.localTableArray.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.colspan,
-        0
-      );
-      this.localTableArray.map((element: any) => {
-        if (Object.keys(found).length == 0) {
-          this.componentForm.value.rows.map((elem: any, i: number) => {
-            if (Object.keys(found).length == 0) {
-              found = elem.columns.find((el: any, j: number) => {
-                ind = j;
-                return el.id == element.id;
-              });
-              if (found == undefined) {
-                found = {};
-              }
-              if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-                const control: any = (<FormArray>(
-                  this.componentForm.controls['rows']
-                ))
-                  .at(i)
-                  .get('columns') as FormArray;
-                found.colspan = sumWithInitial;
-                elem.columns.splice(ind + 1, this.localTableArray.length - 1);
-                control.controls.splice(
-                  ind + 1,
-                  this.localTableArray.length - 1
-                );
-                this.resetTable();
-              }
-            }
-          });
-        }
-      });
-    }
+    let ind: number;
+    let found: any = {};
+    let colspanSum;
+    let rowspanSum;
+    // console.log(Object.keys(this.localTableArray));
+    let key: any = Object.keys(this.localTableArray);
+    let value = Object.values(this.localTableArray);
+    // console.log(key);
+    // console.log(value);
+    let min = Math.min(...key);
+    colspanSum = this.localTableArray[min].reduce(
+      (accumulator, currentValue) => accumulator + currentValue.colspan,
+      0
+    );
+    let rowspanArray: any = [];
+    Object.entries(this.localTableArray).forEach(([key, value]: any) => {
+      console.log(value);
+      if (value.length > 0) {
+        rowspanArray.push(value[0].rowspan);
+      }
+    });
+    rowspanSum = rowspanArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    console.log(colspanSum);
+    console.log('rowspanSum', rowspanSum);
+    // if (this.getMergeValidation()) {
+    //   let ind: number;
+    //   let found: any = {};
+    //   const sumWithInitial = this.localTableArray.reduce(
+    //     (accumulator, currentValue) => accumulator + currentValue.colspan,
+    //     0
+    //   );
+    //   this.localTableArray.map((element: any) => {
+    //     if (Object.keys(found).length == 0) {
+    //       this.componentForm.value.rows.map((elem: any, i: number) => {
+    //         if (Object.keys(found).length == 0) {
+    //           found = elem.columns.find((el: any, j: number) => {
+    //             ind = j;
+    //             return el.id == element.id;
+    //           });
+    //           if (found == undefined) {
+    //             found = {};
+    //           }
+    //           if (this.isValidInput(found) && Object.keys(found).length !== 0) {
+    //             const control: any = (<FormArray>(
+    //               this.componentForm.controls['rows']
+    //             ))
+    //               .at(i)
+    //               .get('columns') as FormArray;
+    //             found.colspan = sumWithInitial;
+    //             elem.columns.splice(ind + 1, this.localTableArray.length - 1);
+    //             control.controls.splice(
+    //               ind + 1,
+    //               this.localTableArray.length - 1
+    //             );
+    //             this.resetTable();
+    //           }
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
     console.log('this.componentForm.value.rows', this.componentForm.value.rows);
   }
 
@@ -250,6 +283,7 @@ export class AcrossEditorComponent implements OnInit {
       value: [],
       colType: [],
       colspan: [1],
+      rowspan: [1],
       textColor: [],
       bgColor: [],
       checked: [],
@@ -259,16 +293,6 @@ export class AcrossEditorComponent implements OnInit {
 
   postData() {
     console.log(this.componentForm);
-    //isme jo json generate hua wo backend me uska table banega
-    // title: [],
-    //   value: [],
-    //   colType: [],
-    //   colspan: [1],
-    //   textColor: [],
-    //   bgColor: [],
-    //   checked: [],
-    //   fontSize: [],
-    //DOUBLE CLICK KRKE JO PROPERTY BNAYA WO UPAR KE VALUE,COLTYPE ME JAYEGA PHIR WAHI DATABASE ME SAVE HOGA
   }
 
   getColumnCount() {

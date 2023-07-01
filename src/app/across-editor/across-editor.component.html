@@ -58,6 +58,7 @@
                       'font-size': columnControl.value.fontSize
                     }"
                     [attr.colspan]="columnControl.value.colspan"
+                    [attr.rowspan]="columnControl.value.rowspan"
                     formGroupName="{{ j }}"
                     (dblclick)="op.toggle($event)"
                     (click)="getCellDetail(columnControl,i)"
@@ -183,7 +184,6 @@
     <div class="col-12">
       <button
         style="float: right;"
-        *ngIf="localTableArray.length > 1"
         class="linkBtn-submit ml-3"
         (click)="mergeData()"
       >
