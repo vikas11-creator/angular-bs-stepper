@@ -132,6 +132,7 @@ export class EditorComponent implements OnInit {
         this.getForStatus(consecutiveIndex);
       }
     });
+    console.log('aaaaaayyyyyyyyyyaaaaaaaa')
     return true;
   }
 

@@ -105,7 +105,10 @@ export class AcrossEditorComponent implements OnInit {
       0
     );
     if (this.getMergeValidation(this.localTableArray)) {
-      console.log('gggggggggggggg');
+      console.log(
+        'this.getMergeValidation(this.localTableArray)',
+        this.getMergeValidation(this.localTableArray)
+      );
       if (colspanSum) {
         this.localTableArray[min].map((element: any) => {
           if (Object.keys(found).length == 0) {
@@ -228,12 +231,20 @@ export class AcrossEditorComponent implements OnInit {
       });
     });
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-      return this.getForStatus(value);
+      console.log('this.getForStatus(value)', this.getForStatus(value));
+      if (this.breakL) {
+        return this.getForStatus(value);
+      } else {
+        console.log('aaaaaaaaaaaaaaaaaa');
+        return true;
+      }
     });
+    console.log('aaaaaayyyyyyyyyyaaaaaaaa');
     return true;
   }
 
   breakLoop: any = [];
+  breakL: boolean = false;
   getForStatus(consecutiveIndex) {
     let flag: boolean = false;
     for (let i = 1; i < consecutiveIndex.length; i++) {
@@ -243,10 +254,13 @@ export class AcrossEditorComponent implements OnInit {
         this.breakLoop.push(true);
       }
     }
+    console.log(this.breakLoop);
     flag = this.breakLoop.every((el: boolean) => {
       return el == true;
     });
+    console.log('flag', flag);
     if (!flag) {
+      this.breakL = true;
       alert('merge elements are not consecutive');
       this.resetTable();
     }
