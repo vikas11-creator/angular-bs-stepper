@@ -60,11 +60,10 @@ export class EditorComponent implements OnInit {
         1
       );
     }
-    console.log(this.localTableArray);
   }
 
   mergeData() {
-    // if (this.getMergeValidation()) {
+    if (this.getMergeValidation()) {
       let ind: number;
       let found: any = {};
       const sumWithInitial = this.localTableArray.reduce(
@@ -91,25 +90,22 @@ export class EditorComponent implements OnInit {
                 found.colspan = sumWithInitial;
                 // control.controls[ind].controls.colspan = sumWithInitial;
                 elem.columns.splice(ind + 1, this.localTableArray.length - 1);
-                control.controls.forEach((el: any) => {
-                  el.value.checked = false;
-                });
                 control.controls.splice(
                   ind + 1,
                   this.localTableArray.length - 1
                 );
-                console.log(control.controls);
-                this.localTableArray = [];
+                this.resetTable();
               }
             }
           });
         }
       });
-    // }
-    console.log('this.componentForm.value.rows',this.componentForm.value.rows)
+    }
+    console.log('this.componentForm.value.rows', this.componentForm.value.rows);
   }
 
   getMergeValidation() {
+    console.log('this.clickedCellIndex', this.clickedCellIndex);
     const everyVal = this.clickedCellIndex.every((el: any) => {
       return el == this.clickedCellIndex[0];
     });
@@ -141,15 +137,16 @@ export class EditorComponent implements OnInit {
   }
 
   getForStatus(consecutiveIndex) {
+    let flag = false;
     for (let i = 1; i < consecutiveIndex.length; i++) {
       if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
         this.resetTable();
         alert('merge elements are not consecutive');
-        return false;
+        return flag;
       }
-      return true;
     }
-    return true;
+    flag = true;
+    return flag;
   }
 
   resetTable() {
