@@ -214,7 +214,6 @@ export class AcrossEditorComponent implements OnInit {
   }
 
   getConsecutiveStatus() {
-    let consecutiveIndex: any = [];
     console.log('111111', this.componentForm.value.rows);
     let consecutiveObj: any = {};
     Object.entries(this.localTableArray).forEach(([key, value]: any) => {
@@ -230,23 +229,11 @@ export class AcrossEditorComponent implements OnInit {
         });
       });
     });
+    let flag;
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-     let flag =  this.getForStatus(value);
-     return flag;
+     this.getForStatus(value);;
     })
-    console.log(consecutiveObj)
-    // this.localTableArray.forEach((e: any) => {
-    //   let ind = this.componentForm.value.rows[
-    //     this.clickedCellIndex[0]
-    //   ].columns.findIndex((el: any) => {
-    //     return el.id == e.id;
-    //   });
-    //   // consecutiveIndex.push(ind);
-    //   // if (consecutiveIndex.length == this.localTableArray.length) {
-    //   //   consecutiveIndex.sort();
-    //   //   this.getForStatus(consecutiveIndex);
-    //   // }
-    // });
+    return true;
   }
 
   getForStatus(consecutiveIndex) {
