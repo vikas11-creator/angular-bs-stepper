@@ -168,7 +168,7 @@ export class AcrossEditorComponent implements OnInit {
       let isFirst = true;
       Object.entries(this.localTableArray).forEach(([key, value]: any) => {
         if (Object.keys(rowFound).length == 0 && isFirst) {
-          value.force((element: any) => {
+          value.forEach((element: any) => {
             this.componentForm.value.rows.map((elem: any, i: number) => {
               if (Object.keys(rowFound).length == 0) {
                 rowFound = elem.columns.find((el: any, j: number) => {
