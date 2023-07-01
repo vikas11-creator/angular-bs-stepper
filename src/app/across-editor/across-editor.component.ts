@@ -191,8 +191,6 @@ export class AcrossEditorComponent implements OnInit {
         );
       }
       this.resetTable();
-      // console.log('getMergeValidation', this.localTableArray);
-      // console.log('this.componentForm.value.rows', this.componentForm);
     }
   }
 
@@ -214,7 +212,6 @@ export class AcrossEditorComponent implements OnInit {
   }
 
   getConsecutiveStatus() {
-    console.log('111111', this.componentForm.value.rows);
     let consecutiveObj: any = {};
     Object.entries(this.localTableArray).forEach(([key, value]: any) => {
       consecutiveObj[key] = [];
@@ -229,24 +226,29 @@ export class AcrossEditorComponent implements OnInit {
         });
       });
     });
-    let flag;
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-     this.getForStatus(value);;
+     this.getForStatus(value);
     })
     return true;
   }
 
+  breakLoop: boolean = true;
   getForStatus(consecutiveIndex) {
     let flag = false;
-    for (let i = 1; i < consecutiveIndex.length; i++) {
-      if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
-        this.resetTable();
-        alert('merge elements are not consecutive');
-        return flag;
+    if(this.breakLoop){
+      for (let i = 1; i < consecutiveIndex.length; i++) {
+        if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
+          this.resetTable();
+          this.breakLoop = false;
+          alert('merge elements are not consecutive');
+          return flag;
+        }
       }
+      flag = true;
+      return flag;
+    }else{
+      return flag;
     }
-    flag = true;
-    return flag;
   }
 
   resetTable() {
