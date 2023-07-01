@@ -73,11 +73,7 @@ export class AcrossEditorComponent implements OnInit {
     let found: any = {};
     let colspanSum;
     let rowspanSum;
-    // console.log(Object.keys(this.localTableArray));
     let key: any = Object.keys(this.localTableArray);
-    let value = Object.values(this.localTableArray);
-    // console.log(key);
-    // console.log(value);
     let min = Math.min(...key);
     colspanSum = this.localTableArray[min].reduce(
       (accumulator, currentValue) => accumulator + currentValue.colspan,
@@ -94,8 +90,6 @@ export class AcrossEditorComponent implements OnInit {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    console.log(colspanSum);
-    console.log('rowspanSum', rowspanSum);
 
     if (colspanSum) {
       this.localTableArray[min].map((element: any) => {
@@ -134,40 +128,10 @@ export class AcrossEditorComponent implements OnInit {
 
     let rowFound: any = {};
     if (rowspanSum) {
-      console.log(this.componentForm.value.rows);
-      console.log('getMergeValidation', this.localTableArray);
-      // this.localTableArray[min].map((element: any) => {
-      //   if (Object.keys(rowFound).length == 0) {
-      //     this.componentForm.value.rows.map((elem: any, i: number) => {
-      //       if (Object.keys(rowFound).length == 0) {
-      //         rowFound = elem.columns.find((el: any, j: number) => {
-      //           ind = j;
-      //           return el.id == element.id;
-      //         });
-      //         if (rowFound == undefined) {
-      //           rowFound = {};
-      //         }
-      //         if (this.isValidInput(rowFound) && Object.keys(rowFound).length !== 0) {
-      //           const control: any = (<FormArray>(
-      //             this.componentForm.controls['rows']
-      //           ))
-      //             .at(i)
-      //             .get('columns') as FormArray;
-      //             rowFound.rowspan = rowspanSum;
-      //           // elem.columns.splice(ind + 1, this.localTableArray[min].length - 1);
-      //           // control.controls.splice(
-      //           //   ind + 1,
-      //           //   this.localTableArray[min].length - 1
-      //           // );
-      //           // this.resetTable();bad me dalna
-      //         }
-      //       }
-      //     });
-      //   }
-      // });
       let isFirst = true;
       Object.entries(this.localTableArray).forEach(([key, value]: any) => {
         if (Object.keys(rowFound).length == 0 && isFirst) {
+          console.log('value', value);
           value.forEach((element: any) => {
             this.componentForm.value.rows.map((elem: any, i: number) => {
               if (Object.keys(rowFound).length == 0) {
@@ -195,8 +159,8 @@ export class AcrossEditorComponent implements OnInit {
           });
         }
         if (!isFirst) {
-          value.forEach((element: any) => {
-            this.componentForm.value.rows.map((elem: any, i: number) => {
+          value.forEach((element: any, i: number) => {
+            this.componentForm.value.rows.map((elem: any) => {
               const control: any = (<FormArray>(
                 this.componentForm.controls['rows']
               ))
@@ -214,43 +178,7 @@ export class AcrossEditorComponent implements OnInit {
         }
       });
     }
-    // if (this.getMergeValidation()) {
-    //   let ind: number;
-    //   let found: any = {};
-    //   const sumWithInitial = this.localTableArray.reduce(
-    //     (accumulator, currentValue) => accumulator + currentValue.colspan,
-    //     0
-    //   );
-    //   this.localTableArray.map((element: any) => {
-    //     if (Object.keys(found).length == 0) {
-    //       this.componentForm.value.rows.map((elem: any, i: number) => {
-    //         if (Object.keys(found).length == 0) {
-    //           found = elem.columns.find((el: any, j: number) => {
-    //             ind = j;
-    //             return el.id == element.id;
-    //           });
-    //           if (found == undefined) {
-    //             found = {};
-    //           }
-    //           if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-    //             const control: any = (<FormArray>(
-    //               this.componentForm.controls['rows']
-    //             ))
-    //               .at(i)
-    //               .get('columns') as FormArray;
-    //             found.colspan = sumWithInitial;
-    //             elem.columns.splice(ind + 1, this.localTableArray.length - 1);
-    //             control.controls.splice(
-    //               ind + 1,
-    //               this.localTableArray.length - 1
-    //             );
-    //             this.resetTable();
-    //           }
-    //         }
-    //       });
-    //     }
-    //   });
-    // }
+    console.log('getMergeValidation', this.localTableArray);
     console.log('this.componentForm.value.rows', this.componentForm.value.rows);
   }
 
