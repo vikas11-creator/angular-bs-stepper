@@ -58,7 +58,7 @@ export class AcrossEditorComponent implements OnInit {
   }
 
   getCellDetail(compType, index) {
-    console.log('this.componentForm.value.rows', this.componentForm.value.rows);
+    // console.log('this.componentForm.value.rows', this.componentForm.value.rows);
     compType.value.checked = !compType.value.checked;
     if (this.localTableArray[index]?.length > 0) {
     } else {
@@ -104,7 +104,7 @@ export class AcrossEditorComponent implements OnInit {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    if (this.getMergeValidation()) {
+    if (this.getMergeValidation(this.localTableArray)) {
       if (colspanSum) {
         this.localTableArray[min].map((element: any) => {
           if (Object.keys(found).length == 0) {
@@ -146,10 +146,8 @@ export class AcrossEditorComponent implements OnInit {
       if (rowspanSum) {
         Object.entries(this.localTableArray).forEach(
           ([key, value]: any, j: number) => {
-            console.log('value', value);
             if (Object.keys(rowFound).length == 0 && j == 0) {
               value.forEach((element: any) => {
-                console.log('value111', value);
                 this.componentForm.value.rows.map((elem: any, i: number) => {
                   if (Object.keys(rowFound).length == 0) {
                     rowFound = elem.columns.find((el: any, j: number) => {
@@ -171,7 +169,6 @@ export class AcrossEditorComponent implements OnInit {
             }
             if (j !== 0) {
               value.forEach((element: any) => {
-                console.log('value222', value);
                 this.componentForm.value.rows.map(
                   (elem: any, i: number, arr: any) => {
                     const control: any = (<FormArray>(
@@ -182,7 +179,6 @@ export class AcrossEditorComponent implements OnInit {
                     let ind = elem.columns.findIndex((el: any, j: number) => {
                       return el.id == element.id;
                     });
-                    console.log('ind', ind);
                     if (ind !== -1) {
                       control.controls.splice(ind, 1);
                       arr[key].columns.splice(ind, 1);
@@ -195,13 +191,28 @@ export class AcrossEditorComponent implements OnInit {
         );
       }
       this.resetTable();
-      console.log('getMergeValidation', this.localTableArray);
-      console.log('this.componentForm.value.rows', this.componentForm);
+      // console.log('getMergeValidation', this.localTableArray);
+      // console.log('this.componentForm.value.rows', this.componentForm);
     }
   }
 
-  getMergeValidation() {
-    // console.log('this.clickedCellIndex', this.clickedCellIndex);
+  getMergeValidation(obj: any) {
+    console.log('this.clickedCellIndex', Object.values(obj));
+    let condtionEqualLength = Object.values(obj).every(
+      (el: any, i: number, arr: any) => {
+        console.log('arr', arr);
+        let len = arr[0].length;
+        return el.length == len;
+      }
+    );
+    console.log('arr', condtionEqualLength);
+    if (condtionEqualLength) {
+      this.getConsecutiveStatus();
+    } else {
+      this.resetTable();
+      alert('cannot merge across cell');
+      return false;
+    }
     // const everyVal = this.clickedCellIndex.every((el: any) => {
     //   return el == this.clickedCellIndex[0];
     // });
@@ -217,18 +228,18 @@ export class AcrossEditorComponent implements OnInit {
 
   getConsecutiveStatus() {
     let consecutiveIndex: any = [];
-    this.localTableArray.forEach((e: any) => {
-      let ind = this.componentForm.value.rows[
-        this.clickedCellIndex[0]
-      ].columns.findIndex((el: any) => {
-        return el.id == e.id;
-      });
-      consecutiveIndex.push(ind);
-      if (consecutiveIndex.length == this.localTableArray.length) {
-        consecutiveIndex.sort();
-        this.getForStatus(consecutiveIndex);
-      }
-    });
+    // this.localTableArray.forEach((e: any) => {
+    //   let ind = this.componentForm.value.rows[
+    //     this.clickedCellIndex[0]
+    //   ].columns.findIndex((el: any) => {
+    //     return el.id == e.id;
+    //   });
+    //   consecutiveIndex.push(ind);
+    //   if (consecutiveIndex.length == this.localTableArray.length) {
+    //     consecutiveIndex.sort();
+    //     this.getForStatus(consecutiveIndex);
+    //   }
+    // });
     return true;
   }
 
