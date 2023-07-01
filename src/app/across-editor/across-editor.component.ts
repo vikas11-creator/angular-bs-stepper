@@ -22,6 +22,7 @@ export class AcrossEditorComponent implements OnInit {
   clickedCellIndex: any = [];
   isAdd: boolean = false;
   ids: any = [];
+  breakLoop: any = [];
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
@@ -58,7 +59,6 @@ export class AcrossEditorComponent implements OnInit {
   }
 
   getCellDetail(compType, index) {
-    // console.log('this.componentForm.value.rows', this.componentForm.value.rows);
     compType.value.checked = !compType.value.checked;
     if (this.localTableArray[index]?.length > 0) {
     } else {
@@ -105,10 +105,6 @@ export class AcrossEditorComponent implements OnInit {
       0
     );
     if (this.getMergeValidation(this.localTableArray)) {
-      console.log(
-        'this.getMergeValidation(this.localTableArray)',
-        this.getMergeValidation(this.localTableArray)
-      );
       if (colspanSum) {
         this.localTableArray[min].map((element: any) => {
           if (Object.keys(found).length == 0) {
@@ -231,22 +227,20 @@ export class AcrossEditorComponent implements OnInit {
       });
     });
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-      console.log('this.getForStatus(value)', this.getForStatus(value));
-      if (this.breakL) {
-        return this.getForStatus(value);
-      } else {
-        console.log('aaaaaaaaaaaaaaaaaa');
-        return true;
-      }
+      this.getForStatus(value);
     });
-    console.log('aaaaaayyyyyyyyyyaaaaaaaa');
+    let flag= this.breakLoop.every((el: boolean) => {
+      return el == true;
+    });
+    if (!flag) {
+      alert('merge elements are not consecutive');
+      this.resetTable();
+      return false;
+    }
     return true;
   }
 
-  breakLoop: any = [];
-  breakL: boolean = false;
   getForStatus(consecutiveIndex) {
-    let flag: boolean = false;
     for (let i = 1; i < consecutiveIndex.length; i++) {
       if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
         this.breakLoop.push(false);
@@ -254,17 +248,6 @@ export class AcrossEditorComponent implements OnInit {
         this.breakLoop.push(true);
       }
     }
-    console.log(this.breakLoop);
-    flag = this.breakLoop.every((el: boolean) => {
-      return el == true;
-    });
-    console.log('flag', flag);
-    if (!flag) {
-      this.breakL = true;
-      alert('merge elements are not consecutive');
-      this.resetTable();
-    }
-    return flag;
   }
 
   resetTable() {
