@@ -239,14 +239,14 @@ export class AcrossEditorComponent implements OnInit {
     for (let i = 1; i < consecutiveIndex.length; i++) {
       if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
         this.breakLoop.push(false);
-      }else{
+      } else {
         this.breakLoop.push(true);
       }
     }
-     flag = this.breakLoop.every((el:boolean)=>{
+    flag = this.breakLoop.every((el: boolean) => {
       return el == true;
-    })
-    if(!flag){
+    });
+    if (!flag) {
       alert('merge elements are not consecutive');
       this.resetTable();
     }
