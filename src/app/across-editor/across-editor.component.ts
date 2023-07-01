@@ -181,7 +181,7 @@ export class AcrossEditorComponent implements OnInit {
       });
     }
     console.log('getMergeValidation', this.localTableArray);
-    console.log('this.componentForm.value.rows', this.componentForm.value.rows);
+    console.log('this.componentForm.value.rows', this.componentForm);
   }
 
   getMergeValidation() {
