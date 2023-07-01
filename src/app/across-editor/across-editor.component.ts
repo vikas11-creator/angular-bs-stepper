@@ -21,7 +21,7 @@ export class AcrossEditorComponent implements OnInit {
   localTableArray: any = {};
   clickedCellIndex: any = [];
   isAdd: boolean = false;
-  ids:any=[];
+  ids: any = [];
   constructor(
     private formbuilder: FormBuilder,
     private cdr: ChangeDetectorRef
@@ -49,16 +49,15 @@ export class AcrossEditorComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  sortIds(){
-    this.componentForm.value.rows.forEach((elem:any,i:number)=>{
-      elem.columns.forEach((el:any,j:number)=>{
+  sortIds() {
+    this.componentForm.value.rows.forEach((elem: any, i: number) => {
+      elem.columns.forEach((el: any, j: number) => {
         this.ids.push(el.id);
-      })
-    })
+      });
+    });
   }
 
   getCellDetail(compType, index) {
-    
     console.log('this.componentForm.value.rows', this.componentForm.value.rows);
     compType.value.checked = !compType.value.checked;
     if (this.localTableArray[index]?.length > 0) {
@@ -79,9 +78,9 @@ export class AcrossEditorComponent implements OnInit {
         delete this.localTableArray[index];
       }
     }
-    Object.entries(this.localTableArray).forEach(([key,value]:any)=>{
+    Object.entries(this.localTableArray).forEach(([key, value]: any) => {
       value.sort((a, b) => this.ids.indexOf(a.id) - this.ids.indexOf(b.id));
-    })
+    });
   }
 
   mergeData() {
@@ -105,111 +104,115 @@ export class AcrossEditorComponent implements OnInit {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-
-    if (colspanSum) {
-      this.localTableArray[min].map((element: any) => {
-        if (Object.keys(found).length == 0) {
-          this.componentForm.value.rows.map((elem: any, i: number) => {
-            if (Object.keys(found).length == 0) {
-              found = elem.columns.find((el: any, j: number) => {
-                ind = j;
-                return el.id == element.id;
-              });
-              if (found == undefined) {
-                found = {};
-              }
-              if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-                const control: any = (<FormArray>(
-                  this.componentForm.controls['rows']
-                ))
-                  .at(i)
-                  .get('columns') as FormArray;
-                found.colspan = colspanSum;
-                elem.columns.splice(
-                  ind + 1,
-                  this.localTableArray[min].length - 1
-                );
-                control.controls.splice(
-                  ind + 1,
-                  this.localTableArray[min].length - 1
-                );
-              }
-            }
-          });
-        }
-      });
-    }
-
-    let rowFound: any = {};
-    if (rowspanSum) {
-      Object.entries(this.localTableArray).forEach(
-        ([key, value]: any, j: number) => {
-          console.log('value', value);
-          if (Object.keys(rowFound).length == 0 && j == 0) {
-            value.forEach((element: any) => {
-              console.log('value111', value);
-              this.componentForm.value.rows.map((elem: any, i: number) => {
-                if (Object.keys(rowFound).length == 0) {
-                  rowFound = elem.columns.find((el: any, j: number) => {
-                    ind = j;
-                    return el.id == element.id;
-                  });
-                  if (rowFound == undefined) {
-                    rowFound = {};
-                  }
-                  if (
-                    this.isValidInput(rowFound) &&
-                    Object.keys(rowFound).length !== 0
-                  ) {
-                    rowFound.rowspan = rowspanSum;
-                  }
+    if (this.getMergeValidation()) {
+      if (colspanSum) {
+        this.localTableArray[min].map((element: any) => {
+          if (Object.keys(found).length == 0) {
+            this.componentForm.value.rows.map((elem: any, i: number) => {
+              if (Object.keys(found).length == 0) {
+                found = elem.columns.find((el: any, j: number) => {
+                  ind = j;
+                  return el.id == element.id;
+                });
+                if (found == undefined) {
+                  found = {};
                 }
-              });
-            });
-          }
-          if (j !== 0) {
-            value.forEach((element: any) => {
-              console.log('value222', value);
-              this.componentForm.value.rows.map(
-                (elem: any, i: number, arr: any) => {
+                if (
+                  this.isValidInput(found) &&
+                  Object.keys(found).length !== 0
+                ) {
                   const control: any = (<FormArray>(
                     this.componentForm.controls['rows']
                   ))
-                    .at(key)
+                    .at(i)
                     .get('columns') as FormArray;
-                  let ind = elem.columns.findIndex((el: any, j: number) => {
-                    return el.id == element.id;
-                  });
-                  console.log('ind', ind);
-                  if (ind !== -1) {
-                    control.controls.splice(ind, 1);
-                    arr[key].columns.splice(ind, 1);
-                  }
+                  found.colspan = colspanSum;
+                  elem.columns.splice(
+                    ind + 1,
+                    this.localTableArray[min].length - 1
+                  );
+                  control.controls.splice(
+                    ind + 1,
+                    this.localTableArray[min].length - 1
+                  );
                 }
-              );
+              }
             });
           }
-        }
-      );
+        });
+      }
+
+      let rowFound: any = {};
+      if (rowspanSum) {
+        Object.entries(this.localTableArray).forEach(
+          ([key, value]: any, j: number) => {
+            console.log('value', value);
+            if (Object.keys(rowFound).length == 0 && j == 0) {
+              value.forEach((element: any) => {
+                console.log('value111', value);
+                this.componentForm.value.rows.map((elem: any, i: number) => {
+                  if (Object.keys(rowFound).length == 0) {
+                    rowFound = elem.columns.find((el: any, j: number) => {
+                      ind = j;
+                      return el.id == element.id;
+                    });
+                    if (rowFound == undefined) {
+                      rowFound = {};
+                    }
+                    if (
+                      this.isValidInput(rowFound) &&
+                      Object.keys(rowFound).length !== 0
+                    ) {
+                      rowFound.rowspan = rowspanSum;
+                    }
+                  }
+                });
+              });
+            }
+            if (j !== 0) {
+              value.forEach((element: any) => {
+                console.log('value222', value);
+                this.componentForm.value.rows.map(
+                  (elem: any, i: number, arr: any) => {
+                    const control: any = (<FormArray>(
+                      this.componentForm.controls['rows']
+                    ))
+                      .at(key)
+                      .get('columns') as FormArray;
+                    let ind = elem.columns.findIndex((el: any, j: number) => {
+                      return el.id == element.id;
+                    });
+                    console.log('ind', ind);
+                    if (ind !== -1) {
+                      control.controls.splice(ind, 1);
+                      arr[key].columns.splice(ind, 1);
+                    }
+                  }
+                );
+              });
+            }
+          }
+        );
+      }
+      this.resetTable();
+      console.log('getMergeValidation', this.localTableArray);
+      console.log('this.componentForm.value.rows', this.componentForm);
     }
-    this.resetTable();
-    console.log('getMergeValidation', this.localTableArray);
-    console.log('this.componentForm.value.rows', this.componentForm);
   }
 
   getMergeValidation() {
-    console.log('this.clickedCellIndex', this.clickedCellIndex);
-    const everyVal = this.clickedCellIndex.every((el: any) => {
-      return el == this.clickedCellIndex[0];
-    });
-    if (!everyVal) {
-      this.resetTable();
-      alert('cannot merge across cell');
-      return false;
-    } else {
-      let status = this.getConsecutiveStatus();
-      return status;
-    }
+    // console.log('this.clickedCellIndex', this.clickedCellIndex);
+    // const everyVal = this.clickedCellIndex.every((el: any) => {
+    //   return el == this.clickedCellIndex[0];
+    // });
+    // if (!everyVal) {
+    //   this.resetTable();
+    //   alert('cannot merge across cell');
+    //   return false;
+    // } else {
+    //   let status = this.getConsecutiveStatus();
+    //   return status;
+    // }
   }
 
   getConsecutiveStatus() {
