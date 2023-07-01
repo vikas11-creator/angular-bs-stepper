@@ -230,6 +230,10 @@ export class AcrossEditorComponent implements OnInit {
         });
       });
     });
+    Object.entries(consecutiveObj).forEach(([key, value]: any) => {
+     let flag =  this.getForStatus(value);
+     return flag;
+    })
     console.log(consecutiveObj)
     // this.localTableArray.forEach((e: any) => {
     //   let ind = this.componentForm.value.rows[
@@ -243,7 +247,6 @@ export class AcrossEditorComponent implements OnInit {
     //   //   this.getForStatus(consecutiveIndex);
     //   // }
     // });
-    return true;
   }
 
   getForStatus(consecutiveIndex) {
