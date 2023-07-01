@@ -136,32 +136,80 @@ export class AcrossEditorComponent implements OnInit {
     if (rowspanSum) {
       console.log(this.componentForm.value.rows);
       console.log('getMergeValidation', this.localTableArray);
-      this.localTableArray[min].map((element: any) => {
-        if (Object.keys(rowFound).length == 0) {
-          this.componentForm.value.rows.map((elem: any, i: number) => {
-            if (Object.keys(rowFound).length == 0) {
-              rowFound = elem.columns.find((el: any, j: number) => {
-                ind = j;
-                return el.id == element.id;
-              });
-              if (rowFound == undefined) {
-                rowFound = {};
-              }
-              if (this.isValidInput(rowFound) && Object.keys(rowFound).length !== 0) {
-                const control: any = (<FormArray>(
-                  this.componentForm.controls['rows']
-                ))
-                  .at(i)
-                  .get('columns') as FormArray;
+      // this.localTableArray[min].map((element: any) => {
+      //   if (Object.keys(rowFound).length == 0) {
+      //     this.componentForm.value.rows.map((elem: any, i: number) => {
+      //       if (Object.keys(rowFound).length == 0) {
+      //         rowFound = elem.columns.find((el: any, j: number) => {
+      //           ind = j;
+      //           return el.id == element.id;
+      //         });
+      //         if (rowFound == undefined) {
+      //           rowFound = {};
+      //         }
+      //         if (this.isValidInput(rowFound) && Object.keys(rowFound).length !== 0) {
+      //           const control: any = (<FormArray>(
+      //             this.componentForm.controls['rows']
+      //           ))
+      //             .at(i)
+      //             .get('columns') as FormArray;
+      //             rowFound.rowspan = rowspanSum;
+      //           // elem.columns.splice(ind + 1, this.localTableArray[min].length - 1);
+      //           // control.controls.splice(
+      //           //   ind + 1,
+      //           //   this.localTableArray[min].length - 1
+      //           // );
+      //           // this.resetTable();bad me dalna
+      //         }
+      //       }
+      //     });
+      //   }
+      // });
+      let isFirst = true;
+      Object.entries(this.localTableArray).forEach(([key, value]: any) => {
+        if (Object.keys(rowFound).length == 0 && isFirst) {
+          value.force((element: any) => {
+            this.componentForm.value.rows.map((elem: any, i: number) => {
+              if (Object.keys(rowFound).length == 0) {
+                rowFound = elem.columns.find((el: any, j: number) => {
+                  ind = j;
+                  return el.id == element.id;
+                });
+                if (rowFound == undefined) {
+                  rowFound = {};
+                }
+                if (
+                  this.isValidInput(rowFound) &&
+                  Object.keys(rowFound).length !== 0
+                ) {
+                  const control: any = (<FormArray>(
+                    this.componentForm.controls['rows']
+                  ))
+                    .at(i)
+                    .get('columns') as FormArray;
                   rowFound.rowspan = rowspanSum;
-                // elem.columns.splice(ind + 1, this.localTableArray[min].length - 1);
-                // control.controls.splice(
-                //   ind + 1,
-                //   this.localTableArray[min].length - 1
-                // );
-                // this.resetTable();bad me dalna
+                  isFirst = false;
+                }
               }
-            }
+            });
+          });
+        }
+        if (!isFirst) {
+          value.forEach((element: any) => {
+            this.componentForm.value.rows.map((elem: any, i: number) => {
+              const control: any = (<FormArray>(
+                this.componentForm.controls['rows']
+              ))
+                .at(i)
+                .get('columns') as FormArray;
+              control.controls.splice(
+                elem.columns.findIndex((el: any, j: number) => {
+                  return el.id == element.id;
+                }),
+                1
+              );
+              this.resetTable(); //bad me dalna
+            });
           });
         }
       });
