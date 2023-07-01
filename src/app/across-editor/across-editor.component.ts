@@ -228,28 +228,29 @@ export class AcrossEditorComponent implements OnInit {
       });
     });
     Object.entries(consecutiveObj).forEach(([key, value]: any) => {
-      this.getForStatus(value);
+      return this.getForStatus(value);
     });
     return true;
   }
 
-  breakLoop: boolean = true;
+  breakLoop: any = [];
   getForStatus(consecutiveIndex) {
-    let flag = false;
-    if (this.breakLoop) {
-      for (let i = 1; i < consecutiveIndex.length; i++) {
-        if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
-          this.resetTable();
-          this.breakLoop = false;
-          alert('merge elements are not consecutive');
-          return flag;
-        }
+    let flag: boolean = false;
+    for (let i = 1; i < consecutiveIndex.length; i++) {
+      if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
+        this.breakLoop.push(false);
+      }else{
+        this.breakLoop.push(true);
       }
-      flag = true;
-      return flag;
-    } else {
-      return flag;
     }
+     flag = this.breakLoop.every((el:boolean)=>{
+      return el == true;
+    })
+    if(!flag){
+      alert('merge elements are not consecutive');
+      this.resetTable();
+    }
+    return flag;
   }
 
   resetTable() {
