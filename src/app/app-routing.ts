@@ -20,6 +20,7 @@ import { Component2Component } from './inheritance/comp2/component2/component2.c
 import { Component3Component } from './inheritance/comp3/component3/component3.component';
 import { EditorComponent } from './editor/editor.component';
 import { AcrossEditorComponent } from './across-editor/across-editor.component';
+import { JsPdfComponent } from './js-pdf/js-pdf.component';
 const routes: Routes = [
   {
     path: '',
@@ -88,6 +89,10 @@ const routes: Routes = [
   {
     path: 'across-editor',
     component: AcrossEditorComponent,
+  },
+  {
+    path: 'jspdf',
+    component: JsPdfComponent,
   },
   { path: 'pageone', component: Component1Component },
   { path: 'pagetwo', component: Component2Component },

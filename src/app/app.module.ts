@@ -33,6 +33,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AcrossEditorComponent } from './across-editor/across-editor.component';
+import { JsPdfComponent } from './js-pdf/js-pdf.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { AcrossEditorComponent } from './across-editor/across-editor.component';
     Component2Component,
     Component3Component,
     EditorComponent,
-    AcrossEditorComponent
+    AcrossEditorComponent,
+    JsPdfComponent
   ],
   bootstrap: [AppComponent],
 })
