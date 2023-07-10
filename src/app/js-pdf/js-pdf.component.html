@@ -7,7 +7,25 @@
 >
   Download Pdf
 </button>
+<div>
+<button
+  type="button"
+  class="btn btn-secondary"
+  routerLink="tablecolumnfilter"
+  (click)=exportTableToExcel()
+>
+  Download Excel
+</button>
+<div>
+<button
+  type="button"
+  class="btn btn-secondary"
+  routerLink="tablecolumnfilter"
+  (click)=exportTableToHTML()
+>
+  Download Html
+</button>
 </div>
 <div class="table-con">
-<div class="reportData" [innerHTML]="tableData"></div>
+<div class="reportData" [innerHTML]="tableData" id="my-component"></div>
 </div>

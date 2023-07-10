@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { jsPDF } from 'jspdf';
+import * as XLSX  from 'xlsx';
+
 
 @Component({
   selector: 'app-js-pdf',
@@ -9,6 +11,7 @@ import { jsPDF } from 'jspdf';
 export class JsPdfComponent implements OnInit {
   tableData:any;
   opt: any;
+  reportName: string = 'report';
   constructor() { }
 
   ngOnInit() {
@@ -17,12 +20,13 @@ export class JsPdfComponent implements OnInit {
 
   downloadPdf(){
     let colCount = ("table tr td").length;
+    console.log('colCount',colCount)
     let jsPdf;
     let scale;
     let scaleCole = 0.10;
     if(colCount < 12){
       jsPdf = new jsPDF('1','pt','a4',true);
-      scale = (colCount /2 * scaleCole)
+      scale = (colCount /3 * scaleCole)
     }else if(colCount < 20){
       jsPdf = new jsPDF('1','pt','a4',true);
       scale = scaleCole;
@@ -31,7 +35,7 @@ export class JsPdfComponent implements OnInit {
       jsPdf = new jsPDF('1','pt','a4',true);
       scale = 0.5
     }
-    let filename = `report.pdf`;
+    let filename = `${this.reportName}.pdf`;
     this.opt = {
       callback: function(jsPdf){
         jsPdf.save(filename)
@@ -45,5 +49,40 @@ export class JsPdfComponent implements OnInit {
       }
     }
     jsPdf.html(this.tableData,this.opt)
+  }
+
+  exportTableToExcel(){
+    var doc
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(doc =document.getElementById('my-component')
+    );
+    /* new format */
+    var fmt = "2.00";
+    /* change cell format of range B2:D4 */
+    var range = { s: { r: 1, c: 1 }, e: { r: 2, c: 100000 } };
+    for (var R = range.s.r; R <= range.e.r; ++R) {
+      for (var C = range.s.c; C <= range.e.c; ++C) {
+        var cell = ws[XLSX.utils.encode_cell({ r: R, c: C })];
+        if (!cell || cell.t != "n") continue; // only format numeric cells
+        cell.z = fmt;
+      }
+    }
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    var fmt = "@";
+    wb.Sheets["Sheet1"]["F"] = fmt;
+    /* save to file */
+    XLSX.writeFile(wb, this.reportName+".xlsx");
+  }
+  exportTableToHTML(filename='webfile'){
+    var downloadLink;
+    var dataType = 'application/vnd.html';
+    var tableHTML = this.tableData;
+    filename = this.reportName?filename+'.html':'web.html';
+    downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    downloadLink.download = filename;
+    downloadLink.click();
+
   }
 }
