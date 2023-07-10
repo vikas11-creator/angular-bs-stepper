@@ -1,0 +1,25 @@
+.table-con{
+  height: calc(100% - 42px);
+}
+.reportData{
+  overflow: auto;
+  height: 100%;
+}
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr{
+  background-color: aliceblue;
+  color: aquamarine;
+  transition: box-shadow 0.2s;
+}
+
+td,th{
+  border: 1px solid rgb(202, 170, 170);
+  height: 56px;
+  padding: 8px 16px;
+  color: aquamarine;
+}
