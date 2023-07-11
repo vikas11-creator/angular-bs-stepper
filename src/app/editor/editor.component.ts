@@ -561,177 +561,175 @@ export class EditorComponent implements OnInit {
     };
   }
 
-  // addRow(i, j) {
-  //   console.log('index', i);
-  //   let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-  //   let rowData = _.cloneDeep(rows);
-  //   if (j <= 1) {
-  //     rowData.id = uuidv4();
-  //     rowData.columns.forEach((el: any) => {
-  //       el.id = uuidv4();
-  //       el.rowSpan = 1,
-  //         el.colSpan = 1,
-  //         el.bgColor = null,
-  //         el.fontSize = null,
-  //         el.textColor = null,
-  //         el.title = null,
-  //         el.value = null
-  //     })
-  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
-  //   } else if (j > 1) {
-  //     // let rowData = _.cloneDeep(this.rowDataJson);
-  //     // let newIndex = i;
-  //     // for (let m = i; m < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && m >= 0 && newIndex ==i; m--) {
-  //     //   if (this.fndlFormatedFilteredData.tab[0].table[0].rows[m].columns[0].rowSpan !== 0 ) {
-  //     //     newIndex = m;
-  //     //     console.log('newIndex', newIndex);
-  //     //     break;
-  //     //   }
-  //     // }
-  //     let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-  //     let rowData = _.cloneDeep(rows);
-  //     rowData.id = uuidv4();
-  //     // if (i == 2) {
-  //     //   rows.columns.forEach((el: any, k: number) => {
-  //     //     if (k < 2) {
-  //     //       el.rowSpan = el.rowSpan + 1
-  //     //     }
-  //     //   })
-  //     // } else {
-  //     //   rows.columns.forEach((el: any, k: number) => {
-  //     //     if (k < 2) {
-  //     //       el.rowSpan = el.rowSpan + 1
-  //     //     }
-  //     //   })
-  //     //   let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[3];
-  //     //   rowss.columns.forEach((el: any, k: number) => {
-  //     //     if (k >= 2 && k <= 3) {
-  //     //       console.log('logggggggg');
-
-  //     //       el.rowSpan = el.rowSpan + 1
-  //     //     }
-  //     //   })
-  //     // }
-
-  //     // for (let l = i; l < this.fndlFormatedFilteredData.tab[0].table[0].rows.length; l--) {//2,<3,--
-  //     //   // for (let f = 0; f < this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length; f++) {//13
-  //     //   let f = 0;
-  //     //   while(f<this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length){
-  //     //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns[0].rowSpan == 0) {
-
-  //     //     }
-  //     //   }
-  //     // }
-  //     let out = i;
-  //     while (out < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && out > 1) {
-  //       let inn = 0;
-  //       while (inn < j) {
-  //         if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out].columns[0].rowSpan == 0) {
-  //           out--;
-  //         } else {
-  //           rows.columns.forEach((el: any, k: number) => {
-  //             if (k < j - 1) {
-  //               el.rowSpan = el.rowSpan + 1
-  //             }
-  //           })
-  //           if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1]) {
-  //             let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1];
-  //             rowss.columns.forEach((el: any, k: number) => {
-  //               if (k >= j-1) {
-  //                 el.rowSpan = el.rowSpan + 1
-  //               }
-  //             })
-  //           }
-  //         }
-  //       }
-  //     }
-
-
-  //     rowData.columns.forEach((el: any, k: number) => {
-  //       el.id = uuidv4();
-  //       if (k < j - 1) {
-  //         el.rowSpan = 0,
-  //           el.colSpan = 0,
-  //           el.bgColor = null,
-  //           el.fontSize = null,
-  //           el.textColor = null,
-  //           el.title = null,
-  //           el.value = null
-  //       }
-  //       if (k >= (j - 1)) {
-  //         el.rowSpan = 1,
-  //           el.colSpan = 1,
-  //           el.bgColor = null,
-  //           el.fontSize = null,
-  //           el.value = null,
-  //           el.textColor = null,
-  //           el.title = null
-  //       }
-  //     })
-  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
-  //     console.log('rowData.columns', rowData.columns);
-  //     console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
-  //   }
-  // }
   addRow(i, j) {
-    console.log(i, j);
+    console.log('index', i);
     let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+    let rowData = _.cloneDeep(rows);
     if (j <= 1) {
-      let rowData = _.cloneDeep(rows);
       rowData.id = uuidv4();
       rowData.columns.forEach((el: any) => {
         el.id = uuidv4();
-        (el.rowSpan = 1),
-          (el.colSpan = 1),
-          (el.bgColor = null),
-          (el.fontSize = null),
-          (el.textColor = null),
-          (el.title = null),
-          (el.value = null);
-      });
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);
+        el.rowSpan = 1,
+          el.colSpan = 1,
+          el.bgColor = null,
+          el.fontSize = null,
+          el.textColor = null,
+          el.title = null,
+          el.value = null
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
     } else if (j > 1) {
       // let rowData = _.cloneDeep(this.rowDataJson);
+      // let newIndex = i;
+      // for (let m = i; m < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && m >= 0 && newIndex ==i; m--) {
+      //   if (this.fndlFormatedFilteredData.tab[0].table[0].rows[m].columns[0].rowSpan !== 0 ) {
+      //     newIndex = m;
+      //     console.log('newIndex', newIndex);
+      //     break;
+      //   }
+      // }
+      let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
       let rowData = _.cloneDeep(rows);
       rowData.id = uuidv4();
-      rows.columns.forEach((el: any, k: number) => {
-        if (k < j - 1) {
-          el.rowSpan = el.rowSpan + 1;
-        }
-      });
+      if (i == 2) {
+        rows.columns.forEach((el: any, k: number) => {
+          if (k < 2) {
+            el.rowSpan = el.rowSpan + 1
+          }
+        })
+      } else {
+        rows.columns.forEach((el: any, k: number) => {
+          if (k < 2) {
+            el.rowSpan = el.rowSpan + 1
+          }
+        })
+        let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[3];
+        rowss.columns.forEach((el: any, k: number) => {
+          if (k >= 2 && k <= 3) {
+            console.log('logggggggg');
+
+            el.rowSpan = el.rowSpan + 1
+          }
+        })
+      }
+
+      // for (let l = i; l < this.fndlFormatedFilteredData.tab[0].table[0].rows.length; l--) {//2,<3,--
+      //   // for (let f = 0; f < this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length; f++) {//13
+      //   let f = 0;
+      //   while(f<this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length){
+      //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns[0].rowSpan == 0) {
+
+      //     }
+      //   }
+      // }
+      // let out = i;
+      // while (out < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && out > 1) {
+      //   let inn = 0;
+      //   while (inn < j) {
+      //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out].columns[0].rowSpan == 0) {
+      //       out--;
+      //     } else {
+      //       rows.columns.forEach((el: any, k: number) => {
+      //         if (k < j - 1) {
+      //           el.rowSpan = el.rowSpan + 1
+      //         }
+      //       })
+      //       if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1]) {
+      //         let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1];
+      //         rowss.columns.forEach((el: any, k: number) => {
+      //           if (k >= j-1) {
+      //             el.rowSpan = el.rowSpan + 1
+      //           }
+      //         })
+      //       }
+      //     }
+      //   }
+      // }
+
+
       rowData.columns.forEach((el: any, k: number) => {
         el.id = uuidv4();
         if (k < j - 1) {
-          (el.rowSpan = 0),
-            (el.colSpan = 0),
-            (el.bgColor = null),
-            (el.fontSize = null),
-            (el.textColor = null),
-            (el.title = null),
-            (el.value = null);
+          el.rowSpan = 0,
+            el.colSpan = 0,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.textColor = null,
+            el.title = null,
+            el.value = null
         }
-        if (k >= j - 1) {
-          (el.rowSpan = 1),
-            (el.colSpan = 1),
-            (el.bgColor = null),
-            (el.fontSize = null),
-            (el.value = null),
-            (el.textColor = null),
-            (el.title = null);
+        if (k >= (j - 1)) {
+          el.rowSpan = 1,
+            el.colSpan = 1,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.value = null,
+            el.textColor = null,
+            el.title = null
         }
-      });
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(
-        i + 1,
-        0,
-        rowData
-      );
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
       console.log('rowData.columns', rowData.columns);
-      console.log(
-        'this.fndlFormatedFilteredData.tab[0].table[0].rows',
-        _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows)
-      );
+      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
     }
   }
+
+  // addRow(i, j) {
+  //   console.log(i, j);
+  //   let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+  //   if (j <= 1) {
+  //     let rowData = _.cloneDeep(rows);
+  //     rowData.id = uuidv4();
+  //     rowData.columns.forEach((el: any) => {
+  //       el.id = uuidv4();
+  //       (el.rowSpan = 1),
+  //         (el.colSpan = 1),
+  //         (el.bgColor = null),
+  //         (el.fontSize = null),
+  //         (el.textColor = null),
+  //         (el.title = null),
+  //         (el.value = null);
+  //     });
+  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);
+  //   } else if (j > 1) {
+  //     // let rowData = _.cloneDeep(this.rowDataJson);
+  //     let rowData = _.cloneDeep(rows);
+  //     rowData.id = uuidv4();
+  //     rows.columns.forEach((el: any, k: number) => {
+  //       if (k < j - 1) {
+  //         el.rowSpan = el.rowSpan + 1;
+  //       }
+  //     });
+
+      
+  //     rowData.columns.forEach((el: any, k: number) => {
+  //       el.id = uuidv4();
+  //       if (k < j - 1) {
+  //         (el.rowSpan = 0),
+  //           (el.colSpan = 0),
+  //           (el.bgColor = null),
+  //           (el.fontSize = null),
+  //           (el.textColor = null),
+  //           (el.title = null),
+  //           (el.value = null);
+  //       }
+  //       if (k >= j - 1) {
+  //         (el.rowSpan = 1),
+  //           (el.colSpan = 1),
+  //           (el.bgColor = null),
+  //           (el.fontSize = null),
+  //           (el.value = null),
+  //           (el.textColor = null),
+  //           (el.title = null);
+  //       }
+  //     });
+  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(
+  //       i + 1,
+  //       0,
+  //       rowData
+  //     );
+  //   }
+  // }
 
   getColTypeDropDown(res) {
     return [];
