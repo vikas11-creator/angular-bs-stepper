@@ -3,14 +3,9 @@
     <tr *ngFor="let row of fndlFormatedFilteredData.tab[0].table[0].rows; let i = index">
       <td
         *ngFor="let col of row.columns; let j = index"
-        [ngStyle]="{
-          color: col.textColor,
-          'background-color': col.bgColor,
-          'font-size': col.fontSize
-        }"
         [attr.colSpan]="col.colSpan"
         [attr.rowSpan]="col.rowSpan"
-        [ngClass]="col.rowSpan == '0' && col.colSpan == '0' ? 'noSpan' : ''"
+        [ngStyle]="(col.rowSpan =='0' && col.colSpan == '0') ? {'display': 'none'} : {'display': ''}"
       >
         <ng-container *ngIf="col.colType == 'label'">{{
           col.title
