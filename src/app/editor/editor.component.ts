@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 })
 export class EditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
-
+  local:any;
   // checked = true;
   // merge: boolean;
   // mergeList = [];
@@ -43,6 +43,168 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     // this.merge = false;
     // this.validMerge = false;
+    this.local = {
+      columns: [
+        {
+          id: 'a3f973e0-1e9d-48be-a2b1-a8143913be8e',
+          title: null,
+          value: null,
+          colType: 'currency',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: true,
+          fontSize: null,
+        },
+        {
+          id: '32bc84be-55a0-4157-9a30-f1e87226e2c9',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '220f1e7d-0420-4567-8302-b4444538fcf6',
+          title: null,
+          value: null,
+          colType: 'product',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: 'fbf27f28-8482-45e4-8e36-3f0afb3cfd57',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: 'c08cc6a3-8d67-488c-88ad-df9b712fec93',
+          title: null,
+          value: null,
+          colType: 'tenor',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '81874df6-69f4-42c1-bc4c-b4eb4ccbd74b',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '1b2eb9fd-1a91-4e14-a4d3-f8855a3e5103',
+          title: null,
+          value: null,
+          colType: 'installmentType',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: 'f0e4e1cb-3842-4adf-af5f-569d6d24ba94',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: 'ea5365a0-6d8a-47e8-a15a-6d1d0917b411',
+          title: null,
+          value: null,
+          colType: 'installmentFrequency',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '10c0ca8d-44c7-4f57-a2bd-a134f532bc24',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '190218b9-bac0-4e95-b06e-d2d2a4ef6f00',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: 'bab667a5-d54b-4d18-ab51-6aa211fece86',
+          title: null,
+          value: null,
+          colType: 'entity',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+        {
+          id: '04700e70-07c4-4c40-b72e-b94da96241dc',
+          title: null,
+          value: null,
+          colType: 'input',
+          colSpan: 1,
+          rowSpan: 1,
+          textColor: null,
+          bgColor: null,
+          checked: false,
+          fontSize: null,
+        },
+      ],
+      id: '12794122-5b38-4404-a2ef-bbffdc77d360',
+      property: null,
+    }
     this.fndlFormatedFilteredData = {
       tab: [
         {
@@ -561,118 +723,125 @@ export class EditorComponent implements OnInit {
     };
   }
 
-  addRow(i, j) {
-    console.log('index', i);
-    let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-    let rowData = _.cloneDeep(rows);
-    if (j <= 1) {
-      rowData.id = uuidv4();
-      rowData.columns.forEach((el: any) => {
-        el.id = uuidv4();
-        el.rowSpan = 1,
-          el.colSpan = 1,
-          el.bgColor = null,
-          el.fontSize = null,
-          el.textColor = null,
-          el.title = null,
-          el.value = null
-      })
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
-    } else if (j > 1) {
-      // let rowData = _.cloneDeep(this.rowDataJson);
-      // let newIndex = i;
-      // for (let m = i; m < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && m >= 0 && newIndex ==i; m--) {
-      //   if (this.fndlFormatedFilteredData.tab[0].table[0].rows[m].columns[0].rowSpan !== 0 ) {
-      //     newIndex = m;
-      //     console.log('newIndex', newIndex);
-      //     break;
-      //   }
-      // }
-      let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-      let rowData = _.cloneDeep(rows);
-      rowData.id = uuidv4();
-      if (i == 2) {
-        rows.columns.forEach((el: any, k: number) => {
-          if (k < 2) {
-            el.rowSpan = el.rowSpan + 1
-          }
-        })
-      } else {
-        rows.columns.forEach((el: any, k: number) => {
-          if (k < 2) {
-            el.rowSpan = el.rowSpan + 1
-          }
-        })
-        let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[3];
-        rowss.columns.forEach((el: any, k: number) => {
-          if (k >= 2 && k <= 3) {
-            console.log('logggggggg');
+  addRow(i,j){
+   // this.fndlFormatedFilteredData.tab[0].table[0].rows.push()
+    this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, this.local);
+    
 
-            el.rowSpan = el.rowSpan + 1
-          }
-        })
-      }
-
-      // for (let l = i; l < this.fndlFormatedFilteredData.tab[0].table[0].rows.length; l--) {//2,<3,--
-      //   // for (let f = 0; f < this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length; f++) {//13
-      //   let f = 0;
-      //   while(f<this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length){
-      //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns[0].rowSpan == 0) {
-
-      //     }
-      //   }
-      // }
-      // let out = i;
-      // while (out < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && out > 1) {
-      //   let inn = 0;
-      //   while (inn < j) {
-      //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out].columns[0].rowSpan == 0) {
-      //       out--;
-      //     } else {
-      //       rows.columns.forEach((el: any, k: number) => {
-      //         if (k < j - 1) {
-      //           el.rowSpan = el.rowSpan + 1
-      //         }
-      //       })
-      //       if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1]) {
-      //         let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1];
-      //         rowss.columns.forEach((el: any, k: number) => {
-      //           if (k >= j-1) {
-      //             el.rowSpan = el.rowSpan + 1
-      //           }
-      //         })
-      //       }
-      //     }
-      //   }
-      // }
-
-
-      rowData.columns.forEach((el: any, k: number) => {
-        el.id = uuidv4();
-        if (k < j - 1) {
-          el.rowSpan = 0,
-            el.colSpan = 0,
-            el.bgColor = null,
-            el.fontSize = null,
-            el.textColor = null,
-            el.title = null,
-            el.value = null
-        }
-        if (k >= (j - 1)) {
-          el.rowSpan = 1,
-            el.colSpan = 1,
-            el.bgColor = null,
-            el.fontSize = null,
-            el.value = null,
-            el.textColor = null,
-            el.title = null
-        }
-      })
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
-      console.log('rowData.columns', rowData.columns);
-      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
-    }
   }
+
+  // addRow(i, j) {
+  //   console.log('index', i);
+  //   let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+  //   let rowData = _.cloneDeep(rows);
+  //   if (j <= 1) {
+  //     rowData.id = uuidv4();
+  //     rowData.columns.forEach((el: any) => {
+  //       el.id = uuidv4();
+  //       el.rowSpan = 1,
+  //         el.colSpan = 1,
+  //         el.bgColor = null,
+  //         el.fontSize = null,
+  //         el.textColor = null,
+  //         el.title = null,
+  //         el.value = null
+  //     })
+  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
+  //   } else if (j > 1) {
+  //     // let rowData = _.cloneDeep(this.rowDataJson);
+  //     // let newIndex = i;
+  //     // for (let m = i; m < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && m >= 0 && newIndex ==i; m--) {
+  //     //   if (this.fndlFormatedFilteredData.tab[0].table[0].rows[m].columns[0].rowSpan !== 0 ) {
+  //     //     newIndex = m;
+  //     //     console.log('newIndex', newIndex);
+  //     //     break;
+  //     //   }
+  //     // }
+  //     let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+  //     let rowData = _.cloneDeep(rows);
+  //     rowData.id = uuidv4();
+  //     if (i == 2) {
+  //       rows.columns.forEach((el: any, k: number) => {
+  //         if (k < 2) {
+  //           el.rowSpan = el.rowSpan + 1
+  //         }
+  //       })
+  //     } else {
+  //       rows.columns.forEach((el: any, k: number) => {
+  //         if (k < 2) {
+  //           el.rowSpan = el.rowSpan + 1
+  //         }
+  //       })
+  //       let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[3];
+  //       rowss.columns.forEach((el: any, k: number) => {
+  //         if (k >= 2 && k <= 3) {
+  //           console.log('logggggggg');
+
+  //           el.rowSpan = el.rowSpan + 1
+  //         }
+  //       })
+  //     }
+
+  //     // for (let l = i; l < this.fndlFormatedFilteredData.tab[0].table[0].rows.length; l--) {//2,<3,--
+  //     //   // for (let f = 0; f < this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length; f++) {//13
+  //     //   let f = 0;
+  //     //   while(f<this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns.length){
+  //     //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[l].columns[0].rowSpan == 0) {
+
+  //     //     }
+  //     //   }
+  //     // }
+  //     // let out = i;
+  //     // while (out < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && out > 1) {
+  //     //   let inn = 0;
+  //     //   while (inn < j) {
+  //     //     if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out].columns[0].rowSpan == 0) {
+  //     //       out--;
+  //     //     } else {
+  //     //       rows.columns.forEach((el: any, k: number) => {
+  //     //         if (k < j - 1) {
+  //     //           el.rowSpan = el.rowSpan + 1
+  //     //         }
+  //     //       })
+  //     //       if (this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1]) {
+  //     //         let rowss = this.fndlFormatedFilteredData.tab[0].table[0].rows[out+1];
+  //     //         rowss.columns.forEach((el: any, k: number) => {
+  //     //           if (k >= j-1) {
+  //     //             el.rowSpan = el.rowSpan + 1
+  //     //           }
+  //     //         })
+  //     //       }
+  //     //     }
+  //     //   }
+  //     // }
+
+
+  //     rowData.columns.forEach((el: any, k: number) => {
+  //       el.id = uuidv4();
+  //       if (k < j - 1) {
+  //         el.rowSpan = 0,
+  //           el.colSpan = 0,
+  //           el.bgColor = null,
+  //           el.fontSize = null,
+  //           el.textColor = null,
+  //           el.title = null,
+  //           el.value = null
+  //       }
+  //       if (k >= (j - 1)) {
+  //         el.rowSpan = 1,
+  //           el.colSpan = 1,
+  //           el.bgColor = null,
+  //           el.fontSize = null,
+  //           el.value = null,
+  //           el.textColor = null,
+  //           el.title = null
+  //       }
+  //     })
+  //     this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
+  //     console.log('rowData.columns', rowData.columns);
+  //     console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
+  //   }
+  // }
 
   // addRow(i, j) {
   //   console.log(i, j);
