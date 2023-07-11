@@ -1,4 +1,63 @@
-<form [formGroup]="componentForm">
+<div class="tableBox-rowNo">
+  <table>
+    <tr *ngFor="let row of fndlFormatedFilteredData.tab[0].table.rows; let i = index">
+      <td
+        *ngFor="let col of row.columns; let j = index"
+        [ngStyle]="{
+          color: col.textColor,
+          'background-color': col.bgColor,
+          'font-size': col.fontSize
+        }"
+        [attr.colSpan]="col.colSpan"
+        [attr.rowSpan]="col.rowSpan"
+        [ngClass]="col.rowSpan == '0' && col.colSpan == '0' ? 'noSpan' : ''"
+      >
+        <ng-container *ngIf="col.colType == 'label'">{{
+          col.title
+        }}</ng-container>
+        <ng-container
+          *ngIf="
+            col.colType == 'currency' ||
+            col.colType == 'product' ||
+            col.colType == 'tenor' ||
+            col.colType == 'installmentType' ||
+            col.colType == 'installmentFrequency' ||
+            col.colType == 'entity'
+          "
+        >
+          <p-dropdown
+            [options]="getColTypeDropDown(col.colType)"
+            [(ngModel)]="col.value"
+            placeholder="Select"
+            optionLabel="name"
+            optionValue="value"
+          ></p-dropdown>
+        </ng-container>
+        <ng-container *ngIf="col.colType == 'input'">
+          <input
+            placeholder="Enter Input"
+            [(ngModel)]="col.value"
+            class="input-field"
+            pInputText
+            maxlength="51"
+          />
+        </ng-container>
+        <ng-container *ngIf="i >= 2 && j % 2 == 1 && j !== 0">
+          <!-- <fa-icon class="fndl-addbtn-tableRow" (click)="addRow(i,j)" [icon]="iconsSet.faPlus"></fa-icon> -->
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="addRow(i,j)"
+          >
+            +
+          </button>
+        </ng-container>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- <form [formGroup]="componentForm">
   <div class="new-rating">
     <div class="row">
       <div class="col-6">
@@ -206,4 +265,4 @@
       </button>
     </div>
   </div>
-</form>
+</form> -->
