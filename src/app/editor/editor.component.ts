@@ -10,92 +10,6 @@ import * as _ from 'lodash';
 export class EditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
 
-  updateRow(i, j) {
-    if (i > 1) {
-      let s = i;
-      let m = j;
-      if (m - 3 >= 0 && s > 1) {
-        while (
-          s < this.fndlFormatedFilteredData.tab[0].table[0].rows.length &&
-          s >= 0
-        ) {
-          if (
-            this.fndlFormatedFilteredData.tab[0].table[0].rows[s].columns[m - 3]
-              .rowSpan == 0
-          ) {
-            s--;
-          } else {
-            let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[s];
-            for (let f = 0; f < rows.columns.length; f++) {
-              let imd = m - 1;
-              if (imd - 2 <= f && f < imd) {
-                rows.columns[f].rowSpan = rows.columns[f].rowSpan + 1;
-              }
-            }
-            this.updateRow(s, m - 2);
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  addRow(i, j) {
-    let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-    if (j <= 1) {
-      let rowData = _.cloneDeep(rows);
-      rowData.id = uuidv4();
-      rowData.columns.forEach((el: any) => {
-        el.id = uuidv4();
-        (el.rowSpan = 1),
-          (el.colSpan = 1),
-          (el.bgColor = null),
-          (el.fontSize = null),
-          (el.textColor = null),
-          (el.title = null),
-          (el.value = null);
-      });
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);
-    } else if (j > 1) {
-      let rowData = _.cloneDeep(rows);
-      rowData.id = uuidv4();
-      rowData.columns.forEach((el: any, k: number) => {
-        el.id = uuidv4();
-        if (k < j - 1) {
-          (el.rowSpan = 0),
-            (el.colSpan = 0),
-            (el.bgColor = null),
-            (el.fontSize = null),
-            (el.textColor = null),
-            (el.title = null),
-            (el.value = null);
-        }
-        if (k >= j - 1) {
-          (el.rowSpan = 1),
-            (el.colSpan = 1),
-            (el.bgColor = null),
-            (el.fontSize = null),
-            (el.value = null),
-            (el.textColor = null),
-            (el.title = null);
-        }
-      });
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(
-        i + 1,
-        0,
-        rowData
-      );
-      console.log('rowData.columns', rowData.columns);
-      console.log(
-        'this.fndlFormatedFilteredData.tab[0].table[0].rows',
-        _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows)
-      );
-    }
-  }
-
-  getColTypeDropDown(res) {
-    return [];
-  }
 
   ngOnInit() {
     this.fndlFormatedFilteredData = {
@@ -614,6 +528,81 @@ export class EditorComponent implements OnInit {
         },
       ],
     };
+  }
+
+  
+    updateRow(i, j) {
+    if (i > 1) {
+      let s = i;
+      let m = j;
+      if ((m - 3) >= 0 && s > 1) {
+        while (s < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && s >= 0) {
+          if (this.fndlFormatedFilteredData.tab[0].table[0].rows[s].columns[m - 3].rowSpan == 0) {
+            s--;
+          } else {
+            let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[s];
+            for (let f = 0; f < rows.columns.length; f++) {
+              let imd = m - 1;
+              if ((imd - 2) <= f && f < imd) {
+                rows.columns[f].rowSpan = rows.columns[f].rowSpan + 1;
+              }
+            }
+            this.updateRow(s, m - 2);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  addRow(i, j) {
+    let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+    if (j <= 1) {
+      let rowData = _.cloneDeep(rows);
+      rowData.id = uuidv4();
+      rowData.columns.forEach((el: any) => {
+        el.id = uuidv4();
+        el.rowSpan = 1,
+          el.colSpan = 1,
+          el.bgColor = null,
+          el.fontSize = null,
+          el.textColor = null,
+          el.title = null,
+          el.value = null
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
+    } else if (j > 1) {
+      let rowData = _.cloneDeep(rows);
+      rowData.id = uuidv4();
+      rowData.columns.forEach((el: any, k: number) => {
+        el.id = uuidv4();
+        if (k < j - 1) {
+          el.rowSpan = 0,
+            el.colSpan = 0,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.textColor = null,
+            el.title = null,
+            el.value = null
+        }
+        if (k >= (j - 1)) {
+          el.rowSpan = 1,
+            el.colSpan = 1,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.value = null,
+            el.textColor = null,
+            el.title = null
+        }
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
+      console.log('rowData.columns', rowData.columns);
+      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
+    }
+  }
+
+  getColTypeDropDown(res) {
+    return [];
   }
 
   // checked = true;
