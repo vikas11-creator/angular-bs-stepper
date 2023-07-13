@@ -15,7 +15,7 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
    this.assignTableValue();
    this.colSpanArrayList();
-   console.log(CheckEvenOdd)
+   console.log(this.CheckEvenOdd)
   }
 
     updateRow(i, j) {
@@ -130,6 +130,7 @@ export class EditorComponent implements OnInit {
         }
       }
     }
+    console.log(this.buttonArray)
   }
 
   removeDuplicates(array) {
