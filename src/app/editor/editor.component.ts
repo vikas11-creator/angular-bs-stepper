@@ -530,7 +530,20 @@ export class EditorComponent implements OnInit {
     };
   }
 
-  
+  buttonArray: number[] = [];
+  getButtonStatus(i, j) {
+    if (i >= 2 && j !== 0) {
+      console.log(this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns);
+      this.buttonArray.forEach((el: any, i: number) => {
+        if (el) {
+          this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[el - 1];
+        }
+      });
+      return true;
+    }
+    return false;
+  }
+
     updateRow(i, j) {
     if (i > 1) {
       let s = i;
@@ -603,6 +616,78 @@ export class EditorComponent implements OnInit {
 
   getColTypeDropDown(res) {
     return [];
+  }
+
+  addMappings(j, i?) {
+    if (i) {
+      let localArr: any = [];
+      let mappingVal: any;
+      let rowM = this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[j - 1];
+      mappingVal = _.cloneDeep(rowM.mappingId);
+      let lastValue = mappingVal.pop();
+      mappingVal.push(++lastValue);
+      this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns.forEach((el: any, i: number) => {
+        if (i < j - 1) {
+          // el.mappingId = 0;
+        } else if (i == j - 1) {
+          el.mappingId = mappingVal;
+        } else {
+          let val = [0, 1];
+          localArr.push(...val);
+          el.mappingId = [...mappingVal, ...localArr];
+        }
+      });
+      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns', this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns);
+    } else {
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.forEach((el: any, i: number) => {
+        if (i > 1) {
+          let arr = [0, i - 1];
+          let loopArr: any = [];
+          el.columns.forEach((e: any, j: number) => {
+            if (e.rowSpan && e.colSpan) {
+              if (j == 0) {
+                e.mappingId = [...arr];
+                loopArr.push(...arr);
+              }
+              else {
+                let val = [0, 1];
+                loopArr.push(...val);
+                e.mappingId = [...loopArr];
+              }
+            }
+          })
+        }
+      })
+    }
+    console.log('addMappings', this.fndlFormatedFilteredData.tab[0].table[0].rows);
+  }
+
+  colSpanArrayList() {
+    if (this.buttonArray.length == 0) {
+      this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns.forEach((el: any) => {
+        this.buttonArray.push(el.colSpan);
+      })
+      let aa = this.buttonArray.map((num, i, arr) =>
+        num + arr.slice(0, i).reduce((a, b) =>
+          a + b, 0));
+      this.buttonArray = this.removeDuplicates(aa);
+      let length = this.buttonArray.length;
+      for (let i = 0; i < length-1; i++) {
+        let min = i;
+        for (let j = i+1; j < length; j++) {
+          if (this.buttonArray[j] == 0) {
+            min = j;
+          }else{
+            break;
+          }
+        }
+        if (min != i) {
+          let tem = this.buttonArray[i];
+          this.buttonArray[i] = this.buttonArray[min];
+          this.buttonArray[min] = tem
+        }
+      }
+    }
   }
 
   // checked = true;
