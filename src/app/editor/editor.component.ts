@@ -10,11 +10,12 @@ import * as _ from 'lodash';
 export class EditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
   buttonArray: number[] = [];
-
+  CheckEvenOdd: any;
 
   ngOnInit() {
    this.assignTableValue();
    this.colSpanArrayList();
+   console.log(CheckEvenOdd)
   }
 
     updateRow(i, j) {
@@ -111,6 +112,7 @@ export class EditorComponent implements OnInit {
         num + arr.slice(0, i).reduce((a, b) =>
           a + b, 0));
       this.buttonArray = this.removeDuplicates(aa);
+      this.CheckEvenOdd= _.cloneDeep( this.removeDuplicates(aa))
       let length = this.buttonArray.length;
       for (let i = 0; i < length-1; i++) {
         let min = i;
