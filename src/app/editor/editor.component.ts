@@ -9,9 +9,140 @@ import * as _ from 'lodash';
 })
 export class EditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
+  buttonArray: number[] = [];
 
 
   ngOnInit() {
+   this.assignTableValue();
+  }
+
+    updateRow(i, j) {
+    if (i > 1) {
+      let s = i;
+      let m = j;
+      if ((m - 3) >= 0 && s > 1) {
+        while (s < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && s >= 0) {
+          if (this.fndlFormatedFilteredData.tab[0].table[0].rows[s].columns[m - 3].rowSpan == 0) {
+            s--;
+          } else {
+            let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[s];
+            for (let f = 0; f < rows.columns.length; f++) {
+              let imd = m - 1;
+              if ((imd - 2) <= f && f < imd) {
+                rows.columns[f].rowSpan = rows.columns[f].rowSpan + 1;
+              }
+            }
+            this.updateRow(s, m - 2);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  addRow(i, j) {
+    let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
+    if (j <= 1) {
+      let rowData = _.cloneDeep(rows);
+      rowData.id = uuidv4();
+      rowData.columns.forEach((el: any) => {
+        el.id = uuidv4();
+        el.rowSpan = 1,
+          el.colSpan = 1,
+          el.bgColor = null,
+          el.fontSize = null,
+          el.textColor = null,
+          el.title = null,
+          el.value = null
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
+    } else if (j > 1) {
+      let rowData = _.cloneDeep(rows);
+      rowData.id = uuidv4();
+      rowData.columns.forEach((el: any, k: number) => {
+        el.id = uuidv4();
+        if (k < j - 1) {
+          el.rowSpan = 0,
+            el.colSpan = 0,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.textColor = null,
+            el.title = null,
+            el.value = null
+        }
+        if (k >= (j - 1)) {
+          el.rowSpan = 1,
+            el.colSpan = 1,
+            el.bgColor = null,
+            el.fontSize = null,
+            el.value = null,
+            el.textColor = null,
+            el.title = null
+        }
+      })
+      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
+      console.log('rowData.columns', rowData.columns);
+      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
+    }
+  }
+
+  getColTypeDropDown(res) {
+    return [];
+  }
+
+  getButtonStatus(i, j) {
+    if (i >= 2 && j !== 0) {
+      console.log(this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns);
+      this.buttonArray.forEach((el: any, i: number) => {
+        if (el) {
+          this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[el - 1];
+        }
+      });
+      return true;
+    }
+    return false;
+  }
+
+  colSpanArrayList() {
+    if (this.buttonArray.length == 0) {
+      this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns.forEach((el: any) => {
+        this.buttonArray.push(el.colSpan);
+      })
+      let aa = this.buttonArray.map((num, i, arr) =>
+        num + arr.slice(0, i).reduce((a, b) =>
+          a + b, 0));
+      this.buttonArray = this.removeDuplicates(aa);
+      let length = this.buttonArray.length;
+      for (let i = 0; i < length-1; i++) {
+        let min = i;
+        for (let j = i+1; j < length; j++) {
+          if (this.buttonArray[j] == 0) {
+            min = j;
+          }else{
+            break;
+          }
+        }
+        if (min != i) {
+          let tem = this.buttonArray[i];
+          this.buttonArray[i] = this.buttonArray[min];
+          this.buttonArray[min] = tem
+        }
+      }
+    }
+  }
+
+  removeDuplicates(array) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] === array[j]) {
+          array[j] = 0;
+        }
+      }
+    }
+    return array;
+  }
+
+  assignTableValue(){
     this.fndlFormatedFilteredData = {
       tab: [
         {
@@ -529,577 +660,4 @@ export class EditorComponent implements OnInit {
       ],
     };
   }
-
-  buttonArray: number[] = [];
-  getButtonStatus(i, j) {
-    if (i >= 2 && j !== 0) {
-      console.log(this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns);
-      this.buttonArray.forEach((el: any, i: number) => {
-        if (el) {
-          this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[el - 1];
-        }
-      });
-      return true;
-    }
-    return false;
-  }
-
-    updateRow(i, j) {
-    if (i > 1) {
-      let s = i;
-      let m = j;
-      if ((m - 3) >= 0 && s > 1) {
-        while (s < this.fndlFormatedFilteredData.tab[0].table[0].rows.length && s >= 0) {
-          if (this.fndlFormatedFilteredData.tab[0].table[0].rows[s].columns[m - 3].rowSpan == 0) {
-            s--;
-          } else {
-            let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[s];
-            for (let f = 0; f < rows.columns.length; f++) {
-              let imd = m - 1;
-              if ((imd - 2) <= f && f < imd) {
-                rows.columns[f].rowSpan = rows.columns[f].rowSpan + 1;
-              }
-            }
-            this.updateRow(s, m - 2);
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  addRow(i, j) {
-    let rows = this.fndlFormatedFilteredData.tab[0].table[0].rows[i];
-    if (j <= 1) {
-      let rowData = _.cloneDeep(rows);
-      rowData.id = uuidv4();
-      rowData.columns.forEach((el: any) => {
-        el.id = uuidv4();
-        el.rowSpan = 1,
-          el.colSpan = 1,
-          el.bgColor = null,
-          el.fontSize = null,
-          el.textColor = null,
-          el.title = null,
-          el.value = null
-      })
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.push(rowData);;
-    } else if (j > 1) {
-      let rowData = _.cloneDeep(rows);
-      rowData.id = uuidv4();
-      rowData.columns.forEach((el: any, k: number) => {
-        el.id = uuidv4();
-        if (k < j - 1) {
-          el.rowSpan = 0,
-            el.colSpan = 0,
-            el.bgColor = null,
-            el.fontSize = null,
-            el.textColor = null,
-            el.title = null,
-            el.value = null
-        }
-        if (k >= (j - 1)) {
-          el.rowSpan = 1,
-            el.colSpan = 1,
-            el.bgColor = null,
-            el.fontSize = null,
-            el.value = null,
-            el.textColor = null,
-            el.title = null
-        }
-      })
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.splice(i + 1, 0, rowData);
-      console.log('rowData.columns', rowData.columns);
-      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows', _.cloneDeep(this.fndlFormatedFilteredData.tab[0].table[0].rows));
-    }
-  }
-
-  getColTypeDropDown(res) {
-    return [];
-  }
-
-  addMappings(j, i?) {
-    if (i) {
-      let localArr: any = [];
-      let mappingVal: any;
-      let rowM = this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[j - 1];
-      mappingVal = _.cloneDeep(rowM.mappingId);
-      let lastValue = mappingVal.pop();
-      mappingVal.push(++lastValue);
-      this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns.forEach((el: any, i: number) => {
-        if (i < j - 1) {
-          // el.mappingId = 0;
-        } else if (i == j - 1) {
-          el.mappingId = mappingVal;
-        } else {
-          let val = [0, 1];
-          localArr.push(...val);
-          el.mappingId = [...mappingVal, ...localArr];
-        }
-      });
-      console.log('this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns', this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns);
-    } else {
-      this.fndlFormatedFilteredData.tab[0].table[0].rows.forEach((el: any, i: number) => {
-        if (i > 1) {
-          let arr = [0, i - 1];
-          let loopArr: any = [];
-          el.columns.forEach((e: any, j: number) => {
-            if (e.rowSpan && e.colSpan) {
-              if (j == 0) {
-                e.mappingId = [...arr];
-                loopArr.push(...arr);
-              }
-              else {
-                let val = [0, 1];
-                loopArr.push(...val);
-                e.mappingId = [...loopArr];
-              }
-            }
-          })
-        }
-      })
-    }
-    console.log('addMappings', this.fndlFormatedFilteredData.tab[0].table[0].rows);
-  }
-
-  colSpanArrayList() {
-    if (this.buttonArray.length == 0) {
-      this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns.forEach((el: any) => {
-        this.buttonArray.push(el.colSpan);
-      })
-      let aa = this.buttonArray.map((num, i, arr) =>
-        num + arr.slice(0, i).reduce((a, b) =>
-          a + b, 0));
-      this.buttonArray = this.removeDuplicates(aa);
-      let length = this.buttonArray.length;
-      for (let i = 0; i < length-1; i++) {
-        let min = i;
-        for (let j = i+1; j < length; j++) {
-          if (this.buttonArray[j] == 0) {
-            min = j;
-          }else{
-            break;
-          }
-        }
-        if (min != i) {
-          let tem = this.buttonArray[i];
-          this.buttonArray[i] = this.buttonArray[min];
-          this.buttonArray[min] = tem
-        }
-      }
-    }
-  }
-
-  // checked = true;
-  // merge: boolean;
-  // mergeList = [];
-  // merged: any = [];
-  // validMerge: boolean;
-  // cols: any = [];
-  // colLength: any;
-  // isLoad: boolean = false;
-  // indexList: any = [];
-  // localTableArray: any = [];
-  // clickedCellIndex: any = [];
-  // isAdd: boolean = false;
-
-  // constructor(
-  //   private formbuilder: FormBuilder,
-  //   private cdr: ChangeDetectorRef
-  // ) {}
-
-  // ngOnInit() {
-  //   this.merge = false;
-  //   this.validMerge = false;
-  // }
-
-  // public componentForm = this.formbuilder.group({
-  //   id: uuidv4(),
-  //   row: [],
-  //   column: [],
-  //   rows: this.formbuilder.array([]),
-  // });
-
-  // public labelType = {
-  //   label: 'Label Title',
-  //   dropDown: 'Dropdown Type',
-  //   input: 'Input Type',
-  // };
-
-  // ngAfterContentChecked() {
-  //   this.cdr.detectChanges();
-  // }
-
-  // getCellDetail(compType, index) {
-  //   compType.value.checked = !compType.value.checked;
-  //   if (compType.value.checked) {
-  //     this.clickedCellIndex.push(index);
-  //     this.localTableArray.push(compType.value);
-  //   } else {
-  //     this.localTableArray.splice(
-  //       this.localTableArray.findIndex((el: any) => {
-  //         return el.id == compType.value.id;
-  //       }),
-  //       1
-  //     );
-  //   }
-  // }
-
-  // mergeData() {
-  //   if (this.getMergeValidation()) {
-  //     let ind: number;
-  //     let found: any = {};
-  //     const sumWithInitial = this.localTableArray.reduce(
-  //       (accumulator, currentValue) => accumulator + currentValue.colspan,
-  //       0
-  //     );
-  //     this.localTableArray.map((element: any) => {
-  //       if (Object.keys(found).length == 0) {
-  //         this.componentForm.value.rows.map((elem: any, i: number) => {
-  //           if (Object.keys(found).length == 0) {
-  //             found = elem.columns.find((el: any, j: number) => {
-  //               ind = j;
-  //               return el.id == element.id;
-  //             });
-  //             if (found == undefined) {
-  //               found = {};
-  //             }
-  //             if (this.isValidInput(found) && Object.keys(found).length !== 0) {
-  //               const control: any = (<FormArray>(
-  //                 this.componentForm.controls['rows']
-  //               ))
-  //                 .at(i)
-  //                 .get('columns') as FormArray;
-  //               found.colspan = sumWithInitial;
-  //               elem.columns.splice(ind + 1, this.localTableArray.length - 1);
-  //               control.controls.splice(
-  //                 ind + 1,
-  //                 this.localTableArray.length - 1
-  //               );
-  //               this.resetTable();
-  //             }
-  //           }
-  //         });
-  //       }
-  //     });
-  //   }
-  //   console.log('this.componentForm.value.rows', this.componentForm.value.rows);
-  // }
-
-  // getMergeValidation() {
-  //   console.log('this.clickedCellIndex', this.clickedCellIndex);
-  //   const everyVal = this.clickedCellIndex.every((el: any) => {
-  //     return el == this.clickedCellIndex[0];
-  //   });
-  //   if (!everyVal) {
-  //     this.resetTable();
-  //     alert('cannot merge across cell');
-  //     return false;
-  //   } else {
-  //     let status = this.getConsecutiveStatus();
-  //     return status;
-  //   }
-  // }
-
-  // getConsecutiveStatus() {
-  //   let consecutiveIndex: any = [];
-  //   this.localTableArray.forEach((e: any) => {
-  //     let ind = this.componentForm.value.rows[
-  //       this.clickedCellIndex[0]
-  //     ].columns.findIndex((el: any) => {
-  //       return el.id == e.id;
-  //     });
-  //     consecutiveIndex.push(ind);
-  //     if (consecutiveIndex.length == this.localTableArray.length) {
-  //       consecutiveIndex.sort();
-  //       this.getForStatus(consecutiveIndex);
-  //     }
-  //   });
-  //   console.log('aaaaaayyyyyyyyyyaaaaaaaa')
-  //   return true;
-  // }
-
-  // getForStatus(consecutiveIndex) {
-  //   let flag = false;
-  //   for (let i = 1; i < consecutiveIndex.length; i++) {
-  //     if (consecutiveIndex[i] != consecutiveIndex[i - 1] + 1) {
-  //       this.resetTable();
-  //       alert('merge elements are not consecutive');
-  //       return flag;
-  //     }
-  //   }
-  //   flag = true;
-  //   return flag;
-  // }
-
-  // resetTable() {
-  //   this.componentForm.value.rows.map((elem: any, i: number) => {
-  //     const control: any = (<FormArray>this.componentForm.controls['rows'])
-  //       .at(i)
-  //       .get('columns') as FormArray;
-  //     control.controls.forEach((el: any) => {
-  //       el.value.checked = false;
-  //     });
-  //   });
-  //   this.localTableArray = [];
-  //   this.clickedCellIndex = [];
-  // }
-
-  // getRowProperty(e, i, type) {
-  //   if (type == 'bgColor' || type == 'textColor') {
-  //     let colorArr: any = [];
-  //     colorArr.push(e.value);
-  //     this.setRowProperty(type, i, colorArr);
-  //   } else {
-  //     this.setRowProperty(type, i, e.value);
-  //   }
-  // }
-
-  // setRowProperty(type, index, arr) {
-  //   let lastColor: any;
-  //   if (type == 'bgColor' || type == 'textColor') {
-  //     lastColor = arr.slice(-1).pop();
-  //   }
-  //   switch (type) {
-  //     case 'bgColor':
-  //       this.componentForm.value.rows[index]['columns'].forEach((el: any) => {
-  //         el[type] = lastColor;
-  //       });
-  //       break;
-  //     case 'textColor':
-  //       this.componentForm.value.rows[index]['columns'].forEach((el: any) => {
-  //         el[type] = lastColor;
-  //       });
-  //       break;
-  //     case 'colType':
-  //       const control = (<FormArray>this.componentForm.controls['rows'])
-  //         .at(index)
-  //         .get('columns') as FormArray;
-  //       control.controls.forEach((el: any, i: any) => {
-  //         el.controls[type].value = arr;
-  //         el.value[type] = arr;
-  //       });
-  //       break;
-  //     case 'fontSize':
-  //       this.componentForm.value.rows[index]['columns'].forEach((el: any) => {
-  //         el[type] = arr;
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
-
-  // addMoreRows() {
-  //   this.componentForm.value.rows.length = this.componentForm.value.rows
-  //     .length++;
-  //   this.tableRowControls.push(this.createRow());
-  //   for (var j = 0; j < this.componentForm.value.column; j++) {
-  //     const control = (<FormArray>this.componentForm.controls['rows'])
-  //       .at(this.componentForm.value.rows.length - 1)
-  //       .get('columns') as FormArray;
-  //     control.push(this.createColumn());
-  //   }
-  // }
-
-  // public get tableRowControls() {
-  //   return this.componentForm.get('rows') as FormArray;
-  // }
-
-  // createTable() {
-  //   for (var i = 0; i < this.componentForm.value.row; i++) {
-  //     this.tableRowControls.push(this.createRow());
-  //     for (var j = 0; j < this.componentForm.value.column; j++) {
-  //       const control = (<FormArray>this.componentForm.controls['rows'])
-  //         .at(i)
-  //         .get('columns') as FormArray;
-  //       control.push(this.createColumn());
-  //     }
-  //   }
-  //   this.isAdd = true;
-  // }
-
-  // createRow(): FormGroup {
-  //   return this.formbuilder.group({
-  //     id: uuidv4(),
-  //     property: [],
-  //     columns: this.formbuilder.array([]),
-  //   });
-  // }
-
-  // createColumn(): FormGroup {
-  //   return this.formbuilder.group({
-  //     id: uuidv4(),
-  //     title: [],
-  //     value: [],
-  //     colType: [],
-  //     colspan: [1],
-  //     textColor: [],
-  //     bgColor: [],
-  //     checked: [],
-  //     fontSize: [],
-  //   });
-  // }
-
-  // postData() {
-  //   console.log(this.componentForm);
-  //   //isme jo json generate hua wo backend me uska table banega
-  //   // title: [],
-  //   //   value: [],
-  //   //   colType: [],
-  //   //   colspan: [1],
-  //   //   textColor: [],
-  //   //   bgColor: [],
-  //   //   checked: [],
-  //   //   fontSize: [],
-  //   //DOUBLE CLICK KRKE JO PROPERTY BNAYA WO UPAR KE VALUE,COLTYPE ME JAYEGA PHIR WAHI DATABASE ME SAVE HOGA
-  // }
-
-  // getColumnCount() {
-  //   if (this.componentForm.value.row) {
-  //     this.componentForm.get('rows')['controls'] = [];
-  //     this.createTable();
-  //   }
-  // }
-
-  // getRowCount() {
-  //   if (this.componentForm.value.column) {
-  //     this.componentForm.get('rows')['controls'] = [];
-  //     this.createTable();
-  //   }
-  // }
-
-  // products: any = [
-  //   { name: 'Label', value: 'label' },
-  //   { name: 'Dropdown', value: 'dropDown' },
-  //   { name: 'Input', value: 'input' },
-  // ];
-
-  // fontSize: any = [
-  //   { name: '14px', value: '14px' },
-  //   { name: '16px', value: '16px' },
-  //   { name: '18px', value: '18px' },
-  // ];
-
-  // isValidInput(input) {
-  //   if (this.isNull(input) || this.isUndefined(input) || this.isEmpty(input)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-  // isUndefined(input) {
-  //   if (typeof input === 'undefined') {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // isNull(input) {
-  //   if (input != null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-  // isEmpty(input) {
-  //   if (typeof input === 'undefined') {
-  //     return true;
-  //   } else {
-  //     let lstrTempstring = String(input);
-  //     lstrTempstring = lstrTempstring.trim();
-  //     if (lstrTempstring === '' || lstrTempstring === 'undefined') {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   }
-  // }
-
-  // //subham code
-  // // mergeColumns() {
-  // //   if (this.validateMerge()) {
-  // //     let mergeIndex = Number(Math.min(...this.indexList));
-  // //     this.selectedCells.forEach((data: any) => {
-  // //       this.tableRowControls['controls'].forEach((rowControl) => {
-  // //         rowControl
-  // //           .get('columns')
-  // //           ['controls'].forEach((columnControl: any, i: any) => {
-  // //             if (_.isEqual(columnControl.value, data)) {
-  // //               if (mergeIndex != i) {
-  // //                 _.remove(
-  // //                   rowControl.get('columns')['controls'],
-  // //                   (element: any) => _.isEqual(element.value, data)
-  // //                 );
-  // //                 _.remove(rowControl.get('columns')['value'], (element: any) =>
-  // //                   _.isEqual(element, data)
-  // //                 );
-  // //               } else {
-  // //                 this.setColSpan(columnControl, this.selectedCells);
-  // //               }
-  // //             }
-  // //           });
-  // //       });
-  // //     });
-  // //     this.selectedCells = [];
-  // //     this.indexList = [];
-  // //   } else {
-  // //     this.indexList = [];
-  // //     this.selectedCells.forEach((cell: any) => {
-  // //       cell.checked = false;
-  // //     });
-  // //     this.selectedCells = [];
-  // //     return;
-  // //   }
-  // // }
-
-  // // setColSpan(cell, length) {
-  // //   let sumWithInitial = this.selectedCells.reduce(
-  // //     (accumulator, currentValue) => accumulator + currentValue.colspan,
-  // //     0
-  // //   );
-  // //   if (cell.controls.colspan.value) {
-  // //     cell.controls.colspan.value = sumWithInitial;
-  // //   }
-  // //   if (cell.value) {
-  // //     cell.value.colspan = sumWithInitial;
-  // //     cell.value.checked = false;
-  // //   }
-  // // }
-
-  // // validateMerge() {
-  // //   let flag: boolean = false;
-  // //   let rowFlag: boolean = false;
-  // //   let adjFlag: boolean = false;
-  // //   let indexArr: any = [];
-  // //   let adjacentArr: any = [];
-  // //   //code for across rows
-  // //   this.selectedCells.forEach((cell: any) => {
-  // //     this.componentForm.value.rows.forEach((row: any, index: any) => {
-  // //       if (row.columns.includes(cell)) {
-  // //         indexArr.push(index);
-  // //       }
-  // //     });
-  // //   });
-  // //   this.componentForm.value.rows.forEach((row: any) => {
-  // //     row.columns.forEach((column: any, index: number) => {
-  // //       if (this.selectedCells.includes(column)) {
-  // //         adjacentArr.push(index);
-  // //       }
-  // //     });
-  // //   });
-  // //   _.uniq(indexArr).length == 1 ? (rowFlag = true) : '';
-  // //   adjFlag = this.sequntialIndices(adjacentArr, adjacentArr.length);
-  // //   adjFlag == true && rowFlag == true ? (flag = true) : (flag = false);
-  // //   return flag;
-  // // }
-
-  // // sequntialIndices(arr: any, n: any) {
-  // //   arr.sort();
-  // //   for (let i = 1; i < n; i++) if (arr[i] != arr[i - 1] + 1) return false;
-  // //   return true;
-  // // }
 }
