@@ -15,7 +15,7 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
    this.assignTableValue();
    this.colSpanArrayList();
-   console.log(this.CheckEvenOdd)
+  //  console.log(this.CheckEvenOdd)
   }
 
     updateRow(i, j) {
