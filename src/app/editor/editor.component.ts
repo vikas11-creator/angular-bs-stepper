@@ -92,13 +92,11 @@ export class EditorComponent implements OnInit {
 
   getButtonStatus(i, j) {
     if (i >= 2 && j !== 0) {
-      console.log(this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns);
-      this.buttonArray.forEach((el: any, i: number) => {
-        if (el) {
-          this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[el - 1];
-        }
-      });
-      return true;
+      if (this.buttonArray[j]) {
+        return true;
+      } else {
+        return false;
+      }
     }
     return false;
   }
