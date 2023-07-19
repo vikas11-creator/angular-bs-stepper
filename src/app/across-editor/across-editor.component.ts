@@ -160,9 +160,47 @@ export class AcrossEditorComponent implements OnInit {
     return [];
   }
 
-  addMappings(i,j?){
-
+  
+  colSpanArrayList() {
+    if (this.buttonArray.length == 0) {
+      this.fndlFormatedFilteredData.tab[0].table[0].rows[0].columns.forEach((el: any) => {
+        this.buttonArray.push(el.colSpan);
+      })
+      let duplicateArray = this.buttonArray.map((num, i, arr) =>
+        num + arr.slice(0, i).reduce((a, b) =>
+          a + b, 0));
+      this.buttonArray = this.removeDuplicates(duplicateArray);
+      let length = this.buttonArray.length;
+      for (let i = 0; i < length - 1; i++) {
+        let min = i;
+        for (let j = i + 1; j < length; j++) {
+          if (this.buttonArray[j] == 0) {
+            min = j;
+          } else {
+            break;
+          }
+        }
+        if (min != i) {
+          let tem = this.buttonArray[i];
+          this.buttonArray[i] = this.buttonArray[min];
+          this.buttonArray[min] = tem
+        }
+      }
+    }
+    console.log('this.buttonArray', this.buttonArray);
   }
+
+  removeDuplicates(array) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] === array[j]) {
+          array[j] = 0;
+        }
+      }
+    }
+    return array;
+  }
+
 
   assignTableValue(){
     this.fndlFormatedFilteredData = {
