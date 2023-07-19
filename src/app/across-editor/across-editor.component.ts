@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css'],
+  templateUrl: './across-editor.component.html',
+  styleUrls: ['./across-editor.component.css'],
 })
-export class EditorComponent implements OnInit {
+export class AcrossEditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
   buttonArray: number[] = [];
   CheckEvenOdd: any;
