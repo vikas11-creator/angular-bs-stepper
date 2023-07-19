@@ -11,7 +11,11 @@ export class AcrossEditorComponent implements OnInit {
   fndlFormatedFilteredData: any;
   buttonArray: number[] = [];
   CheckEvenOdd: any;
-
+  triggerIndex: number;
+  previousNonZeroDigitIndex: number;
+  previousGroupLevel: any = [];
+  headerData:any;
+  currentGroupLevel: any = [];
   ngOnInit() {
    this.assignTableValue();
    this.colSpanArrayList();
@@ -154,6 +158,10 @@ export class AcrossEditorComponent implements OnInit {
   
   getColTypeDropDown(res) {
     return [];
+  }
+
+  addMappings(i,j?){
+
   }
 
   assignTableValue(){
