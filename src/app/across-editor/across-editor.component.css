@@ -15,7 +15,11 @@ th {
   color: #dee2e6;
 }
 
-.box{
+.noSpan{
+  display: none;
+}
+
+.box{ 
   margin-top: 10px;
 }
 .new-rating{
