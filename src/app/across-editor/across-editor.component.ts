@@ -202,6 +202,48 @@ export class AcrossEditorComponent implements OnInit {
   }
 
 
+  addMappings(j, i?) {
+    // if (i) {
+    //   let localArr: any = [];
+    //   let mappingVal: any;
+    //   let rowM = this.fndlFormatedFilteredData.tab[0].table[0].rows[i].columns[j - 1];
+    //   mappingVal = _.cloneDeep(rowM.mappingId);
+    //   let lastValue = mappingVal?.pop();
+    //   mappingVal.push(++lastValue);
+    //   this.fndlFormatedFilteredData.tab[0].table[0].rows[i + 1].columns.forEach((el: any, i: number) => {
+    //     if (i < j - 1) {
+    //       // el.mappingId = 0;
+    //     } else if (i == j - 1) {
+    //       el.mappingId = mappingVal;
+    //     } else {
+    //       let val = [0, 1];
+    //       localArr.push(...val);
+    //       el.mappingId = [...mappingVal, ...localArr];
+    //     }
+    //   });
+    // } else {
+    //   this.fndlFormatedFilteredData.tab[0].table[0].rows.forEach((el: any, i: number) => {
+    //     if (i > 1) {
+    //       let arr = [0, i - 1];
+    //       let loopArr: any = [];
+    //       el.columns.forEach((e: any, j: number) => {
+    //         if (e.rowSpan && e.colSpan) {
+    //           if (j == 0) {
+    //             e.mappingId = [...arr];
+    //             loopArr.push(...arr);
+    //           }
+    //           else {
+    //             let val = [0, 1];
+    //             loopArr.push(...val);
+    //             e.mappingId = [...loopArr];
+    //           }
+    //         }
+    //       })
+    //     }
+    //   })
+    // }
+  }
+  
   assignTableValue(){
     this.fndlFormatedFilteredData = {
       tab: [
