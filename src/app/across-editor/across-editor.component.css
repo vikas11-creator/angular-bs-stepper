@@ -9,10 +9,9 @@ tr {
 }
 td,
 th {
-  border: 1px solid #dee2e6;
+  border: 1px solid #000;
   height: 56px;
   padding: 8px 16px;
-  color: #dee2e6;
 }
 
 .noSpan{

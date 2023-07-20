@@ -70,33 +70,13 @@ export class AcrossEditorComponent implements OnInit {
             this.updateRow(s, (m - (this.currentGroupLevel.length+1)));
             break;
           }
-        }
+        } 
       }
     }
   }
 
   getCurrentRowIndex(rowIndex:number,columnIndex:number){
-    if (rowIndex < this.fndlFormatedFilteredData.tab[0].table[0].rows.length-1) {
-      if (this.fndlFormatedFilteredData.tab[0].table[0].rows[rowIndex].columns[columnIndex].rowSpan > 1) {
-        for (let i = rowIndex; i < this.fndlFormatedFilteredData.tab[0].table[0].rows.length; i++) {
-          if (this.fndlFormatedFilteredData.tab[0].table[0].rows[i+1]) {
-            if (this.fndlFormatedFilteredData.tab[0].table[0].rows[i+1].columns[columnIndex].rowSpan == 0) {
-              // break;
-              // console.log('indexxxxxxxxxxx',i+1);
-              // return i+1
-            }
-            // else{
-            //   return i+1
-            // }
-          }
-          else {
-            console.log('indexxxxxxxxxxx',i);
-            return i;
-          }
-        }
-      }
-    }
-    return rowIndex;
+   return rowIndex + (this.fndlFormatedFilteredData.tab[0].table[0].rows[rowIndex].columns[columnIndex].rowSpan -1);
   }
 
   addRow(i, j) {
